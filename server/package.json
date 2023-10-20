@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
+    "lint": "eslint --ext .ts .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ahmed Kasu",
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "eslint": "^8.51.0",
     "typescript": "^5.2.2"
   }
 }
