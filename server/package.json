@@ -8,6 +8,8 @@
     "lint": "eslint --ext .ts .",
     "dev": "ts-node-dev src/index.ts",
     "start": "node build/index.js",
+    "migration:up": "node src/utils/migrate.js up",
+    "migration:down": "node src/utils/migrate.js down",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ahmed Kasu",
