@@ -1,11 +1,17 @@
 import express from 'express';
 
 import { PORT } from './utils/config';
+import { connectToDatabase } from './utils/db';
 
 const app = express();
 
 app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const start = async () => {
+  await connectToDatabase();
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+};
+
+void start();
