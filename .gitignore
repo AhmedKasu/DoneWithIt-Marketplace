@@ -30,3 +30,7 @@ pids
 # OS generated
 .DS_Store
 Thumbs.db
+
+# Docker Containers persisted data
+pgdata/
+```
