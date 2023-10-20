@@ -1,4 +1,5 @@
 import express from 'express';
+import 'reflect-metadata';
 
 import { PORT } from './utils/config';
 import { connectToDatabase } from './utils/db';
