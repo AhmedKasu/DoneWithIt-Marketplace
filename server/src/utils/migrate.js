@@ -7,4 +7,5 @@ require('./umzug')
   })
   .catch((error) => {
     console.error('Error during migration:', error);
+    process.exit(1);
   });
