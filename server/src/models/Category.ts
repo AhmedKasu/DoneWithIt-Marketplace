@@ -13,7 +13,7 @@ import {
 
 import { Product } from './Product';
 
-@Table({ tableName: 'categories' })
+@Table
 export class Category extends Model {
   @PrimaryKey
   @AutoIncrement

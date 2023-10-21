@@ -14,7 +14,7 @@ import {
 import { User } from './User';
 import { Category } from './Category';
 
-@Table({ tableName: 'products' })
+@Table
 export class Product extends Model {
   @PrimaryKey
   @AutoIncrement

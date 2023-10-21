@@ -12,7 +12,7 @@ import {
 } from 'sequelize-typescript';
 
 import { Product } from './Product';
-@Table({ tableName: 'users' })
+@Table
 export class User extends Model {
   @PrimaryKey
   @AutoIncrement
