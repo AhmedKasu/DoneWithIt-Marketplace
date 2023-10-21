@@ -24,6 +24,9 @@ export class User extends Model {
   email!: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
+  name!: string;
+
+  @Column({ type: DataType.STRING, allowNull: false })
   passwordHash!: string;
 
   @CreatedAt

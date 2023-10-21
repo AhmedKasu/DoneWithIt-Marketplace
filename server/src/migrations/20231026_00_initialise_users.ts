@@ -13,6 +13,7 @@ export const up: Migration = async ({ context: sequelize }) => {
           allowNull: false,
         },
         email: { type: DataTypes.STRING, unique: true, allowNull: false },
+        name: { type: DataTypes.STRING, allowNull: false },
         passwordHash: { type: DataTypes.STRING, allowNull: false },
         createdAt: { type: DataTypes.DATE, allowNull: false },
         updatedAt: { type: DataTypes.DATE, allowNull: false },
