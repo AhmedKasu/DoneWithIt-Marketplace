@@ -10,8 +10,8 @@ export const up: Migration = async ({ context: sequelize }) => {
       allowNull: false,
     },
     name: { type: DataTypes.STRING, unique: true, allowNull: false },
-    createdAt: { type: DataTypes.DATE, allowNull: false },
-    updatedAt: { type: DataTypes.DATE, allowNull: false },
+    created_at: { type: DataTypes.DATE, allowNull: false },
+    updated_at: { type: DataTypes.DATE, allowNull: false },
   });
 
   await sequelize.getQueryInterface().createTable('products', {
@@ -46,8 +46,8 @@ export const up: Migration = async ({ context: sequelize }) => {
       allowNull: false,
       defaultValue: 'available',
     },
-    createdAt: { type: DataTypes.DATE, allowNull: false },
-    updatedAt: { type: DataTypes.DATE, allowNull: false },
+    created_at: { type: DataTypes.DATE, allowNull: false },
+    updated_at: { type: DataTypes.DATE, allowNull: false },
   });
 
   await sequelize.getQueryInterface().addConstraint('products', {
