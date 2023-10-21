@@ -1,17 +1,19 @@
 import {
-  Model,
-  Table,
-  Column,
-  PrimaryKey,
   AutoIncrement,
-  Unique,
-  DataType,
+  Column,
   CreatedAt,
+  DataType,
+  HasMany,
+  Model,
+  PrimaryKey,
+  Table,
+  Unique,
   UpdatedAt,
 } from 'sequelize-typescript';
 
+import { Product } from './Product';
 @Table({ tableName: 'users' })
-class User extends Model {
+export class User extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
@@ -31,6 +33,7 @@ class User extends Model {
   @UpdatedAt
   @Column({ type: DataType.DATE, allowNull: false })
   updatedAt!: Date;
-}
 
-export default User;
+  @HasMany(() => Product)
+  products!: Product[];
+}
