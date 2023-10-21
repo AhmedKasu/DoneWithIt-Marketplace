@@ -4,6 +4,9 @@ import { DATABASE_URL, NODE_ENV } from '../utils/config';
 
 const sequelizeOptions: SequelizeOptions = {
   logging: false,
+  define: {
+    underscored: true,
+  },
   models: [`${__dirname}/../models/*.ts`],
 };
 
