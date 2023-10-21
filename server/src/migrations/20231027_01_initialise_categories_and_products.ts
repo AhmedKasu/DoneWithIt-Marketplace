@@ -24,7 +24,7 @@ export const up: Migration = async ({ context: sequelize }) => {
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Users',
+        model: 'users',
         key: 'id',
       },
       onDelete: 'CASCADE',
@@ -50,7 +50,7 @@ export const up: Migration = async ({ context: sequelize }) => {
     updatedAt: { type: DataTypes.DATE, allowNull: false },
   });
 
-  await sequelize.getQueryInterface().addConstraint('Products', {
+  await sequelize.getQueryInterface().addConstraint('products', {
     fields: ['price'],
     type: 'check',
     where: {
