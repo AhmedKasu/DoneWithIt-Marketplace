@@ -4,7 +4,7 @@ import { DATABASE_URL, NODE_ENV } from '../utils/config';
 
 const sequelizeOptions: SequelizeOptions = {
   logging: false,
-  models: [__dirname + '../modules/**/model.ts'],
+  models: [`${__dirname}/../models/*.ts`],
 };
 
 if (NODE_ENV === 'production') {
