@@ -9,6 +9,7 @@ import { connectToDatabase } from './utils/db';
 import errorHandler from './middleware/errorHandler';
 
 import usersRouter from './controllers/users';
+import loginRouter from './controllers/login';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
 
 app.use(errorHandler);
 
