@@ -5,6 +5,9 @@ declare module 'express' {
     cookies?: {
       accessToken: string;
     };
-    user?: string;
+    user?: {
+      id: string;
+      name: string;
+    };
   }
 }
