@@ -14,9 +14,9 @@ export const up: Migration = async ({ context: sequelize }) => {
         },
         email: { type: DataTypes.STRING, unique: true, allowNull: false },
         name: { type: DataTypes.STRING, allowNull: false },
-        passwordHash: { type: DataTypes.STRING, allowNull: false },
-        createdAt: { type: DataTypes.DATE, allowNull: false },
-        updatedAt: { type: DataTypes.DATE, allowNull: false },
+        password_hash: { type: DataTypes.STRING, allowNull: false },
+        created_at: { type: DataTypes.DATE, allowNull: false },
+        updated_at: { type: DataTypes.DATE, allowNull: false },
       },
       { transaction }
     );

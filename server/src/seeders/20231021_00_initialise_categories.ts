@@ -1,16 +1,15 @@
 import { Seeder } from '../utils/umzug';
-
 const categorySeeds = [
-  { name: 'Electronics', createdAt: new Date(), updatedAt: new Date() },
-  { name: 'Entertainment', createdAt: new Date(), updatedAt: new Date() },
-  { name: 'Free Stuff', createdAt: new Date(), updatedAt: new Date() },
-  { name: 'Garden & Outdoor', createdAt: new Date(), updatedAt: new Date() },
-  { name: 'Clothing', createdAt: new Date(), updatedAt: new Date() },
-  { name: 'Home Appliances', createdAt: new Date(), updatedAt: new Date() },
-  { name: 'Hobbies', createdAt: new Date(), updatedAt: new Date() },
-  { name: 'Sporting Goods', createdAt: new Date(), updatedAt: new Date() },
-  { name: 'Toys & Games', createdAt: new Date(), updatedAt: new Date() },
-  { name: 'Pet Supplies', createdAt: new Date(), updatedAt: new Date() },
+  { name: 'Electronics', created_at: new Date(), updated_at: new Date() },
+  { name: 'Entertainment', created_at: new Date(), updated_at: new Date() },
+  { name: 'Free Stuff', created_at: new Date(), updated_at: new Date() },
+  { name: 'Garden & Outdoor', created_at: new Date(), updated_at: new Date() },
+  { name: 'Clothing', created_at: new Date(), updated_at: new Date() },
+  { name: 'Home Appliances', created_at: new Date(), updated_at: new Date() },
+  { name: 'Hobbies', created_at: new Date(), updated_at: new Date() },
+  { name: 'Sporting Goods', created_at: new Date(), updated_at: new Date() },
+  { name: 'Toys & Games', created_at: new Date(), updated_at: new Date() },
+  { name: 'Pet Supplies', created_at: new Date(), updated_at: new Date() },
 ];
 
 export const up: Seeder = async ({ context: sequelize }) => {
