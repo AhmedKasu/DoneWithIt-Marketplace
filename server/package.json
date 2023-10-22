@@ -6,7 +6,7 @@
   "scripts": {
     "tsc": "tsc",
     "lint": "eslint --ext .ts .",
-    "dev": "ts-node-dev src/index.ts",
+    "dev": "ts-node-dev --files src/index.ts",
     "start": "node build/index.js",
     "migration:up": "node src/utils/migrate.js up",
     "migration:down": "node src/utils/migrate.js down",
