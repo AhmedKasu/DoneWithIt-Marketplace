@@ -15,11 +15,11 @@ const validateUserInput = <T>(
   const { error, data }: SafeParseReturnType<T> = schema.safeParse(userInput);
 
   if (error) {
-    const zodErrorMessage = error.issues
-      .map((e) => `${e.path.join('.')}: ${e.message}`)
-      .join(', ');
+    const firstZodError = `${error.issues[0].path.join('.')}: ${
+      error.issues[0].message
+    }`;
 
-    throw new ValidationError(customErrorMessage || zodErrorMessage);
+    throw new ValidationError(customErrorMessage || firstZodError);
   }
 
   return data!;
