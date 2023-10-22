@@ -47,7 +47,10 @@ export const up: Migration = async ({ context: sequelize }) => {
         title: { type: DataTypes.STRING, allowNull: false },
         price: { type: DataTypes.INTEGER, allowNull: false },
         description: { type: DataTypes.STRING, allowNull: false },
-        image_urls: { type: DataTypes.STRING, allowNull: false },
+        image_urls: {
+          type: DataTypes.ARRAY(DataTypes.STRING),
+          allowNull: false,
+        },
         status: {
           type: DataTypes.ENUM('available', 'sold', 'pending'),
           allowNull: false,

@@ -51,8 +51,8 @@ export class Product extends Model {
   @Column({ type: DataType.STRING, allowNull: false })
   description!: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
-  imageUrls!: string;
+  @Column({ type: DataType.ARRAY(DataType.STRING), allowNull: false })
+  imageUrls!: string[];
 
   @Column({
     type: DataType.ENUM('available', 'sold', 'pending'),
