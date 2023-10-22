@@ -18,6 +18,12 @@ const errorHandler = (
   _next: NextFunction
 ) => {
   const { name, message, details, status } = error;
+  if (error instanceof UniqueConstraintError) {
+    return res.status(400).json({
+      error: name,
+      details: error.errors[0].message,
+    });
+  }
 
   if (
     error instanceof SequelizeValidationError ||
@@ -26,13 +32,6 @@ const errorHandler = (
     return res.status(400).json({
       error: name,
       details: message,
-    });
-  }
-
-  if (error instanceof UniqueConstraintError) {
-    return res.status(400).json({
-      error: name,
-      details: error.errors[0].message,
     });
   }
 
