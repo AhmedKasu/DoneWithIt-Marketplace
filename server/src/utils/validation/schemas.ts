@@ -15,4 +15,9 @@ const userSchema = z.object({
     ),
 });
 
-export { userSchema };
+const loginSchema = z.object({
+  name: userSchema.shape.name,
+  password: userSchema.shape.password,
+});
+
+export { userSchema, loginSchema };
