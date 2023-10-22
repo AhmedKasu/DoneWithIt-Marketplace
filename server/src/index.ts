@@ -10,6 +10,7 @@ import errorHandler from './middleware/errorHandler';
 
 import usersRouter from './controllers/users';
 import loginRouter from './controllers/login';
+import categoriesRouter from './controllers/categories';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(cookieParser());
 
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/categories', categoriesRouter);
 
 app.use(errorHandler);
 
