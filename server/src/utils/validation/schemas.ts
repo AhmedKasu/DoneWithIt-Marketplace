@@ -1,5 +1,11 @@
 import { z } from 'zod';
 
+import { isValidURL } from '.';
+
+const URLSchema = z.string().refine(isValidURL, {
+  message: 'Invalid URL',
+});
+
 const userSchema = z.object({
   name: z
     .string()
@@ -33,7 +39,10 @@ const productSchema = z.object({
     .string()
     .min(10, 'Description is too short! Should be at least 10 characters.')
     .max(200, 'Description is too long! Should not exceed 200 characters.'),
-  imageUrls: z.array(z.string()).min(1, 'Please provide at least one image.'),
+  imageUrls: z
+    .array(URLSchema)
+    .min(1, 'Please provide at least one image.')
+    .max(4, 'You can provide a maximum of 4 images.'),
   condition: z.enum(['New', 'Used - Like New', 'Used - Good', 'Used - Fair']),
 });
 
