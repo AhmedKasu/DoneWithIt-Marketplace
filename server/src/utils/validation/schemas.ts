@@ -34,6 +34,7 @@ const productSchema = z.object({
     .min(10, 'Description is too short! Should be at least 10 characters.')
     .max(200, 'Description is too long! Should not exceed 200 characters.'),
   imageUrls: z.array(z.string()).min(1, 'Please provide at least one image.'),
+  condition: z.enum(['New', 'Used - Like New', 'Used - Good', 'Used - Fair']),
 });
 
 export { userSchema, loginSchema, productSchema };
