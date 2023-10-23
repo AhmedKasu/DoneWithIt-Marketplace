@@ -12,6 +12,7 @@ import auth from './middleware/auth';
 import usersRouter from './controllers/users';
 import loginRouter from './controllers/login';
 import categoriesRouter from './controllers/categories';
+import productsRouter from './controllers/products';
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/api/login', loginRouter);
 app.use(auth);
 
 app.use('/api/categories', categoriesRouter);
+app.use('/api/products', productsRouter);
 
 app.use(errorHandler);
 
