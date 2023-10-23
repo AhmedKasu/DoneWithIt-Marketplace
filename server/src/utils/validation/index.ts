@@ -7,6 +7,15 @@ type SafeParseReturnType<T> = {
   error?: ZodError;
 };
 
+export const isValidURL = (url: string): boolean => {
+  try {
+    new URL(url);
+    return true;
+  } catch (_) {
+    return false;
+  }
+};
+
 const validateUserInput = <T>(
   schema: ZodSchema<T>,
   userInput: unknown,
