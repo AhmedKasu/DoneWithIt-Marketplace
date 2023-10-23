@@ -61,6 +61,14 @@ export class Product extends Model {
   })
   status!: 'available' | 'sold' | 'pending';
 
+  @Column({
+    type: DataType.ENUM,
+    values: ['New', 'Used - Like New', 'Used - Good', 'Used - Fair'],
+    allowNull: false,
+    defaultValue: 'Used - Good',
+  })
+  condition!: 'New' | 'Used - Like New' | 'Used - Good' | 'Used - Fair';
+
   @CreatedAt
   @Column({ type: DataType.DATE, allowNull: false })
   createdAt!: Date;
