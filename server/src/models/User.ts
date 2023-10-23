@@ -12,21 +12,25 @@ import {
 } from 'sequelize-typescript';
 
 import { Product } from './Product';
+import {
+  requiredIntegerColumn,
+  requiredStringColumn,
+} from '../helpers/modelHelpers';
 @Table
 export class User extends Model {
   @PrimaryKey
   @AutoIncrement
-  @Column(DataType.INTEGER)
+  @Column(requiredIntegerColumn())
   id!: number;
 
   @Unique
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column(requiredStringColumn())
   email!: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column(requiredStringColumn())
   name!: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column(requiredStringColumn())
   passwordHash!: string;
 
   @CreatedAt

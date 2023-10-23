@@ -12,16 +12,19 @@ import {
 } from 'sequelize-typescript';
 
 import { Product } from './Product';
-
+import {
+  requiredIntegerColumn,
+  requiredStringColumn,
+} from '../helpers/modelHelpers';
 @Table
 export class Category extends Model {
   @PrimaryKey
   @AutoIncrement
-  @Column(DataType.INTEGER)
+  @Column(requiredIntegerColumn())
   id!: number;
 
   @Unique
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column(requiredStringColumn())
   name!: string;
 
   @CreatedAt

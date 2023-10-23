@@ -14,22 +14,27 @@ import {
 import { User } from './User';
 import { Category } from './Category';
 
+import {
+  requiredStringColumn,
+  requiredIntegerColumn,
+} from '../helpers/modelHelpers';
+
 @Table
 export class Product extends Model {
   @PrimaryKey
   @AutoIncrement
-  @Column(DataType.INTEGER)
+  @Column(requiredIntegerColumn())
   id!: number;
 
   @ForeignKey(() => User)
-  @Column
+  @Column(requiredIntegerColumn())
   userId!: number;
 
   @ForeignKey(() => Category)
-  @Column
+  @Column(requiredIntegerColumn())
   categoryId!: number;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column(requiredStringColumn())
   title!: string;
 
   @Column({
@@ -48,7 +53,7 @@ export class Product extends Model {
   })
   price!: number;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column(requiredStringColumn())
   description!: string;
 
   @Column({ type: DataType.ARRAY(DataType.STRING), allowNull: false })
