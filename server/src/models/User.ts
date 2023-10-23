@@ -1,14 +1,11 @@
 import {
   AutoIncrement,
   Column,
-  CreatedAt,
-  DataType,
   HasMany,
   Model,
   PrimaryKey,
   Table,
   Unique,
-  UpdatedAt,
 } from 'sequelize-typescript';
 
 import { Product } from './Product';
@@ -16,7 +13,7 @@ import {
   requiredIntegerColumn,
   requiredStringColumn,
 } from '../helpers/modelHelpers';
-@Table
+@Table({ timestamps: true })
 export class User extends Model {
   @PrimaryKey
   @AutoIncrement
@@ -32,14 +29,6 @@ export class User extends Model {
 
   @Column(requiredStringColumn())
   passwordHash!: string;
-
-  @CreatedAt
-  @Column({ type: DataType.DATE, allowNull: false })
-  createdAt!: Date;
-
-  @UpdatedAt
-  @Column({ type: DataType.DATE, allowNull: false })
-  updatedAt!: Date;
 
   @HasMany(() => Product)
   products!: Product[];

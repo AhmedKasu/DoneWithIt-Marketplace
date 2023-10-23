@@ -1,13 +1,10 @@
 import {
   AutoIncrement,
-  CreatedAt,
   Column,
-  DataType,
   HasMany,
   Model,
   PrimaryKey,
   Table,
-  UpdatedAt,
   Unique,
 } from 'sequelize-typescript';
 
@@ -16,7 +13,7 @@ import {
   requiredIntegerColumn,
   requiredStringColumn,
 } from '../helpers/modelHelpers';
-@Table
+@Table({ timestamps: true })
 export class Category extends Model {
   @PrimaryKey
   @AutoIncrement
@@ -26,14 +23,6 @@ export class Category extends Model {
   @Unique
   @Column(requiredStringColumn())
   name!: string;
-
-  @CreatedAt
-  @Column({ type: DataType.DATE, allowNull: false })
-  createdAt!: Date;
-
-  @UpdatedAt
-  @Column({ type: DataType.DATE, allowNull: false })
-  updatedAt!: Date;
 
   @HasMany(() => Product)
   products!: Product[];

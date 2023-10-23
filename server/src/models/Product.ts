@@ -1,14 +1,12 @@
 import {
   AutoIncrement,
   BelongsTo,
-  CreatedAt,
   Column,
   ForeignKey,
   DataType,
   Model,
   PrimaryKey,
   Table,
-  UpdatedAt,
 } from 'sequelize-typescript';
 
 import { User } from './User';
@@ -19,7 +17,7 @@ import {
   requiredIntegerColumn,
 } from '../helpers/modelHelpers';
 
-@Table
+@Table({ timestamps: true })
 export class Product extends Model {
   @PrimaryKey
   @AutoIncrement
@@ -73,14 +71,6 @@ export class Product extends Model {
     defaultValue: 'Used - Good',
   })
   condition!: 'New' | 'Used - Like New' | 'Used - Good' | 'Used - Fair';
-
-  @CreatedAt
-  @Column({ type: DataType.DATE, allowNull: false })
-  createdAt!: Date;
-
-  @UpdatedAt
-  @Column({ type: DataType.DATE, allowNull: false })
-  updatedAt!: Date;
 
   @BelongsTo(() => User)
   user!: User;
