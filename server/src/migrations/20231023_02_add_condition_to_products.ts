@@ -3,13 +3,17 @@ import { DataType } from 'sequelize-typescript';
 
 export const up: Migration = async ({ context: sequelize }) => {
   return sequelize.transaction(async (transaction) => {
-    await sequelize.getQueryInterface().addColumn('products', 'condition', {
-      type: DataType.ENUM,
-      values: ['New', 'Used - Like New', 'Used - Good', 'Used - Fair'],
-      allowNull: false,
-      defaultValue: 'Used - Good',
-    }),
-      { transaction };
+    await sequelize.getQueryInterface().addColumn(
+      'products',
+      'condition',
+      {
+        type: DataType.ENUM,
+        values: ['New', 'Used - Like New', 'Used - Good', 'Used - Fair'],
+        allowNull: false,
+        defaultValue: 'Used - Good',
+      },
+      { transaction }
+    );
   });
 };
 
