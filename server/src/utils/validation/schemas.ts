@@ -47,4 +47,9 @@ const productSchema = z.object({
     .max(4, 'You can provide a maximum of 4 images.'),
 });
 
-export { userSchema, loginSchema, productSchema };
+const paramsIdSchema = z.string().refine((value) => {
+  const reg = /^\d+$/;
+  return reg.test(value);
+}, 'ID must be a positive integer');
+
+export { userSchema, loginSchema, productSchema, paramsIdSchema };
