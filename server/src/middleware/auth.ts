@@ -4,7 +4,7 @@ import { verify, JwtPayload } from 'jsonwebtoken';
 import { JWT_SECRET } from '../utils/config';
 
 interface JWTPayload extends JwtPayload {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -15,7 +15,8 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const { id, name } = verify(accessToken, JWT_SECRET) as JWTPayload;
-    req.user = { id, name };
+    req.entities = req.entities || {};
+    req.entities.user = { id, name };
   } catch (err) {
     res.clearCookie('accessToken');
     return res.status(400).send('Invalid accessToken.');
