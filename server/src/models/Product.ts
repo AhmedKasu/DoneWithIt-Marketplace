@@ -73,7 +73,7 @@ export class Product extends Model {
   condition!: 'New' | 'Used - Like New' | 'Used - Good' | 'Used - Fair';
 
   @BelongsTo(() => User)
-  user!: User;
+  seller!: User;
 
   @BelongsTo(() => Category)
   category!: Category;
