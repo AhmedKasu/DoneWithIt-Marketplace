@@ -44,4 +44,23 @@ router.get(
   }
 );
 
+router.put(
+  '/:id',
+  findById(Product, 'product', paramsIdSchema),
+  async (req: Request, res: Response) => {
+    const product = req.entities?.product as Product;
+
+    if (req.authUser?.id !== product.userId)
+      return res.status(403).send('Operation not authorized.');
+
+    product.set({
+      ...validateUserInput(productSchema, req.body),
+      userId: req.authUser?.id,
+    });
+    await product.save();
+
+    return res.status(200).json(product);
+  }
+);
+
 export default router;
