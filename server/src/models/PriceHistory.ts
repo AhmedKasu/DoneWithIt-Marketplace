@@ -12,7 +12,7 @@ import {
 import { Product } from './Product';
 import { requiredIntegerColumn } from '../helpers/modelHelpers';
 
-@Table({ timestamps: true })
+@Table({ timestamps: true, tableName: 'price_history' })
 export class PriceHistory extends Model {
   @PrimaryKey
   @AutoIncrement
