@@ -27,3 +27,5 @@ export interface User {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export type AuthUser = Omit<User, 'email' | 'passwordHash'>;
