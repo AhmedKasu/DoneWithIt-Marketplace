@@ -1,4 +1,4 @@
-import Router, { Request, Response } from 'express';
+import { Router, Request, Response } from 'express';
 import _ from 'lodash';
 
 import { Product } from '../models/Product';
@@ -12,6 +12,7 @@ import { productSchema, paramsIdSchema } from '../utils/validation/schemas';
 import findById from '../middleware/findById';
 
 const router = Router();
+const singleProductRouter = Router({ mergeParams: true });
 
 router.get('/', async (_req: Request, res: Response) => {
   const allProducts = await Product.findAll({
@@ -29,8 +30,8 @@ router.post('/', async (req: Request, res: Response) => {
   res.status(200).json(_.omit(newProduct.toJSON(), ['createdAt', 'updatedAt']));
 });
 
-router.get(
-  '/:id',
+singleProductRouter.get(
+  '/',
   findById(Product, 'product', paramsIdSchema, (_req) => {
     return {
       attributes: { exclude: ['categoryId', 'userId'] },
@@ -46,8 +47,8 @@ router.get(
   }
 );
 
-router.put(
-  '/:id',
+singleProductRouter.put(
+  '/',
   findById(Product, 'product', paramsIdSchema),
   async (req: Request, res: Response) => {
     const product = req.entities?.product as Product;
@@ -65,8 +66,8 @@ router.put(
   }
 );
 
-router.delete(
-  '/:id',
+singleProductRouter.delete(
+  '/',
   findById(Product, 'product', paramsIdSchema),
   async (req: Request, res: Response) => {
     const product = req.entities?.product as Product;
@@ -78,5 +79,7 @@ router.delete(
     return res.status(204).end();
   }
 );
+
+router.use('/:id', singleProductRouter);
 
 export default router;
