@@ -12,6 +12,8 @@ import { productSchema, paramsIdSchema } from '../utils/validation/schemas';
 import findById from '../middleware/findById';
 import checkOwner from '../middleware/checkOwner';
 
+import { Product as ProductType } from '../types';
+
 const router = Router();
 const singleProductRouter = Router({ mergeParams: true });
 
@@ -26,8 +28,8 @@ router.get('/', async (_req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   const newProduct = await Product.create({
     ...validateUserInput(productSchema, req.body),
-    userId: req.authUser?.id,
-  });
+    userId: req.authUser!.id,
+  } as ProductType);
   res.status(200).json(_.omit(newProduct.toJSON(), ['createdAt', 'updatedAt']));
 });
 

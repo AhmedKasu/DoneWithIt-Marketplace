@@ -9,6 +9,8 @@ import { userSchema } from '../utils/validation/schemas';
 
 import auth from '../middleware/auth';
 
+import { User as UserType } from '../types';
+
 const router = Router();
 
 router.post('/', async (req, res) => {
@@ -21,7 +23,7 @@ router.post('/', async (req, res) => {
     name,
     email,
     passwordHash,
-  });
+  } as UserType);
 
   res
     .status(200)
