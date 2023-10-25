@@ -65,4 +65,18 @@ router.put(
   }
 );
 
+router.delete(
+  '/:id',
+  findById(Product, 'product', paramsIdSchema),
+  async (req: Request, res: Response) => {
+    const product = req.entities?.product as Product;
+
+    if (req.authUser?.id !== product.userId)
+      return res.status(403).send('Operation not authorized.');
+
+    await product.destroy();
+    return res.status(204).end();
+  }
+);
+
 export default router;
