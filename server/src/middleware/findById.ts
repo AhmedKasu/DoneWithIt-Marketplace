@@ -3,12 +3,7 @@ import { ZodSchema } from 'zod';
 import { ModelStatic, Model, FindOptions } from 'sequelize/types';
 
 import validateUserInput from '../utils/validation/index';
-import {
-  EntityKeys,
-  ReqUserInstance,
-  ProductInstance,
-  CategoryInstance,
-} from '../types/express';
+import { EntitiyTypes, EntityKeys } from '../types/express';
 
 const findById = <T extends Model>(
   Model: ModelStatic<T>,
@@ -23,11 +18,7 @@ const findById = <T extends Model>(
     const modelInstance = await Model.findByPk(id, options);
 
     req.entities = req.entities || {};
-    req.entities[resource] = modelInstance as
-      | ProductInstance
-      | CategoryInstance
-      | ReqUserInstance
-      | null;
+    req.entities[resource] = modelInstance as EntitiyTypes;
 
     if (!req.entities[resource])
       return res.status(404).send(`${resource} not found!`);

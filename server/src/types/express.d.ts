@@ -8,12 +8,14 @@ export interface ProductInstance extends Model<Product>, Product {}
 export interface CategoryInstance extends Model<Category>, Category {}
 export interface ReqUserInstance extends Model<User>, ReqUser {}
 
+export type EntitiyTypes =
+  | ProductInstance
+  | CategoryInstance
+  | ReqUserInstance
+  | null;
+
 type Entities = {
-  [key in EntityKeys]?:
-    | ProductInstance
-    | CategoryInstance
-    | ReqUserInstance
-    | null;
+  [key in EntityKeys]?: EntitiyTypes;
 };
 
 declare module 'express' {
