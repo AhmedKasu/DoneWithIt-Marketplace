@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { Product } from '../models/Product';
 import { Category } from '../models/Category';
 import { User } from '../models/User';
+import { PriceHistory } from '../models/PriceHistory';
 
 import validateUserInput from '../utils/validation';
 import { productSchema, paramsIdSchema } from '../utils/validation/schemas';
@@ -36,6 +37,7 @@ router.get(
       include: [
         { model: User, as: 'seller', attributes: ['id', 'name'] },
         { model: Category, attributes: ['name'] },
+        { model: PriceHistory, attributes: ['price', 'createdAt'] },
       ],
     };
   }),
