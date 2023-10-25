@@ -6,15 +6,15 @@ export type EntityKeys = 'product' | 'category' | 'user';
 
 export interface ProductInstance extends Model<Product>, Product {}
 export interface CategoryInstance extends Model<Category>, Category {}
-export interface ReqUserInstance extends Model<User>, ReqUser {}
+export interface UserInstance extends Model<User>, ReqUser {}
 
 export type EntitiyTypes =
   | ProductInstance
   | CategoryInstance
-  | ReqUserInstance
+  | UserInstance
   | null;
 
-type Entities = {
+export type Entities = {
   [key in EntityKeys]?: EntitiyTypes;
 };
 
