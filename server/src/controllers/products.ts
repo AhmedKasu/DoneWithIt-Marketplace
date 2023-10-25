@@ -10,6 +10,7 @@ import validateUserInput from '../utils/validation';
 import { productSchema, paramsIdSchema } from '../utils/validation/schemas';
 
 import findById from '../middleware/findById';
+import checkOwner from '../middleware/checkOwner';
 
 const router = Router();
 const singleProductRouter = Router({ mergeParams: true });
@@ -50,11 +51,9 @@ singleProductRouter.get(
 singleProductRouter.put(
   '/',
   findById(Product, 'product', paramsIdSchema),
+  checkOwner('product'),
   async (req: Request, res: Response) => {
     const product = req.entities?.product as Product;
-
-    if (req.authUser?.id !== product.userId)
-      return res.status(403).send('Operation not authorized.');
 
     product.set({
       ...validateUserInput(productSchema, req.body),
@@ -69,11 +68,9 @@ singleProductRouter.put(
 singleProductRouter.delete(
   '/',
   findById(Product, 'product', paramsIdSchema),
+  checkOwner('product'),
   async (req: Request, res: Response) => {
     const product = req.entities?.product as Product;
-
-    if (req.authUser?.id !== product.userId)
-      return res.status(403).send('Operation not authorized.');
 
     await product.destroy();
     return res.status(204).end();
