@@ -12,6 +12,14 @@ export interface Product {
   updatedAt?: Date;
 }
 
+export interface PriceHistory {
+  id: number;
+  productId: number;
+  price: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 export interface Category {
   id: number;
   name: string;
