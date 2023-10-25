@@ -1,12 +1,19 @@
 import 'express';
-import type { Product, Category, User } from '../types';
-
-export type ReqUser = Omit<User, 'email' | 'passwordHash'>;
+import type { AuthUser, Product, Category, User } from '../types';
+import { Model } from 'sequelize-typescript';
 
 export type EntityKeys = 'product' | 'category' | 'user';
 
+export interface ProductInstance extends Model<Product>, Product {}
+export interface CategoryInstance extends Model<Category>, Category {}
+export interface ReqUserInstance extends Model<User>, ReqUser {}
+
 type Entities = {
-  [key in EntityKeys]?: Product | Category | ReqUser | null;
+  [key in EntityKeys]?:
+    | ProductInstance
+    | CategoryInstance
+    | ReqUserInstance
+    | null;
 };
 
 declare module 'express' {
@@ -14,6 +21,7 @@ declare module 'express' {
     cookies?: {
       accessToken: string;
     };
+    authUser?: AuthUser;
     entities?: Entities;
   }
 }
