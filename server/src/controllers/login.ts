@@ -10,15 +10,16 @@ import { JWT_SECRET, NODE_ENV } from '../utils/config';
 const router = Router();
 
 router.post('/', async (req, res) => {
-  const { name, password } = validateUserInput(loginSchema, req.body);
+  const { email, password } = validateUserInput(loginSchema, req.body);
 
-  const user = await User.findOne({ where: { name } });
+  const user = await User.findOne({ where: { email } });
   if (!user) return res.status(400).send('Invalid email or password.');
 
-  const validPassword = await compare(password, user.passwordHash);
+  const { name, id, passwordHash } = user;
+  const validPassword = await compare(password, passwordHash);
   if (!validPassword) return res.status(400).send('Invalid email or password.');
 
-  const accessToken = sign({ name, id: user.id }, JWT_SECRET, {
+  const accessToken = sign({ name, id }, JWT_SECRET, {
     expiresIn: '1h',
   });
 

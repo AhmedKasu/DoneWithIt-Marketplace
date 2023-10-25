@@ -22,7 +22,7 @@ const userSchema = z.object({
 });
 
 const loginSchema = z.object({
-  name: userSchema.shape.name,
+  email: userSchema.shape.email,
   password: userSchema.shape.password,
 });
 
