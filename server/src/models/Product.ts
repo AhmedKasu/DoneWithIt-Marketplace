@@ -19,24 +19,25 @@ import {
   requiredStringColumn,
   requiredIntegerColumn,
 } from '../helpers/modelHelpers';
+import { Product as ProductType } from '../types';
 
 @Table({ timestamps: true })
-export class Product extends Model {
+export class Product extends Model<ProductType> {
   @PrimaryKey
   @AutoIncrement
   @Column(requiredIntegerColumn())
-  id!: number;
+  id!: ProductType['id'];
 
   @ForeignKey(() => User)
   @Column(requiredIntegerColumn())
-  userId!: number;
+  userId!: ProductType['userId'];
 
   @ForeignKey(() => Category)
   @Column(requiredIntegerColumn())
-  categoryId!: number;
+  categoryId!: ProductType['categoryId'];
 
   @Column(requiredStringColumn())
-  title!: string;
+  title!: ProductType['title'];
 
   @Column({
     type: DataType.INTEGER,
@@ -52,20 +53,20 @@ export class Product extends Model {
       },
     },
   })
-  price!: number;
+  price!: ProductType['price'];
 
   @Column(requiredStringColumn())
-  description!: string;
+  description!: ProductType['description'];
 
   @Column({ type: DataType.ARRAY(DataType.STRING), allowNull: false })
-  imageUrls!: string[];
+  imageUrls!: ProductType['imageUrls'];
 
   @Column({
     type: DataType.ENUM('available', 'sold', 'pending'),
     allowNull: false,
     defaultValue: 'available',
   })
-  status!: 'available' | 'sold' | 'pending';
+  status!: ProductType['status'];
 
   @Column({
     type: DataType.ENUM,
@@ -73,7 +74,7 @@ export class Product extends Model {
     allowNull: false,
     defaultValue: 'Used - Good',
   })
-  condition!: 'New' | 'Used - Like New' | 'Used - Good' | 'Used - Fair';
+  condition!: ProductType['condition'];
 
   @BelongsTo(() => User, {
     onDelete: 'CASCADE',

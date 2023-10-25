@@ -13,22 +13,23 @@ import {
   requiredIntegerColumn,
   requiredStringColumn,
 } from '../helpers/modelHelpers';
+import { User as UserType } from '../types';
 @Table({ timestamps: true })
-export class User extends Model {
+export class User extends Model<UserType> {
   @PrimaryKey
   @AutoIncrement
   @Column(requiredIntegerColumn())
-  id!: number;
+  id!: UserType['id'];
 
   @Unique
   @Column(requiredStringColumn())
-  email!: string;
+  email!: UserType['email'];
 
   @Column(requiredStringColumn())
-  name!: string;
+  name!: UserType['name'];
 
   @Column(requiredStringColumn())
-  passwordHash!: string;
+  passwordHash!: UserType['passwordHash'];
 
   @HasMany(() => Product)
   products!: Product[];

@@ -13,16 +13,17 @@ import {
   requiredIntegerColumn,
   requiredStringColumn,
 } from '../helpers/modelHelpers';
+import { Category as CategoryType } from '../types';
 @Table({ timestamps: true })
-export class Category extends Model {
+export class Category extends Model<CategoryType> {
   @PrimaryKey
   @AutoIncrement
   @Column(requiredIntegerColumn())
-  id!: number;
+  id!: CategoryType['id'];
 
   @Unique
   @Column(requiredStringColumn())
-  name!: string;
+  name!: CategoryType['name'];
 
   @HasMany(() => Product)
   products!: Product[];

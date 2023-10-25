@@ -11,17 +11,18 @@ import {
 
 import { Product } from './Product';
 import { requiredIntegerColumn } from '../helpers/modelHelpers';
+import { PriceHistory as PriceHistoryType } from '../types';
 
 @Table({ timestamps: true, tableName: 'price_history' })
-export class PriceHistory extends Model {
+export class PriceHistory extends Model<PriceHistoryType> {
   @PrimaryKey
   @AutoIncrement
   @Column(requiredIntegerColumn())
-  id!: number;
+  id!: PriceHistoryType['id'];
 
   @ForeignKey(() => Product)
   @Column(requiredIntegerColumn())
-  product_id!: number;
+  product_id!: PriceHistoryType['productId'];
 
   @Column({
     type: DataType.INTEGER,
@@ -37,7 +38,7 @@ export class PriceHistory extends Model {
       },
     },
   })
-  price!: number;
+  price!: PriceHistoryType['price'];
 
   @BelongsTo(() => Product, {
     onDelete: 'CASCADE',
