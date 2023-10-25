@@ -22,7 +22,7 @@ export class PriceHistory extends Model<PriceHistoryType> {
 
   @ForeignKey(() => Product)
   @Column(requiredIntegerColumn())
-  product_id!: PriceHistoryType['productId'];
+  productId!: PriceHistoryType['productId'];
 
   @Column({
     type: DataType.INTEGER,

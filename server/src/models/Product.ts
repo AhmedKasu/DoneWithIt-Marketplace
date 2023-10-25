@@ -19,7 +19,10 @@ import {
   requiredStringColumn,
   requiredIntegerColumn,
 } from '../helpers/modelHelpers';
-import { Product as ProductType } from '../types';
+import {
+  Product as ProductType,
+  PriceHistory as PriceHistoryType,
+} from '../types';
 
 @Table({ timestamps: true })
 export class Product extends Model<ProductType> {
@@ -91,9 +94,9 @@ export class Product extends Model<ProductType> {
   static async updatePriceHistory(instance: Product) {
     if (instance.changed('price')) {
       await PriceHistory.create({
-        product_id: instance.id,
+        productId: instance.id,
         price: instance.price,
-      });
+      } as PriceHistoryType);
     }
   }
 }
