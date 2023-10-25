@@ -3,8 +3,12 @@ import { ZodSchema } from 'zod';
 import { ModelStatic, Model, FindOptions } from 'sequelize/types';
 
 import validateUserInput from '../utils/validation/index';
-import { Product, Category } from '../types';
-import { EntityKeys, ReqUser } from '../types/express';
+import {
+  EntityKeys,
+  ReqUserInstance,
+  ProductInstance,
+  CategoryInstance,
+} from '../types/express';
 
 const findById = <T extends Model>(
   Model: ModelStatic<T>,
@@ -20,9 +24,9 @@ const findById = <T extends Model>(
 
     req.entities = req.entities || {};
     req.entities[resource] = modelInstance as
-      | Product
-      | Category
-      | ReqUser
+      | ProductInstance
+      | CategoryInstance
+      | ReqUserInstance
       | null;
 
     if (!req.entities[resource])
