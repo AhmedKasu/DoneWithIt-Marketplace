@@ -2,12 +2,15 @@ import Router, { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import _ from 'lodash';
 
+import { Category } from '../models/Category';
+import { Product } from '../models/Product';
 import { User } from '../models/User';
 
 import validateUserInput from '../utils/validation';
-import { userSchema } from '../utils/validation/schemas';
+import { userSchema, paramsIdSchema } from '../utils/validation/schemas';
 
 import auth from '../middleware/auth';
+import findById from '../middleware/findById';
 
 import { User as UserType } from '../types';
 
@@ -33,5 +36,25 @@ router.post('/', async (req, res) => {
 router.get('/me', auth, (req: Request, res: Response) => {
   res.status(200).json(req.authUser);
 });
+
+router.get(
+  '/:id',
+  auth,
+  findById(User, 'user', paramsIdSchema, (_req) => {
+    return {
+      attributes: { exclude: ['passwordHash'] },
+      include: [
+        {
+          model: Product,
+          attributes: { exclude: ['categoryId', 'userId'] },
+          include: [{ model: Category, attributes: ['name'] }],
+        },
+      ],
+    };
+  }),
+  (req: Request, res: Response) => {
+    res.status(200).json(req.entities?.user);
+  }
+);
 
 export default router;
