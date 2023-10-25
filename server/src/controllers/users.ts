@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/me', auth, (req: Request, res: Response) => {
-  res.status(200).json(req.entities?.user);
+  res.status(200).json(req.authUser);
 });
 
 export default router;

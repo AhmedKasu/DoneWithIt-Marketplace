@@ -23,7 +23,7 @@ router.get('/', async (_req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   const newProduct = await Product.create({
     ...validateUserInput(productSchema, req.body),
-    userId: req.entities?.user?.id,
+    userId: req.authUser?.id,
   });
   res.status(200).json(_.omit(newProduct.toJSON(), ['createdAt', 'updatedAt']));
 });

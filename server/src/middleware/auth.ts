@@ -16,7 +16,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id, name } = verify(accessToken, JWT_SECRET) as JWTPayload;
     req.entities = req.entities || {};
-    req.entities.user = { id, name };
+    req.authUser = { id, name };
   } catch (err) {
     res.clearCookie('accessToken');
     return res.status(400).send('Invalid accessToken.');
