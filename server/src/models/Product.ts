@@ -90,7 +90,7 @@ export class Product extends Model {
   static async updatePriceHistory(instance: Product) {
     if (instance.changed('price')) {
       await PriceHistory.create({
-        productId: instance.id,
+        product_id: instance.id,
         price: instance.price,
       });
     }
