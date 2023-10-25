@@ -1,9 +1,11 @@
 import {
   AutoIncrement,
+  AfterUpdate,
   BelongsTo,
   Column,
-  ForeignKey,
   DataType,
+  ForeignKey,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
@@ -11,6 +13,7 @@ import {
 
 import { User } from './User';
 import { Category } from './Category';
+import { PriceHistory } from './PriceHistory';
 
 import {
   requiredStringColumn,
@@ -77,4 +80,17 @@ export class Product extends Model {
 
   @BelongsTo(() => Category)
   category!: Category;
+
+  @HasMany(() => PriceHistory)
+  priceHistories!: PriceHistory[];
+
+  @AfterUpdate
+  static async updatePriceHistory(instance: Product) {
+    if (instance.changed('price')) {
+      await PriceHistory.create({
+        productId: instance.id,
+        price: instance.price,
+      });
+    }
+  }
 }
