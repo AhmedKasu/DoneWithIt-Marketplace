@@ -21,10 +21,16 @@ import { Product as ProductType } from '../types';
 const router = Router();
 const singleProductRouter = Router({ mergeParams: true });
 
-router.get('/', async (_req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
+  const where: { status?: ProductType['status'] } = {};
+  if (['available', 'sold', 'pending'].includes(req.query.status as string)) {
+    where.status = req.query.status as ProductType['status'];
+  }
+
   const allProducts = await Product.findAll({
     attributes: { exclude: ['categoryId'] },
     include: { model: Category, attributes: ['name'] },
+    where,
   });
   res.status(200).json(allProducts);
 });
