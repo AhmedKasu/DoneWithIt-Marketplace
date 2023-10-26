@@ -52,4 +52,14 @@ const paramsIdSchema = z.string().refine((value) => {
   return reg.test(value);
 }, 'ID must be a positive integer');
 
-export { userSchema, loginSchema, productSchema, paramsIdSchema };
+const productStatusSchema = z.object({
+  status: z.enum(['available', 'sold', 'pending']),
+});
+
+export {
+  userSchema,
+  loginSchema,
+  productSchema,
+  paramsIdSchema,
+  productStatusSchema,
+};
