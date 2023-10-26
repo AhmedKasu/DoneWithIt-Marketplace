@@ -7,7 +7,11 @@ import { User } from '../models/User';
 import { PriceHistory } from '../models/PriceHistory';
 
 import validateUserInput from '../utils/validation';
-import { productSchema, paramsIdSchema } from '../utils/validation/schemas';
+import {
+  productSchema,
+  paramsIdSchema,
+  productStatusSchema,
+} from '../utils/validation/schemas';
 
 import findById from '../middleware/findById';
 import checkOwner from '../middleware/checkOwner';
@@ -64,6 +68,21 @@ singleProductRouter.put(
     await product.save();
 
     return res.status(200).json(product);
+  }
+);
+
+singleProductRouter.put(
+  '/status',
+  findById(Product, 'product', paramsIdSchema),
+  checkOwner('product'),
+  async (req: Request, res: Response) => {
+    (req.entities!.product! as Product).status = validateUserInput(
+      productStatusSchema,
+      req.body
+    ).status;
+
+    await (req.entities!.product! as Product).save();
+    res.status(200).json(req.entities!.product);
   }
 );
 
