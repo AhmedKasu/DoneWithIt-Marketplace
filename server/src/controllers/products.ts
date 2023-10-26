@@ -46,7 +46,7 @@ singleProductRouter.get(
     };
   }),
   (req: Request, res: Response) => {
-    res.status(200).json(req.entities?.product);
+    res.status(200).json(req.entities!.product);
   }
 );
 
@@ -59,7 +59,7 @@ singleProductRouter.put(
 
     product.set({
       ...validateUserInput(productSchema, req.body),
-      userId: req.authUser?.id,
+      userId: req.authUser!.id,
     });
     await product.save();
 
@@ -72,7 +72,7 @@ singleProductRouter.delete(
   findById(Product, 'product', paramsIdSchema),
   checkOwner('product'),
   async (req: Request, res: Response) => {
-    const product = req.entities?.product as Product;
+    const product = req.entities!.product as Product;
 
     await product.destroy();
     return res.status(204).end();
