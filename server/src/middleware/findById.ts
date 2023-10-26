@@ -5,14 +5,14 @@ import { ModelStatic, Model, FindOptions } from 'sequelize/types';
 import validateUserInput from '../utils/validation/index';
 import { EntitiyTypes, EntityKeys } from '../types/express';
 
-const findById = <T extends Model>(
+const findById = <T extends Model, U>(
   Model: ModelStatic<T>,
   resource: EntityKeys,
-  validationSchema: ZodSchema<string>,
+  validationSchema: ZodSchema<U>,
   optionsFn?: (req: Request) => FindOptions
 ) => {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const id = validateUserInput(validationSchema, req.params.id);
+    const id = validateUserInput(validationSchema, req.params.id) as string;
     const options = optionsFn ? optionsFn(req) : undefined;
 
     const modelInstance = await Model.findByPk(id, options);
