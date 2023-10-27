@@ -6,6 +6,7 @@ import { Category } from '../models/Category';
 
 import validateUserInput from '../utils/validation';
 import {
+  priceQuerySchema,
   productSchema,
   productStatusSchema,
   searchQuerySchema,
@@ -16,6 +17,8 @@ export const productsQueryOptions = (req: Request) => {
   const searchQuery = req.query.search;
   const conditionQuery = req.query.condition && req.query;
   const categoryQuery = req.query.categoryId && req.query;
+  const minPriceQuery = req.query.minPrice;
+  const maxPriceQuery = req.query.maxPrice;
 
   const where: WhereOptions<Product> = {};
   if (statusQuery)
@@ -47,6 +50,27 @@ export const productsQueryOptions = (req: Request) => {
       ...categoryQuery,
       categoryId: Number(categoryQuery.categoryId),
     }).categoryId;
+  }
+
+  const minPrice = validateUserInput(priceQuerySchema, minPriceQuery) as string;
+  const maxPrice = validateUserInput(priceQuerySchema, maxPriceQuery) as string;
+
+  if (minPriceQuery && !maxPriceQuery) {
+    where.price = {
+      [Op.gte]: minPrice,
+    };
+  }
+
+  if (!minPriceQuery && maxPriceQuery) {
+    where.price = {
+      [Op.lte]: maxPrice,
+    };
+  }
+
+  if (minPriceQuery && maxPriceQuery) {
+    where.price = {
+      [Op.between]: [minPrice, maxPrice],
+    };
   }
 
   return {
