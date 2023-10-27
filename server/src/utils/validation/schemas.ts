@@ -56,10 +56,16 @@ const productStatusSchema = z.object({
   status: z.enum(['available', 'sold', 'pending']),
 });
 
+const searchQuerySchema = z
+  .string()
+  .max(100, 'Search term is too long')
+  .regex(/^[a-zA-Z0-9\s\-_]+$/, 'Search term contains invalid characters');
+
 export {
-  userSchema,
   loginSchema,
-  productSchema,
+  searchQuerySchema,
   paramsIdSchema,
   productStatusSchema,
+  productSchema,
+  userSchema,
 };
