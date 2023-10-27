@@ -12,6 +12,7 @@ import {
   paramsIdSchema,
   productStatusSchema,
 } from '../utils/validation/schemas';
+import { productsQueryOptions } from '../services/products';
 
 import findById from '../middleware/findById';
 import checkOwner from '../middleware/checkOwner';
@@ -22,16 +23,7 @@ const router = Router();
 const singleProductRouter = Router({ mergeParams: true });
 
 router.get('/', async (req: Request, res: Response) => {
-  const where: { status?: ProductType['status'] } = {};
-  if (['available', 'sold', 'pending'].includes(req.query.status as string)) {
-    where.status = req.query.status as ProductType['status'];
-  }
-
-  const allProducts = await Product.findAll({
-    attributes: { exclude: ['categoryId'] },
-    include: { model: Category, attributes: ['name'] },
-    where,
-  });
+  const allProducts = await Product.findAll(productsQueryOptions(req));
   res.status(200).json(allProducts);
 });
 
