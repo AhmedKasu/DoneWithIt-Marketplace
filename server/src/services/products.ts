@@ -12,65 +12,82 @@ import {
   searchQuerySchema,
 } from '../utils/validation/schemas';
 
-export const productsQueryOptions = (req: Request) => {
-  const statusQuery = req.query.status && req.query;
-  const searchQuery = req.query.search;
-  const conditionQuery = req.query.condition && req.query;
-  const categoryQuery = req.query.categoryId && req.query;
-  const minPriceQuery = req.query.minPrice;
-  const maxPriceQuery = req.query.maxPrice;
+const handleStatus = (query: { status?: Product['status'] }) => {
+  if (query.status) {
+    return validateUserInput(productStatusSchema, query).status;
+  }
+  return undefined;
+};
 
-  const where: WhereOptions<Product> = {};
-  if (statusQuery)
-    where.status = validateUserInput(productStatusSchema, statusQuery).status;
-
-  if (searchQuery) {
+const handleSearch = (query: { search?: string }) => {
+  if (query.search) {
     const validatedSearchQuery = validateUserInput(
       searchQuerySchema,
-      searchQuery
+      query.search
     );
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    where[Op.or as any] = [
-      { title: { [Op.iLike]: `%${validatedSearchQuery}%` } },
-      { description: { [Op.iLike]: `%${validatedSearchQuery}%` } },
-    ];
+    return {
+      [Op.or]: [
+        { title: { [Op.iLike]: `%${validatedSearchQuery}%` } },
+        { description: { [Op.iLike]: `%${validatedSearchQuery}%` } },
+      ],
+    };
   }
+  return undefined;
+};
 
-  if (conditionQuery) {
+const handleCondition = (query: { condition?: Product['condition'] }) => {
+  if (query.condition) {
     const conditionSchema = productSchema.pick({ condition: true });
-    where.condition = validateUserInput(
-      conditionSchema,
-      conditionQuery
-    ).condition;
+    return validateUserInput(conditionSchema, query).condition;
   }
+  return undefined;
+};
 
-  if (categoryQuery) {
+const handleCategory = (query: { categoryId?: string }) => {
+  if (query.categoryId) {
     const categorySchema = productSchema.pick({ categoryId: true });
-    where.categoryId = validateUserInput(categorySchema, {
-      ...categoryQuery,
-      categoryId: Number(categoryQuery.categoryId),
+    return validateUserInput(categorySchema, {
+      ...query,
+      categoryId: Number(query.categoryId),
     }).categoryId;
   }
+  return undefined;
+};
 
-  const minPrice = validateUserInput(priceQuerySchema, minPriceQuery) as string;
-  const maxPrice = validateUserInput(priceQuerySchema, maxPriceQuery) as string;
-
-  if (minPriceQuery && !maxPriceQuery) {
-    where.price = {
-      [Op.gte]: minPrice,
-    };
+const handlePriceRange = (min: string, max: string) => {
+  if (min && !max) {
+    return { [Op.gte]: min };
   }
-
-  if (!minPriceQuery && maxPriceQuery) {
-    where.price = {
-      [Op.lte]: maxPrice,
-    };
+  if (!min && max) {
+    return { [Op.lte]: max };
   }
+  if (min && max) {
+    return { [Op.between]: [min, max] };
+  }
+  return undefined;
+};
 
-  if (minPriceQuery && maxPriceQuery) {
-    where.price = {
-      [Op.between]: [minPrice, maxPrice],
-    };
+export const productsQueryOptions = (req: Request) => {
+  const where: WhereOptions<Product> = {};
+
+  const status = handleStatus(req.query);
+  const search = handleSearch(req.query);
+  const condition = handleCondition(req.query);
+  const categoryId = handleCategory(req.query);
+
+  if (status) where.status = status;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (search) where[Op.or as any] = search[Op.or];
+  if (condition) where.condition = condition;
+  if (categoryId) where.categoryId = categoryId;
+
+  const priceConditions = handlePriceRange(
+    validateUserInput(priceQuerySchema, req.query.minPrice) as string,
+    validateUserInput(priceQuerySchema, req.query.maxPrice) as string
+  );
+
+  if (priceConditions) {
+    where.price = priceConditions;
   }
 
   return {
