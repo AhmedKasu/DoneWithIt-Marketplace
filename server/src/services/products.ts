@@ -15,6 +15,7 @@ export const productsQueryOptions = (req: Request) => {
   const statusQuery = req.query.status && req.query;
   const searchQuery = req.query.search;
   const conditionQuery = req.query.condition && req.query;
+  const categoryQuery = req.query.categoryId && req.query;
 
   const where: WhereOptions<Product> = {};
   if (statusQuery)
@@ -38,6 +39,14 @@ export const productsQueryOptions = (req: Request) => {
       conditionSchema,
       conditionQuery
     ).condition;
+  }
+
+  if (categoryQuery) {
+    const categorySchema = productSchema.pick({ categoryId: true });
+    where.categoryId = validateUserInput(categorySchema, {
+      ...categoryQuery,
+      categoryId: Number(categoryQuery.categoryId),
+    }).categoryId;
   }
 
   return {
