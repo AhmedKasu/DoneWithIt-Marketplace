@@ -6,6 +6,7 @@ import { Category } from '../models/Category';
 
 import validateUserInput from '../utils/validation';
 import {
+  productSchema,
   productStatusSchema,
   searchQuerySchema,
 } from '../utils/validation/schemas';
@@ -13,6 +14,7 @@ import {
 export const productsQueryOptions = (req: Request) => {
   const statusQuery = req.query.status && req.query;
   const searchQuery = req.query.search;
+  const conditionQuery = req.query.condition && req.query;
 
   const where: WhereOptions<Product> = {};
   if (statusQuery)
@@ -28,6 +30,14 @@ export const productsQueryOptions = (req: Request) => {
       { title: { [Op.iLike]: `%${validatedSearchQuery}%` } },
       { description: { [Op.iLike]: `%${validatedSearchQuery}%` } },
     ];
+  }
+
+  if (conditionQuery) {
+    const conditionSchema = productSchema.pick({ condition: true });
+    where.condition = validateUserInput(
+      conditionSchema,
+      conditionQuery
+    ).condition;
   }
 
   return {
