@@ -61,10 +61,19 @@ const searchQuerySchema = z
   .max(100, 'Search term is too long')
   .regex(/^[a-zA-Z0-9\s\-_]+$/, 'Search term contains invalid characters');
 
+const priceQuerySchema = z
+  .string()
+  .refine((value) => {
+    const reg = /^\d+$/;
+    return reg.test(value);
+  }, 'Price must be a positive integer')
+  .optional();
+
 export {
   loginSchema,
   searchQuerySchema,
   paramsIdSchema,
+  priceQuerySchema,
   productStatusSchema,
   productSchema,
   userSchema,
