@@ -1,9 +1,10 @@
 import 'express-async-errors';
-import express from 'express';
+import express, { Request } from 'express';
 import 'reflect-metadata';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
-import { PORT } from './utils/config';
+import { PORT, NODE_ENV } from './utils/config';
 import { connectToDatabase } from './utils/db';
 
 import errorHandler from './middleware/errorHandler';
@@ -15,6 +16,16 @@ import categoriesRouter from './controllers/categories';
 import productsRouter from './controllers/products';
 
 const app = express();
+
+app.use(
+  cors<Request>({
+    origin:
+      NODE_ENV === 'development'
+        ? 'http://localhost:5173'
+        : 'https://patientor.herokuapp.com',
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
