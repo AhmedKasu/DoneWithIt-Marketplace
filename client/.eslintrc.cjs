@@ -17,13 +17,15 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
-    'no-unused-vars': [
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
       'error',
       {
         vars: 'all',
         args: 'after-used',
         ignoreRestSiblings: true,
         argsIgnorePattern: '^_',
+        varsIgnorePattern: '^T',
       },
     ],
     'react/react-in-jsx-scope': 'off',
