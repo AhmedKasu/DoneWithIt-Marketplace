@@ -11,24 +11,30 @@ class APIClient<T> {
     this.endPoint = endPoint;
   }
 
-  getAll = async () => {
-    return await axiosInstance.get<T[]>(this.endPoint);
+  getAll = () => {
+    return axiosInstance.get<T[]>(this.endPoint).then((res) => res.data);
   };
 
   getOne = async (id: string) => {
-    return await axiosInstance.get<T>(`${this.endPoint}/${id}`);
+    return axiosInstance
+      .get<T>(`${this.endPoint}/${id}`)
+      .then((res) => res.data);
   };
 
   post = async (data: T) => {
-    return await axiosInstance.post<T>(this.endPoint, data);
+    return axiosInstance.post<T>(this.endPoint, data).then((res) => res.data);
   };
 
   put = async (id: string, data: T) => {
-    return await axiosInstance.put<T>(`${this.endPoint}/${id}`, data);
+    return axiosInstance
+      .put<T>(`${this.endPoint}/${id}`, data)
+      .then((res) => res.data);
   };
 
   delete = async (id: string) => {
-    return await axiosInstance.delete<T>(`${this.endPoint}/${id}`);
+    return axiosInstance
+      .delete<T>(`${this.endPoint}/${id}`)
+      .then((res) => res.data);
   };
 }
 
