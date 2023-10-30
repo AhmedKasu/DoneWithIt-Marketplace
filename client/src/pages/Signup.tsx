@@ -19,7 +19,11 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Form from '../components/forms';
 import TextInput from '../components/forms/TextInput';
 
+import Error from '../components/Error';
+import Success from '../components/Success';
+
 import signupSchema from '../utils/validation/signup';
+import useSignup from '../hooks/useSignUp';
 
 type FormData = z.infer<typeof signupSchema>;
 
@@ -30,12 +34,24 @@ export default function SignUp() {
     resolver: zodResolver(signupSchema),
   });
 
+  const { mutate, error, data } = useSignup();
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleSubmit = (variables: FieldValues) => {
-    console.log('variables', variables);
+  const handleSubmit = ({
+    firstName,
+    lastName,
+    email,
+    password,
+  }: FieldValues) => {
+    mutate({
+      name: `${firstName} ${lastName}`,
+      email,
+      password,
+    });
   };
 
+  const errorMessage = error?.response?.data.details as string;
   return (
     <Container component='main' maxWidth='xs'>
       <Box
@@ -45,6 +61,12 @@ export default function SignUp() {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
+        <Error open={!!errorMessage} message={errorMessage} />
+        <Success
+          open={!!data}
+          message={`User ${data?.name} created successfully!`}
+        />
+
         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
