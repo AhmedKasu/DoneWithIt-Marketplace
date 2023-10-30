@@ -6,7 +6,6 @@ import { FieldValues, useFormContext } from 'react-hook-form';
 
 interface Props {
   children: React.ReactNode;
-  // eslint-disable-next-line no-unused-vars
   onSubmit: (variables: FieldValues) => Promise<void> | void;
 }
 
