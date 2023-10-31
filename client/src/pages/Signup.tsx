@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
+import { Link as RouterLink } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -139,7 +140,7 @@ export default function SignUp() {
 
             <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link href='#' variant='body2'>
+                <Link component={RouterLink} to='/signin' variant='body2'>
                   Already have an account? Sign in
                 </Link>
               </Grid>
