@@ -9,9 +9,13 @@ const signupSchema = z.object({
     .string()
     .min(2, { message: 'Last name must be at least 2 characters long' })
     .max(20, { message: 'Last name must be at most 20 characters long' }),
-  email: z.string().email({ message: 'Please enter a valid email' }),
+  email: z
+    .string()
+    .min(1, 'Email is required')
+    .email({ message: 'Please enter a valid email' }),
   password: z
     .string()
+    .min(1, 'Password is required')
     .refine(
       (password) =>
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password),
