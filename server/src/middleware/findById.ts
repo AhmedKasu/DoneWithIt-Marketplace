@@ -4,6 +4,7 @@ import { ModelStatic, Model, FindOptions } from 'sequelize/types';
 
 import validateUserInput from '../utils/validation/index';
 import { EntitiyTypes, EntityKeys } from '../types/express';
+import { NotFoundError } from '../utils/errors';
 
 const findById = <T extends Model, U>(
   Model: ModelStatic<T>,
@@ -11,7 +12,7 @@ const findById = <T extends Model, U>(
   validationSchema: ZodSchema<U>,
   optionsFn?: (req: Request) => FindOptions
 ) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
+  return async (req: Request, _res: Response, next: NextFunction) => {
     const id = validateUserInput(validationSchema, req.params.id) as string;
     const options = optionsFn ? optionsFn(req) : undefined;
 
@@ -21,7 +22,7 @@ const findById = <T extends Model, U>(
     req.entities[resource] = modelInstance as EntitiyTypes;
 
     if (!req.entities[resource])
-      return res.status(404).send(`${resource} not found!`);
+      throw new NotFoundError(`${resource} not found!`);
 
     return next();
   };

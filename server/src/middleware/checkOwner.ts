@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Product } from '../models/Product';
 import { User } from '../models/User';
 import { Product as ProductType, User as UserType } from '../types';
+import { ForbiddenError } from '../utils/errors';
 
 type EntityKeys = 'product' | 'user';
 type ResourceUser = Omit<UserType, 'passwordHash'>;
@@ -12,7 +13,10 @@ const checkOwner = (resourceKey: EntityKeys) => {
 
     const resource = req.entities?.[resourceKey];
     if (!resource) {
-      return res.status(500).send(`${resourceKey} not found in request.`);
+      return res.status(500).json({
+        name: 'ServerError',
+        details: `${resourceKey} not found in request.`,
+      });
     }
 
     const notProductOwner =
@@ -23,7 +27,7 @@ const checkOwner = (resourceKey: EntityKeys) => {
       req.authUser?.id !== (resource as ResourceUser).id;
 
     if (notProductOwner || notUserOwner) {
-      return res.status(403).send('Operation not authorized.');
+      throw new ForbiddenError('Operation not authorized.');
     }
 
     next();

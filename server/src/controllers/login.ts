@@ -6,6 +6,7 @@ import { User } from '../models/User';
 import validateUserInput from '../utils/validation';
 import { loginSchema } from '../utils/validation/schemas';
 import { JWT_SECRET, NODE_ENV } from '../utils/config';
+import { ValidationError } from '../utils/errors';
 
 const router = Router();
 
@@ -13,11 +14,11 @@ router.post('/', async (req, res) => {
   const { email, password } = validateUserInput(loginSchema, req.body);
 
   const user = await User.findOne({ where: { email } });
-  if (!user) return res.status(400).send('Invalid email or password.');
+  if (!user) throw new ValidationError('Invalid email or password.');
 
   const { name, id, passwordHash } = user;
   const validPassword = await compare(password, passwordHash);
-  if (!validPassword) return res.status(400).send('Invalid email or password.');
+  if (!validPassword) throw new ValidationError('Invalid email or password.');
 
   const accessToken = sign({ name, id }, JWT_SECRET, {
     expiresIn: '1h',
