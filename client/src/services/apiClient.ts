@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
   baseURL: 'http://localhost:3001/api',
 });
 
-class APIClient<T> {
+class APIClient<T, K = T> {
   endPoint: string;
 
   constructor(endPoint: string) {
@@ -12,28 +12,28 @@ class APIClient<T> {
   }
 
   getAll = () => {
-    return axiosInstance.get<T[]>(this.endPoint).then((res) => res.data);
+    return axiosInstance.get<K[]>(this.endPoint).then((res) => res.data);
   };
 
   getOne = async (id: string) => {
     return axiosInstance
-      .get<T>(`${this.endPoint}/${id}`)
+      .get<K>(`${this.endPoint}/${id}`)
       .then((res) => res.data);
   };
 
   post = async (data: T) => {
-    return axiosInstance.post<T>(this.endPoint, data).then((res) => res.data);
+    return axiosInstance.post<K>(this.endPoint, data).then((res) => res.data);
   };
 
   put = async (id: string, data: T) => {
     return axiosInstance
-      .put<T>(`${this.endPoint}/${id}`, data)
+      .put<K>(`${this.endPoint}/${id}`, data)
       .then((res) => res.data);
   };
 
   delete = async (id: string) => {
     return axiosInstance
-      .delete<T>(`${this.endPoint}/${id}`)
+      .delete<K>(`${this.endPoint}/${id}`)
       .then((res) => res.data);
   };
 }
