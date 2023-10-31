@@ -3,11 +3,11 @@ import { z } from 'zod';
 const signinSchema = z.object({
   email: z
     .string()
-    .min(1, 'Email is required')
-    .email({ message: 'Please enter a valid email' }),
+    .min(1, 'Email is required.')
+    .email('Please enter a valid email.'),
   password: z
     .string()
-    .min(1, 'Password is required')
+    .min(1, 'Password is required.')
     .refine(
       (password) =>
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password),

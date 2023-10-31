@@ -3,19 +3,19 @@ import { z } from 'zod';
 const signupSchema = z.object({
   firstName: z
     .string()
-    .min(2, { message: 'First name must be at least 2 characters long' })
-    .max(20, { message: 'First name must be at most 20 characters long' }),
+    .min(2, 'First name must be at least 2 characters long.')
+    .max(20, 'First name must be at most 20 characters long.'),
   lastName: z
     .string()
-    .min(2, { message: 'Last name must be at least 2 characters long' })
-    .max(20, { message: 'Last name must be at most 20 characters long' }),
+    .min(2, 'Last name must be at least 2 characters long.')
+    .max(20, 'Last name must be at most 20 characters long.'),
   email: z
     .string()
-    .min(1, 'Email is required')
-    .email({ message: 'Please enter a valid email' }),
+    .min(1, 'Email is required.')
+    .email('Please enter a valid email.'),
   password: z
     .string()
-    .min(1, 'Password is required')
+    .min(1, 'Password is required.')
     .refine(
       (password) =>
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password),
