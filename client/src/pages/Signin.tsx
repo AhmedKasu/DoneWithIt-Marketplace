@@ -20,7 +20,12 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Form from '../components/forms';
 import TextInput from '../components/forms/TextInput';
 
+import Error from '../components/Error';
+import Success from '../components/Success';
+
 import signinSchema from '../utils/validation/signin';
+
+import useSignin from '../hooks/useSignIn';
 
 type FormData = z.infer<typeof signinSchema>;
 
@@ -31,11 +36,15 @@ export default function SignIn() {
     resolver: zodResolver(signinSchema),
   });
 
+  const { mutate: signin, error, data } = useSignin();
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleSubmit = (variables: FieldValues) => {
-    console.log('variables', variables);
+  const handleSubmit = ({ email, password }: FieldValues) => {
+    signin({ email, password });
   };
+
+  const errorMessage = error?.response?.data.details as string;
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -46,6 +55,9 @@ export default function SignIn() {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
+        <Error message={errorMessage} open={!!error} />
+        <Success message='Successfully logged in!' open={!!data} />
+
         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
