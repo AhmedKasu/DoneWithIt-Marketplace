@@ -4,7 +4,12 @@ import {
   UniqueConstraintError,
   DatabaseError,
 } from 'sequelize';
-import { ValidationError } from '../utils/errors';
+import {
+  ValidationError,
+  ForbiddenError,
+  NotFoundError,
+  UnauthorizedError,
+} from '../utils/errors';
 
 interface CustomError extends Error {
   details?: string;
@@ -35,7 +40,12 @@ const errorHandler = (
     });
   }
 
-  if (error instanceof ValidationError) {
+  if (
+    error instanceof ValidationError ||
+    error instanceof NotFoundError ||
+    error instanceof UnauthorizedError ||
+    error instanceof ForbiddenError
+  ) {
     return res.status(status).json({
       error: name,
       details: message || details,

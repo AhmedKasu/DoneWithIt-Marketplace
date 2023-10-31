@@ -25,5 +25,23 @@ class NotFoundError extends Error {
     this.status = 404;
   }
 }
+class UnauthorizedError extends Error {
+  status: number;
 
-export { NotFoundError, ValidationError };
+  constructor(message: string) {
+    super(message);
+    this.name = 'UnauthorizedError';
+    this.status = 401;
+  }
+}
+class ForbiddenError extends Error {
+  status: number;
+
+  constructor(message: string) {
+    super(message);
+    this.name = 'ForbiddenError';
+    this.status = 403;
+  }
+}
+
+export { NotFoundError, ValidationError, UnauthorizedError, ForbiddenError };
