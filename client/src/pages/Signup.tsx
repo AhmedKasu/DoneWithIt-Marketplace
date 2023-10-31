@@ -54,7 +54,7 @@ export default function SignUp() {
 
   const errorMessage = error?.response?.data.details as string;
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component='main' maxWidth='xs' sx={{ pt: 15 }}>
       <Box
         sx={{
           marginTop: 8,
