@@ -8,7 +8,6 @@ import { PORT, NODE_ENV } from './utils/config';
 import { connectToDatabase } from './utils/db';
 
 import errorHandler from './middleware/errorHandler';
-import auth from './middleware/auth';
 
 import usersRouter from './controllers/users';
 import loginRouter from './controllers/login';
@@ -32,9 +31,6 @@ app.use(cookieParser());
 
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
-
-app.use(auth);
-
 app.use('/api/categories', categoriesRouter);
 app.use('/api/products', productsRouter);
 

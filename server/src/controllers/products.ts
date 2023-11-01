@@ -16,6 +16,7 @@ import { productsQueryOptions } from '../services/products';
 
 import findById from '../middleware/findById';
 import checkOwner from '../middleware/checkOwner';
+import auth from '../middleware/auth';
 
 import { Product as ProductType } from '../types';
 
@@ -26,6 +27,8 @@ router.get('/', async (req: Request, res: Response) => {
   const allProducts = await Product.findAll(productsQueryOptions(req));
   res.status(200).json(allProducts);
 });
+
+router.use(auth);
 
 router.post('/', async (req: Request, res: Response) => {
   const newProduct = await Product.create({
