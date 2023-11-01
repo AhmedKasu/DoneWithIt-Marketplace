@@ -47,7 +47,7 @@ export default function SignIn() {
   const errorMessage = error?.response?.data.details as string;
 
   return (
-    <Container component='main' maxWidth='xs' sx={{ pt: 15 }}>
+    <Container component='main' maxWidth='xs' sx={{ pt: 15, height: '100vh' }}>
       <Box
         sx={{
           marginTop: 8,
