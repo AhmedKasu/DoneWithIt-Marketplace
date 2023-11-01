@@ -5,12 +5,16 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import RecyclingIcon from '@mui/icons-material/Recycling';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import UserProfileIcon from './UserProfileIcon';
 import { Toolbar } from '@mui/material';
 
 function NavBar() {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <AppBar sx={{ backgroundColor: 'white' }}>
       <Container
@@ -21,27 +25,29 @@ function NavBar() {
           width: '100%',
         }}>
         <Toolbar>
-          <RecyclingIcon
-            sx={{ display: { xs: 'none', md: 'flex', color: 'red' }, mr: 1 }}
-          />
           <Tooltip title='Go home'>
+            <RouterLink to='/'>
+              <RecyclingIcon
+                sx={{ display: { md: 'flex', color: 'red' }, mr: 1 }}
+              />
+            </RouterLink>
+          </Tooltip>
+          {!isSmallScreen && (
             <Typography
               variant='h6'
               noWrap
-              component={RouterLink}
-              to='/'
               sx={{
                 mr: 2,
-                display: { xs: 'none', md: 'flex' },
+                display: { md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
-                letterSpacing: '.3rem',
+                letterSpacing: { md: '.2rem', lg: '.3rem' },
                 color: 'red',
                 textDecoration: 'none',
               }}>
               DoneWithIt
             </Typography>
-          </Tooltip>
+          )}
         </Toolbar>
 
         <UserProfileIcon

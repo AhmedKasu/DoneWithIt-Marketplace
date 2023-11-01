@@ -48,7 +48,11 @@ export default function UserProfileIcon({
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}>
-            <Avatar sx={{ width: 50, height: 50 }}>
+            <Avatar
+              sx={{
+                width: { xs: 35, sm: 40, md: 45, lg: 50 },
+                height: { xs: 35, sm: 40, md: 45, lg: 50 },
+              }}>
               {currentUser ? <UserAvatar name={currentUser} /> : <Avatar />}
             </Avatar>
           </IconButton>
@@ -64,8 +68,8 @@ export default function UserProfileIcon({
         <MenuItem>
           <Avatar
             sx={{
-              width: 25,
-              height: 25,
+              width: { xs: 18, sm: 20, md: 23, lg: 25 },
+              height: { xs: 18, sm: 20, md: 23, lg: 25 },
               mr: 2,
             }}
           />{' '}
