@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 import NavBar from '../components/NavBar';
 
@@ -7,9 +7,13 @@ export default function Layout() {
   return (
     <>
       <NavBar />
-      <Container sx={{ pt: 5 }}>
+      <Box
+        sx={{
+          mt: 2,
+          backgroundColor: '#eceff1',
+        }}>
         <Outlet />
-      </Container>
+      </Box>
     </>
   );
 }
