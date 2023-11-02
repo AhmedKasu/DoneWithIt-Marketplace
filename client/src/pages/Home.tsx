@@ -1,9 +1,8 @@
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 
 import useGetProducts from '../hooks/useGetProducts';
 
@@ -17,24 +16,50 @@ export default function Home() {
   return (
     <Box
       sx={{
+        position: 'fixed',
         display: 'flex',
         backgroundColor: '#eceff1',
+        height: '100vh',
       }}>
       {!isSmallScreen && (
         <Box
-          sx={{ width: '360px', minHeight: '100vh', backgroundColor: 'white' }}>
-          <Container sx={{ pt: 7, maxWidth: '100%' }}>
-            <Paper elevation={2}>
-              <Typography variant='h6'>Sidebar</Typography>
-            </Paper>
-          </Container>
+          sx={{
+            pt: 6.4,
+            width: '360px',
+            height: '100%',
+            overflowY: 'scroll',
+            backgroundColor: 'white',
+            boxShadow: 2,
+          }}>
+          <Box
+            sx={{
+              position: 'fixed',
+              height: '100px',
+              top: 63,
+              left: 7,
+              width: '360px',
+            }}>
+            <Typography variant='h6'>Marketplace search bar</Typography>
+
+            <Divider />
+          </Box>
+
+          <Box
+            sx={{
+              mt: '87px',
+              p: 0,
+              width: '360px',
+            }}>
+            <Typography variant='h6'>Categories</Typography>
+          </Box>
         </Box>
       )}
       <Box
         sx={{
           pt: 6,
           flex: 1,
-          minWidth: 'calc(100vw -360px)',
+          overflowY: 'scroll',
+          minWidth: 'calc(100vw - 360px)',
         }}>
         {products && <Products products={products} />}
       </Box>
