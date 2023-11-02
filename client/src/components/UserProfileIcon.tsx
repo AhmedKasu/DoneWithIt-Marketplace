@@ -50,8 +50,8 @@ export default function UserProfileIcon({
             aria-expanded={open ? 'true' : undefined}>
             <Avatar
               sx={{
-                width: { xs: 35, sm: 40, md: 45, lg: 50 },
-                height: { xs: 35, sm: 40, md: 45, lg: 50 },
+                width: { xs: 25, sm: 30, md: 35, lg: 40 },
+                height: { xs: 25, sm: 30, md: 35, lg: 40 },
               }}>
               {currentUser ? <UserAvatar name={currentUser} /> : <Avatar />}
             </Avatar>
