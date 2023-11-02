@@ -5,7 +5,12 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
+import useGetProducts from '../hooks/useGetProducts';
+
+import Products from '../components/Products';
+
 export default function Home() {
+  const { data: products } = useGetProducts();
   const theme = useTheme();
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -30,7 +35,9 @@ export default function Home() {
           pt: 6,
           flex: 1,
           minWidth: 'calc(100vw -360px)',
-        }}></Box>
+        }}>
+        {products && <Products products={products} />}
+      </Box>
     </Box>
   );
 }
