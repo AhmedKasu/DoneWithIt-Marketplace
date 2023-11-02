@@ -11,6 +11,8 @@ export default function Layout() {
         sx={{
           mt: 2,
           backgroundColor: '#eceff1',
+          minHeight: '100vh',
+          minWidth: '100vw',
         }}>
         <Outlet />
       </Box>
