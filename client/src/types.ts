@@ -22,7 +22,7 @@ export interface Product {
   updatedAt?: Date;
 }
 
-export type Categories =
+export type CategoriesNames =
   | 'Electronics'
   | 'Entertainment'
   | 'Free Stuff'
@@ -33,3 +33,8 @@ export type Categories =
   | 'Sporting Goods'
   | 'Toys & Games'
   | 'Pet Supplies';
+
+export interface Category {
+  id: number;
+  name: CategoriesNames;
+}
