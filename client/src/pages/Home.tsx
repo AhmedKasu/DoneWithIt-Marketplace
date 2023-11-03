@@ -18,7 +18,7 @@ export default function Home() {
       sx={{
         position: 'fixed',
         display: 'flex',
-        backgroundColor: '#eceff1',
+        backgroundColor: 'appBg.main',
         height: '100vh',
       }}>
       {!isSmallScreen && (
@@ -28,7 +28,7 @@ export default function Home() {
             width: '360px',
             height: '100%',
             overflowY: 'scroll',
-            backgroundColor: 'white',
+            backgroundColor: 'appBg.sidebar',
             boxShadow: 2,
           }}>
           <Box

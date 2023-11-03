@@ -19,7 +19,7 @@ export default function ProductCard({ id, title, price, imageUrl }: Props) {
         onClick={() => console.log('clicked', id)}
         sx={{
           maxHeight: 370,
-          backgroundColor: '#eceff1',
+          backgroundColor: 'appBg.main',
           overflow: 'hidden',
         }}>
         <CardMedia

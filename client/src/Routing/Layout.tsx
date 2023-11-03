@@ -10,7 +10,7 @@ export default function Layout() {
       <Box
         sx={{
           mt: 2,
-          backgroundColor: '#eceff1',
+          backgroundColor: 'appBg.main',
           position: 'fixed',
           width: '100%',
         }}>

@@ -16,7 +16,7 @@ function NavBar() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   return (
-    <AppBar elevation={1} sx={{ backgroundColor: 'white' }}>
+    <AppBar elevation={1} sx={{ backgroundColor: 'appBg.navbar' }}>
       <Container
         maxWidth='xl'
         sx={{
