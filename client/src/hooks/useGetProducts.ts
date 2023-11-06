@@ -1,14 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
-import APIClient from '../services/apiClient';
 import { Product, CustomAxiosError } from '../types';
 
-const apiClient = new APIClient<Product>('/products');
+const productsURL = 'http://localhost:3001/api/products';
 
-const useGetProducts = () => {
+const useGetProducts = (categoryId?: number) => {
   return useQuery<Product[], CustomAxiosError>({
-    queryKey: ['products'],
-    queryFn: apiClient.getAll,
+    queryKey: ['products', categoryId],
+    queryFn: () =>
+      axios
+        .get(productsURL, {
+          params: {
+            categoryId,
+          },
+        })
+        .then((res) => res.data),
   });
 };
 
