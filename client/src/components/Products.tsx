@@ -33,9 +33,10 @@ export default function Products({ products }: Props) {
               xs={6}
               sm={4}
               md={6}
-              lg={3}
-              xl={2}
-              xxl={1.7}
+              lg={4}
+              xl={3}
+              xxl={2}
+              xxxl={1.7}
               key={product.id}>
               <ProductCard
                 id={product.id}
