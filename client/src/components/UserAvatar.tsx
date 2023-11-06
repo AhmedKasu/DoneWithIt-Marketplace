@@ -38,6 +38,7 @@ export default function UserAvatar({ name }: Props) {
         bgcolor: stringToColor(name),
         width: 50,
         height: 50,
+        fontSize: { xs: '.8rem' },
       },
       children: `${getInitials(name)}`,
     };
