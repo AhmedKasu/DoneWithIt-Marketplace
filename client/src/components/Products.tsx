@@ -17,6 +17,8 @@ export default function Products({ products }: Props) {
           pl: 4,
           pr: 4,
           alignItems: 'center',
+          width: '100%',
+          maxWidth: '2000px',
         }}>
         <Typography
           gutterBottom
@@ -26,7 +28,15 @@ export default function Products({ products }: Props) {
         </Typography>
         <Grid container spacing={1}>
           {products.map((product) => (
-            <Grid item xs={6} sm={4} md={6} lg={3} xl={2} key={product.id}>
+            <Grid
+              item
+              xs={6}
+              sm={4}
+              md={6}
+              lg={3}
+              xl={2}
+              xxl={1.7}
+              key={product.id}>
               <ProductCard
                 id={product.id}
                 title={product.title}
