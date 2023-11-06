@@ -9,6 +9,7 @@ const useGetCategories = () => {
   return useQuery<Category[], CustomAxiosError>({
     queryKey: ['categories'],
     queryFn: apiClient.getAll,
+    staleTime: 24 * 60 * 60 * 1000, // One day
   });
 };
 
