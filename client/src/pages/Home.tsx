@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -5,14 +7,22 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 import useGetProducts from '../hooks/useGetProducts';
+import useGetCategories from '../hooks/useGetCategories';
 
 import Products from '../components/Products';
+import CategoriesList from '../components/CategoriesList';
 
 export default function Home() {
-  const { data: products } = useGetProducts();
+  const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
+
+  const { data: products } = useGetProducts(categoryId);
+  const { data: categories } = useGetCategories();
   const theme = useTheme();
 
+  console.log('products', products);
+
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <Box
       sx={{
@@ -50,7 +60,12 @@ export default function Home() {
               p: 0,
               width: '360px',
             }}>
-            <Typography variant='h6'>Categories</Typography>
+            {categories && (
+              <CategoriesList
+                categories={categories}
+                onCategorySelect={(categoryId) => setCategoryId(categoryId)}
+              />
+            )}
           </Box>
         </Box>
       )}
@@ -61,7 +76,13 @@ export default function Home() {
           overflowY: 'scroll',
           minWidth: 'calc(100vw - 360px)',
         }}>
-        {products && <Products products={products} />}
+        {products && products.length > 0 ? (
+          <Products products={products} />
+        ) : (
+          <Typography sx={{ p: 15, pl: 20 }} variant='h6'>
+            There is currently no intem!
+          </Typography>
+        )}
       </Box>
     </Box>
   );
