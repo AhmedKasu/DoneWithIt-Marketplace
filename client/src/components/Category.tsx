@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -20,7 +19,8 @@ import TabletAndroidIcon from '@mui/icons-material/TabletAndroid';
 interface Props {
   categoryId: number;
   label: string;
-  onClick: () => void;
+  onSelect: (categoryId: number) => void;
+  isSelected: boolean;
 }
 
 const icons: { [key: number]: React.ElementType } = {
@@ -36,24 +36,33 @@ const icons: { [key: number]: React.ElementType } = {
   10: PetsIcon,
 };
 
-export default function Category({ categoryId, label, onClick }: Props) {
+export default function Category({
+  categoryId,
+  label,
+  onSelect,
+  isSelected,
+}: Props) {
   const CategoryIcon = icons[categoryId];
+
+  const iconColor = isSelected ? 'white' : 'black';
+  const containerColor = isSelected ? 'primary.main' : '#e9ebee';
   return (
     <Stack
       direction='row'
-      onClick={onClick}
+      onClick={() => onSelect(categoryId)}
       sx={{
         width: '97%',
+        borderRadius: '10px',
+        backgroundColor: isSelected ? '#f7f7f7' : 'transparent',
         transition: 'background-color 0.1s ease',
         '&:hover': {
           backgroundColor: '#f7f7f7',
-          borderRadius: '10px',
           cursor: 'pointer',
         },
       }}>
       <Box
         sx={{
-          backgroundColor: '#e9ebee',
+          backgroundColor: containerColor,
           width: '36px',
           height: '36px',
           borderRadius: 18,
@@ -64,8 +73,8 @@ export default function Category({ categoryId, label, onClick }: Props) {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        {<CategoryIcon fontSize='small' /> || (
-          <DefaultCategoryIcon fontSize='small' />
+        {<CategoryIcon sx={{ color: iconColor }} fontSize='small' /> || (
+          <DefaultCategoryIcon sx={{ color: iconColor }} fontSize='small' />
         )}
       </Box>
       <Typography

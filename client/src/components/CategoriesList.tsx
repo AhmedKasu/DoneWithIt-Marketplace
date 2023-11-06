@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
@@ -15,6 +17,12 @@ export default function CategoriesList({
   categories,
   onCategorySelect,
 }: Props) {
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+
+  const handleCategorySelect = (categoryId: number) => {
+    setSelectedCategory(categoryId);
+    onCategorySelect(categoryId);
+  };
   return (
     <Box sx={{ ml: 1 }}>
       <Typography
@@ -35,7 +43,8 @@ export default function CategoriesList({
             key={category.id}
             categoryId={category.id}
             label={category.name}
-            onClick={() => onCategorySelect(category.id)}
+            isSelected={category.id === selectedCategory}
+            onSelect={handleCategorySelect}
           />
         ))}
       </List>
