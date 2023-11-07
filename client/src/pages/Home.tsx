@@ -14,6 +14,7 @@ import useGetCategories from '../hooks/useGetCategories';
 import Products from '../components/Products';
 import CategoriesList from '../components/CategoriesList';
 import SearchBar from '../components/SearchBar';
+import SideBarHeader from '../components/SideBarHeader';
 
 export default function Home() {
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
@@ -57,18 +58,11 @@ export default function Home() {
               zIndex: 9,
             }}>
             <Box sx={{ ml: 2 }}>
-              <Typography
-                sx={{
-                  mt: 1,
-                  mb: 1,
-                  fontSize: '1.5rem',
-                  color: 'black',
-                  fontFamily: 'inherit',
-                  fontWeight: 'bold',
-                }}
-                variant='h2'>
-                Marketplace
-              </Typography>
+              <SideBarHeader
+                categories={categories}
+                categoryId={categoryId}
+                searchQuery={searchQuery}
+              />
               <SearchBar onSubmit={handleProductSearch} />
             </Box>
           </Card>
