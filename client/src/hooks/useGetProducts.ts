@@ -5,14 +5,15 @@ import { Product, CustomAxiosError } from '../types';
 
 const productsURL = 'http://localhost:3001/api/products';
 
-const useGetProducts = (categoryId?: number) => {
+const useGetProducts = (categoryId?: number, search?: string) => {
   return useQuery<Product[], CustomAxiosError>({
-    queryKey: ['products', categoryId],
+    queryKey: ['products', categoryId, search],
     queryFn: () =>
       axios
         .get(productsURL, {
           params: {
             categoryId,
+            search,
           },
         })
         .then((res) => res.data),

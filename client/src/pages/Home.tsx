@@ -6,6 +6,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 
+import { FieldValues } from 'react-hook-form';
+
 import useGetProducts from '../hooks/useGetProducts';
 import useGetCategories from '../hooks/useGetCategories';
 
@@ -15,10 +17,15 @@ import SearchBar from '../components/SearchBar';
 
 export default function Home() {
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
+  const [searchQuery, setSearchQuery] = useState<string | undefined>('');
 
-  const { data: products } = useGetProducts(categoryId);
+  const { data: products } = useGetProducts(categoryId, searchQuery);
   const { data: categories } = useGetCategories();
   const theme = useTheme();
+
+  const handleProductSearch = (variables: FieldValues) => {
+    setSearchQuery(variables.search);
+  };
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const sideBarWidth = '360px';
@@ -62,7 +69,7 @@ export default function Home() {
                 variant='h2'>
                 Marketplace
               </Typography>
-              <SearchBar />
+              <SearchBar onSubmit={handleProductSearch} />
             </Box>
           </Card>
 
