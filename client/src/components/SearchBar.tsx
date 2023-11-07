@@ -21,6 +21,7 @@ export default function SearchBar({ onSubmit }: Props) {
       search: '',
     },
     resolver: zodResolver(searchQuerySchema),
+    mode: 'onSubmit',
   });
 
   const { isDirty } = methods.formState;
