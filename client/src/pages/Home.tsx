@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Divider from '@mui/material/Divider';
+import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 
 import useGetProducts from '../hooks/useGetProducts';
@@ -11,6 +11,7 @@ import useGetCategories from '../hooks/useGetCategories';
 
 import Products from '../components/Products';
 import CategoriesList from '../components/CategoriesList';
+import SearchBar from '../components/SearchBar';
 
 export default function Home() {
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
@@ -19,10 +20,8 @@ export default function Home() {
   const { data: categories } = useGetCategories();
   const theme = useTheme();
 
-  console.log('products', products);
-
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
-
+  const sideBarWidth = '360px';
   return (
     <Box
       sx={{
@@ -41,24 +40,37 @@ export default function Home() {
             backgroundColor: 'appBg.sidebar',
             boxShadow: 2,
           }}>
-          <Box
+          <Card
+            elevation={0}
             sx={{
               position: 'fixed',
               height: '100px',
               top: 63,
-              left: 7,
-              width: '360px',
+              width: sideBarWidth,
+              zIndex: 9,
             }}>
-            <Typography variant='h6'>Marketplace search bar</Typography>
-
-            <Divider />
-          </Box>
+            <Box sx={{ ml: 2 }}>
+              <Typography
+                sx={{
+                  mt: 1,
+                  mb: 1,
+                  fontSize: '1.5rem',
+                  color: 'black',
+                  fontFamily: 'inherit',
+                  fontWeight: 'bold',
+                }}
+                variant='h2'>
+                Marketplace
+              </Typography>
+              <SearchBar />
+            </Box>
+          </Card>
 
           <Box
+            onScroll={(e) => console.log(e)}
             sx={{
-              mt: '87px',
-              p: 0,
-              width: '360px',
+              mt: '110px',
+              width: sideBarWidth,
             }}>
             {categories && (
               <CategoriesList
@@ -69,6 +81,7 @@ export default function Home() {
           </Box>
         </Box>
       )}
+
       <Box
         sx={{
           pt: 6,
