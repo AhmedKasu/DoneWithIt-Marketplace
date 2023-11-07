@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Card from '@mui/material/Card';
+import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 
 import { FieldValues } from 'react-hook-form';
@@ -14,7 +15,6 @@ import useGetCategories from '../hooks/useGetCategories';
 import Products from '../components/Products';
 import CategoriesList from '../components/CategoriesList';
 import SearchBar from '../components/SearchBar';
-import SideBarHeader from '../components/SideBarHeader';
 
 export default function Home() {
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
@@ -24,11 +24,8 @@ export default function Home() {
   const { data: categories } = useGetCategories();
   const theme = useTheme();
 
-  const handleProductSearch = (variables: FieldValues) => {
-    setSearchQuery(variables.search);
-  };
-
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const sideBarWidth = '360px';
   const sideBarWidth = '360px';
   return (
     <Box
@@ -50,26 +47,39 @@ export default function Home() {
           }}>
           <Card
             elevation={0}
+          <Card
+            elevation={0}
             sx={{
               position: 'fixed',
               height: '100px',
               top: 63,
               width: sideBarWidth,
               zIndex: 9,
+              width: sideBarWidth,
+              zIndex: 9,
             }}>
             <Box sx={{ ml: 2 }}>
-              <SideBarHeader
-                categories={categories}
-                categoryId={categoryId}
-                searchQuery={searchQuery}
-              />
-              <SearchBar onSubmit={handleProductSearch} />
+              <Typography
+                sx={{
+                  mt: 1,
+                  mb: 1,
+                  fontSize: '1.5rem',
+                  color: 'black',
+                  fontFamily: 'inherit',
+                  fontWeight: 'bold',
+                }}
+                variant='h2'>
+                Marketplace
+              </Typography>
+              <SearchBar />
             </Box>
           </Card>
 
           <Box
             onScroll={(e) => console.log(e)}
             sx={{
+              mt: '110px',
+              width: sideBarWidth,
               mt: '110px',
               width: sideBarWidth,
             }}>
@@ -82,6 +92,7 @@ export default function Home() {
           </Box>
         </Box>
       )}
+
 
       <Box
         sx={{
