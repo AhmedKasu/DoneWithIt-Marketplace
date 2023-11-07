@@ -12,11 +12,7 @@ interface Props {
 export default function Form({ children, onSubmit }: Props) {
   const { handleSubmit } = useFormContext();
   return (
-    <Box
-      component='form'
-      noValidate
-      onSubmit={handleSubmit(onSubmit)}
-      sx={{ mt: 3 }}>
+    <Box component='form' noValidate onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
         {children}
       </Grid>

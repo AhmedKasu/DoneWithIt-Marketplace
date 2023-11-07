@@ -61,9 +61,10 @@ export default function SignIn() {
         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component='h1' variant='h5'>
+        <Typography component='h1' variant='h5' sx={{ mb: 3 }}>
           Sign in
         </Typography>
+
         <FormProvider {...methods}>
           <Form onSubmit={handleSubmit}>
             <TextInput
