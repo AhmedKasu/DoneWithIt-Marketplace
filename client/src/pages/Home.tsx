@@ -15,6 +15,7 @@ import CategoriesList from '../components/CategoriesList';
 import SearchBar from '../components/SearchBar';
 import SideBarHeader from '../components/SideBarHeader';
 import NoListing from '../components/NoListing';
+import Topbar from '../components/TopBar';
 
 export default function Home() {
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
@@ -38,7 +39,20 @@ export default function Home() {
 
   const renderMainContent = () => {
     if (products && products.length > 0) {
-      return <Products products={products} />;
+      if (isSmallScreen && categories) {
+        return (
+          <>
+            <Topbar
+              handleSearch={handleProductSearch}
+              categories={categories}
+              handleCategorySelect={(categoryId) => setCategoryId(categoryId)}
+            />
+            <Products products={products} />
+          </>
+        );
+      } else {
+        return <Products products={products} />;
+      }
     } else {
       return <NoListing refetch={handleRefetch} />;
     }
