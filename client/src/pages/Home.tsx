@@ -4,8 +4,6 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Card from '@mui/material/Card';
-import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
 
 import { FieldValues } from 'react-hook-form';
 
@@ -15,6 +13,8 @@ import useGetCategories from '../hooks/useGetCategories';
 import Products from '../components/Products';
 import CategoriesList from '../components/CategoriesList';
 import SearchBar from '../components/SearchBar';
+import SideBarHeader from '../components/SideBarHeader';
+import NoListing from '../components/NoListing';
 
 export default function Home() {
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
@@ -23,6 +23,15 @@ export default function Home() {
   const { data: products } = useGetProducts(categoryId, searchQuery);
   const { data: categories } = useGetCategories();
   const theme = useTheme();
+
+  const handleProductSearch = (variables: FieldValues) => {
+    setSearchQuery(variables.search);
+  };
+
+  const handleRefetch = () => {
+    setSearchQuery('');
+    setCategoryId(undefined);
+  };
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const sideBarWidth = '360px';
@@ -104,9 +113,7 @@ export default function Home() {
         {products && products.length > 0 ? (
           <Products products={products} />
         ) : (
-          <Typography sx={{ p: 15, pl: 20 }} variant='h6'>
-            There is currently no intem!
-          </Typography>
+          <NoListing refetch={handleRefetch} />
         )}
       </Box>
     </Box>
