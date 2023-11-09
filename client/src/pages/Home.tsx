@@ -35,7 +35,15 @@ export default function Home() {
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const sideBarWidth = '360px';
-  const sideBarWidth = '360px';
+
+  const renderMainContent = () => {
+    if (products && products.length > 0) {
+      return <Products products={products} />;
+    } else {
+      return <NoListing refetch={handleRefetch} />;
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -108,13 +116,9 @@ export default function Home() {
           pt: 6,
           flex: 1,
           overflowY: 'scroll',
-          minWidth: 'calc(100vw - 360px)',
+          minWidth: { xs: '100vw', lg: 'calc(100vw - 360px)' },
         }}>
-        {products && products.length > 0 ? (
-          <Products products={products} />
-        ) : (
-          <NoListing refetch={handleRefetch} />
-        )}
+        {renderMainContent()}
       </Box>
     </Box>
   );
