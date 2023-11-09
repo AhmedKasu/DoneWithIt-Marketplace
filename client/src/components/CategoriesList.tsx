@@ -11,11 +11,13 @@ import { Category as CategoryType } from '../types';
 interface Props {
   categories: CategoryType[];
   onCategorySelect: (categoryId: number) => void;
+  showHeader?: boolean;
 }
 
 export default function CategoriesList({
   categories,
   onCategorySelect,
+  showHeader = true,
 }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
@@ -33,6 +35,7 @@ export default function CategoriesList({
           color: 'black',
           fontFamily: 'inherit',
           fontWeight: 'bold',
+          display: showHeader ? 'block' : 'none',
         }}
         variant='h6'>
         Categories
