@@ -2,6 +2,7 @@ import { FieldValues } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import Divider from '@mui/material/Divider';
 
 import SideBarHeader from './SideBarHeader';
 import SearchBar from './SearchBar';
@@ -52,6 +53,7 @@ export default function SideBar({
             searchQuery={searchQuery}
           />
           <SearchBar onSubmit={handleProductSearch} />
+          <Divider sx={{ mt: 1, mb: 1, width: '95%' }} />
         </Box>
       </Card>
 
@@ -62,6 +64,7 @@ export default function SideBar({
           ml: 2,
         }}>
         <CreateListingButton onCreateListing={() => console.log(true)} />
+        <Divider sx={{ mt: 1, mb: 1, width: '90%' }} />
         {categories && (
           <CategoriesList
             categories={categories}
