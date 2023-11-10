@@ -21,6 +21,7 @@ export default function CreateListingButton({
           backgroundColor: '#e9ebee',
           color: 'black',
           textTransform: 'none',
+          fontWeight: 800,
           '&:hover': {
             backgroundColor: '#D3D3D3',
           },

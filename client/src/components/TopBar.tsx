@@ -60,6 +60,8 @@ export default function Topbar({
             sx={{
               borderRadius: 8,
               backgroundColor: '#e9ebee',
+              textTransform: 'none',
+              fontWeight: 800,
               color: 'black',
               '&:hover': {
                 backgroundColor: '#D3D3D3',
