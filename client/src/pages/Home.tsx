@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Card from '@mui/material/Card';
 
 import { FieldValues } from 'react-hook-form';
 
@@ -11,10 +10,8 @@ import useGetProducts from '../hooks/useGetProducts';
 import useGetCategories from '../hooks/useGetCategories';
 
 import Products from '../components/Products';
-import CategoriesList from '../components/CategoriesList';
-import SearchBar from '../components/SearchBar';
-import SideBarHeader from '../components/SideBarHeader';
 import NoListing from '../components/NoListing';
+import SideBar from '../components/SideBar';
 import Topbar from '../components/TopBar';
 
 export default function Home() {
@@ -35,7 +32,6 @@ export default function Home() {
   };
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const sideBarWidth = '360px';
 
   const renderMainContent = () => {
     if (products && products.length > 0) {
@@ -66,64 +62,14 @@ export default function Home() {
         backgroundColor: 'appBg.main',
         height: '100vh',
       }}>
-      {!isSmallScreen && (
-        <Box
-          sx={{
-            pt: 6.4,
-            width: '360px',
-            height: '100%',
-            overflowY: 'scroll',
-            backgroundColor: 'appBg.sidebar',
-            boxShadow: 2,
-          }}>
-          <Card
-            elevation={0}
-          <Card
-            elevation={0}
-            sx={{
-              position: 'fixed',
-              height: '100px',
-              top: 63,
-              width: sideBarWidth,
-              zIndex: 9,
-              width: sideBarWidth,
-              zIndex: 9,
-            }}>
-            <Box sx={{ ml: 2 }}>
-              <Typography
-                sx={{
-                  mt: 1,
-                  mb: 1,
-                  fontSize: '1.5rem',
-                  color: 'black',
-                  fontFamily: 'inherit',
-                  fontWeight: 'bold',
-                }}
-                variant='h2'>
-                Marketplace
-              </Typography>
-              <SearchBar />
-            </Box>
-          </Card>
-
-          <Box
-            onScroll={(e) => console.log(e)}
-            sx={{
-              mt: '110px',
-              width: sideBarWidth,
-              mt: '110px',
-              width: sideBarWidth,
-            }}>
-            {categories && (
-              <CategoriesList
-                categories={categories}
-                onCategorySelect={(categoryId) => setCategoryId(categoryId)}
-              />
-            )}
-          </Box>
-        </Box>
+      {!isSmallScreen && categories && (
+        <SideBar
+          categories={categories}
+          categoryId={categoryId}
+          handleProductSearch={handleProductSearch}
+          setCategoryId={setCategoryId}
+        />
       )}
-
 
       <Box
         sx={{
