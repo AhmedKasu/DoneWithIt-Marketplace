@@ -19,7 +19,7 @@ export default function CategoriesList({
   onCategorySelect,
   showHeader = true,
 }: Props) {
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(0);
 
   const handleCategorySelect = (categoryId: number) => {
     setSelectedCategory(categoryId);

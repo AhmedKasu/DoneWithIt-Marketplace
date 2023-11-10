@@ -6,6 +6,7 @@ import { Product, CustomAxiosError } from '../types';
 const productsURL = 'http://localhost:3001/api/products';
 
 const useGetProducts = (categoryId?: number, search?: string) => {
+  categoryId = categoryId === 0 ? undefined : categoryId;
   return useQuery<Product[], CustomAxiosError>({
     queryKey: ['products', categoryId, search],
     queryFn: () =>
