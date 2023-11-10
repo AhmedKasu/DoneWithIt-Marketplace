@@ -11,6 +11,8 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import SearchBar from './SearchBar';
 import CategoriesList from './CategoriesList';
+import CreateListingButton from './CreateListingButton';
+
 import { Category } from '../types';
 
 interface Props {
@@ -47,6 +49,10 @@ export default function Topbar({
     <Box sx={{ p: 1, backgroundColor: 'white' }}>
       <Stack direction='column' spacing={1} sx={{ ml: 4 }}>
         <Stack direction='row' spacing={1}>
+          <CreateListingButton
+            onCreateListing={() => console.log(true)}
+            isSmallScreen
+          />
           <Button
             variant='contained'
             size='small'

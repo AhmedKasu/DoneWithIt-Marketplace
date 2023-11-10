@@ -6,6 +6,7 @@ import Card from '@mui/material/Card';
 import SideBarHeader from './SideBarHeader';
 import SearchBar from './SearchBar';
 import CategoriesList from './CategoriesList';
+import CreateListingButton from './CreateListingButton';
 
 import { Category } from '../types';
 
@@ -60,6 +61,7 @@ export default function SideBar({
           width: sideBarWidth,
           ml: 2,
         }}>
+        <CreateListingButton onCreateListing={() => console.log(true)} />
         {categories && (
           <CategoriesList
             categories={categories}
