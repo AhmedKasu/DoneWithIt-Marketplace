@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { GridProps, TextFieldProps } from '@mui/material';
 import Grid from '@mui/material/Grid';
@@ -10,6 +11,7 @@ interface Props {
   showHelperText?: boolean;
   otherProps?: TextFieldProps;
   gridProps?: GridProps;
+  children?: ReactNode;
 }
 
 export default function TextInput({
@@ -19,6 +21,7 @@ export default function TextInput({
   gridProps,
   otherProps,
   showHelperText = true,
+  children,
 }: Props) {
   const {
     formState: { errors },
@@ -34,8 +37,9 @@ export default function TextInput({
         {...register(name, { valueAsNumber: type === 'number' ? true : false })}
         label={label}
         helperText={showHelperText ? (error?.message as string) : undefined}
-        {...otherProps}
-      />
+        {...otherProps}>
+        {children}
+      </TextField>
     </Grid>
   );
 }
