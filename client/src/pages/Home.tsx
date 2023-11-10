@@ -73,7 +73,7 @@ export default function Home() {
 
       <Box
         sx={{
-          pt: 6,
+          pt: { xs: 5, sm: 6 },
           flex: 1,
           overflowY: 'scroll',
           minWidth: { xs: '100vw', lg: 'calc(100vw - 360px)' },
