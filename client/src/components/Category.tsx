@@ -70,6 +70,7 @@ export default function Category({
           borderRadius: 18,
           boxShadow: 1,
           m: 1,
+          ml: 0,
           mr: 1.5,
           display: 'flex',
           justifyContent: 'center',

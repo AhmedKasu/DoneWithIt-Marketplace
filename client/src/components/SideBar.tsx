@@ -6,6 +6,7 @@ import Card from '@mui/material/Card';
 import SideBarHeader from './SideBarHeader';
 import SearchBar from './SearchBar';
 import CategoriesList from './CategoriesList';
+
 import { Category } from '../types';
 
 interface Props {
@@ -57,6 +58,7 @@ export default function SideBar({
         sx={{
           mt: '110px',
           width: sideBarWidth,
+          ml: 2,
         }}>
         {categories && (
           <CategoriesList

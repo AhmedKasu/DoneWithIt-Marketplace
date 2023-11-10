@@ -29,12 +29,11 @@ export default function CategoriesList({
   const allCategories = [{ id: 0, name: 'Browse all' }, ...categories];
 
   return (
-    <Box sx={{ ml: 1 }}>
+    <Box>
       <Typography
         sx={{
           alignSelf: 'center',
           fontSize: '1rem',
-          ml: 1,
           color: 'black',
           fontFamily: 'inherit',
           fontWeight: 'bold',

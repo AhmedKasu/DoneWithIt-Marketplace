@@ -99,11 +99,13 @@ export default function Topbar({
             </Box>
           </Paper>
 
-          <CategoriesList
-            showHeader={false}
-            categories={categories}
-            onCategorySelect={handleCategorySelectAndClose}
-          />
+          <Box sx={{ ml: 2 }}>
+            <CategoriesList
+              showHeader={false}
+              categories={categories}
+              onCategorySelect={handleCategorySelectAndClose}
+            />
+          </Box>
         </Box>
       </Modal>
     </Box>
