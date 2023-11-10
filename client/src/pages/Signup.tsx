@@ -109,11 +109,11 @@ export default function SignUp() {
             <TextInput
               name='password'
               label='Password'
+              type={showPassword ? 'text' : 'password'}
               otherProps={{
                 autoComplete: 'new-password',
                 required: true,
                 fullWidth: true,
-                type: showPassword ? 'text' : 'password',
                 InputProps: {
                   endAdornment: (
                     <InputAdornment position='end'>

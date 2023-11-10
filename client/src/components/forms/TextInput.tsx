@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 interface Props {
   name: string;
   label: string;
+  type?: 'text' | 'number' | 'password';
   showHelperText?: boolean;
   otherProps?: TextFieldProps;
   gridProps?: GridProps;
@@ -14,6 +15,7 @@ interface Props {
 export default function TextInput({
   name,
   label,
+  type = 'text',
   gridProps,
   otherProps,
   showHelperText = true,
@@ -29,7 +31,7 @@ export default function TextInput({
     <Grid item xs={12} {...gridProps}>
       <TextField
         error={!!error}
-        {...register(name)}
+        {...register(name, { valueAsNumber: type === 'number' ? true : false })}
         label={label}
         helperText={showHelperText ? (error?.message as string) : undefined}
         {...otherProps}
