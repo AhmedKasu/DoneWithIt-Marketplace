@@ -15,6 +15,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import SnowboardingIcon from '@mui/icons-material/Snowboarding';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import TabletAndroidIcon from '@mui/icons-material/TabletAndroid';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 
 interface Props {
   categoryId: number;
@@ -24,6 +25,7 @@ interface Props {
 }
 
 const icons: { [key: number]: React.ElementType } = {
+  0: StorefrontIcon,
   1: TabletAndroidIcon,
   2: CelebrationIcon,
   3: LoyaltyIcon,

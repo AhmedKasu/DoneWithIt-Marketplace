@@ -25,6 +25,9 @@ export default function CategoriesList({
     setSelectedCategory(categoryId);
     onCategorySelect(categoryId);
   };
+
+  const allCategories = [{ id: 0, name: 'Browse all' }, ...categories];
+
   return (
     <Box sx={{ ml: 1 }}>
       <Typography
@@ -41,7 +44,7 @@ export default function CategoriesList({
         Categories
       </Typography>
       <List sx={{ p: 0 }}>
-        {categories.map((category) => (
+        {allCategories.map((category) => (
           <Category
             key={category.id}
             categoryId={category.id}
