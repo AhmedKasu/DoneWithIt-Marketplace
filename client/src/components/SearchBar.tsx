@@ -1,25 +1,42 @@
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm, FieldValues } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
 import TextInput from './forms/TextInput';
 import Form from './forms';
 
-export default function SearchBar() {
-  const methods = useForm({
+import { searchQuerySchema } from '../utils/validation/product';
+
+type FormData = z.infer<typeof searchQuerySchema>;
+interface Props {
+  onSubmit: (variables: FieldValues) => void;
+}
+
+export default function SearchBar({ onSubmit }: Props) {
+  const methods = useForm<FormData>({
     defaultValues: {
       search: '',
     },
+    resolver: zodResolver(searchQuerySchema),
+    mode: 'onSubmit',
   });
 
   const { isDirty } = methods.formState;
 
+  const handleSubmit = (variables: FieldValues) => {
+    onSubmit(variables);
+  };
+
   return (
     <FormProvider {...methods}>
-      <Form onSubmit={(values) => console.log('submiting', values)}>
+      <Form onSubmit={handleSubmit}>
         <TextInput
           name='search'
           label='Search Marketplace'
+          showHelperText={false}
           otherProps={{
             autoComplete: 'off',
             variant: 'filled',
@@ -32,7 +49,11 @@ export default function SearchBar() {
                   <SearchIcon />
                 </InputAdornment>
               ),
+              inputProps: {
+                maxLength: 40,
+              },
             },
+
             InputLabelProps: {
               shrink: false,
               sx: {
