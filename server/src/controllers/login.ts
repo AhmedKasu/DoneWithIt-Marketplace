@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
       secure: NODE_ENV === 'production',
       maxAge: 60 * 60 * 1000,
     })
-    .json({ message: 'Logged in successfully.' });
+    .json({ id, name });
 });
 
 export default router;
