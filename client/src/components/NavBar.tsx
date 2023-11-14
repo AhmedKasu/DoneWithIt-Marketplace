@@ -11,7 +11,11 @@ import { useTheme } from '@mui/material/styles';
 import UserProfileIcon from './UserProfileIcon';
 import { Toolbar } from '@mui/material';
 
-function NavBar() {
+interface Props {
+  currentUser: string | undefined;
+}
+
+function NavBar({ currentUser }: Props) {
   const navigate = useNavigate();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -51,7 +55,7 @@ function NavBar() {
         </Toolbar>
 
         <UserProfileIcon
-          currentUser={'John Doe'}
+          currentUser={currentUser}
           handleSigninClick={() => navigate('/signin')}
           handleSignoutClick={() => navigate('/')}
           handleSignupClick={() => navigate('/signup')}
