@@ -3,9 +3,9 @@ import Typography from '@mui/material/Typography';
 import { Category } from '../types';
 
 interface Props {
-  searchQuery?: string;
-  categories?: Category[];
-  categoryId?: number;
+  searchQuery: string;
+  categories: Category[];
+  categoryId: number;
 }
 
 export default function SideBarHeader({
