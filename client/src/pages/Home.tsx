@@ -32,6 +32,11 @@ export default function Home() {
   };
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const showProductsHeader: boolean = searchQuery
+    ? false
+    : categoryId
+    ? false
+    : true;
 
   const renderMainContent = () => {
     if (products && products.length > 0) {
@@ -43,11 +48,11 @@ export default function Home() {
               categories={categories}
               handleCategorySelect={(categoryId) => setCategoryId(categoryId)}
             />
-            <Products products={products} />
+            <Products products={products} showHeader={showProductsHeader} />
           </>
         );
       } else {
-        return <Products products={products} />;
+        return <Products products={products} showHeader={showProductsHeader} />;
       }
     } else {
       return <NoListing refetch={handleRefetch} />;

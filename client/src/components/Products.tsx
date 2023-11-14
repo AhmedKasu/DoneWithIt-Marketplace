@@ -7,25 +7,29 @@ import ProductCard from './ProductCard';
 
 interface Props {
   products: Product[];
+  showHeader?: boolean;
 }
 
-export default function Products({ products }: Props) {
+export default function Products({ products, showHeader = true }: Props) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       <Box
         sx={{
           pl: 4,
           pr: 4,
+          mt: 2,
           alignItems: 'center',
           width: '100%',
           maxWidth: '2000px',
         }}>
-        <Typography
-          gutterBottom
-          variant='h6'
-          sx={{ pb: 2, pt: 2, fontWeight: 'bold' }}>
-          Today's picks
-        </Typography>
+        {showHeader && (
+          <Typography
+            gutterBottom
+            variant='h6'
+            sx={{ pt: 2, fontWeight: 'bold' }}>
+            Today's picks
+          </Typography>
+        )}
         <Grid container spacing={1}>
           {products.map((product) => (
             <Grid
