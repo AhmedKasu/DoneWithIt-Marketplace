@@ -82,7 +82,7 @@ export default function Home() {
           pt: { xs: 5, sm: 6 },
           flex: 1,
           overflowY: 'scroll',
-          minWidth: { xs: '100vw', lg: 'calc(100vw - 360px)' },
+          minWidth: { xs: '100vw', md: 'calc(100vw - 360px)' },
         }}>
         {renderMainContent()}
       </Box>
