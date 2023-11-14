@@ -10,7 +10,8 @@ interface SignupData {
 }
 
 interface ResData {
-  message: string;
+  id: number;
+  name: string;
 }
 
 const apiClient = new APIClient<SignupData, ResData>('/login');
