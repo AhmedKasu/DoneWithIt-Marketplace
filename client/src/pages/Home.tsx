@@ -65,7 +65,8 @@ export default function Home() {
       {!isSmallScreen && categories && (
         <SideBar
           categories={categories}
-          categoryId={categoryId}
+          categoryId={categoryId as number}
+          searchQuery={searchQuery as string}
           handleProductSearch={handleProductSearch}
           setCategoryId={setCategoryId}
         />

@@ -14,8 +14,8 @@ import { Category } from '../types';
 
 interface Props {
   categories: Category[];
-  categoryId?: number;
-  searchQuery?: string;
+  categoryId: number;
+  searchQuery: string;
   handleProductSearch: (variables: FieldValues) => void;
   setCategoryId: (categoryId: number) => void;
 }
