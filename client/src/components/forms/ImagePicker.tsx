@@ -93,7 +93,7 @@ export default function ImagePicker({ name }: Props) {
           flexDirection: 'row-reverse',
           overflowX: 'scroll',
         }}>
-        {maxPreviewsReached && (
+        {!maxPreviewsReached && (
           <Box {...getRootProps()} style={dropzoneStyle}>
             <input {...inputRef} {...getInputProps()} {...register(name)} />
             {isDragActive ? (
