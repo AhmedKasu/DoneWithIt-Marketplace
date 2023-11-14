@@ -1,4 +1,5 @@
 import { FieldValues } from 'react-hook-form';
+import { useNavigate } from 'react-router';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -26,6 +27,8 @@ export default function SideBar({
   handleProductSearch,
   setCategoryId,
 }: Props) {
+  const navigate = useNavigate();
+
   const sideBarWidth = '360px';
   return (
     <Box
@@ -63,7 +66,9 @@ export default function SideBar({
           width: sideBarWidth,
           ml: 2,
         }}>
-        <CreateListingButton onCreateListing={() => console.log(true)} />
+        <CreateListingButton
+          onCreateListing={() => navigate('createListing')}
+        />
         <Divider sx={{ mt: 1, mb: 1, width: '90%' }} />
         {categories && (
           <CategoriesList

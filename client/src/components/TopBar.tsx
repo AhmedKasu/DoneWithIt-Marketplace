@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
+import { useNavigate } from 'react-router';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -40,6 +41,8 @@ export default function Topbar({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const navigate = useNavigate();
+
   const handleCategorySelectAndClose = (categoryId: number) => {
     handleCategorySelect(categoryId);
     handleClose();
@@ -50,7 +53,7 @@ export default function Topbar({
       <Stack direction='column' spacing={1} sx={{ ml: 4 }}>
         <Stack direction='row' spacing={1}>
           <CreateListingButton
-            onCreateListing={() => console.log(true)}
+            onCreateListing={() => navigate('createListing')}
             isSmallScreen
           />
           <Button
