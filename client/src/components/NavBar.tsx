@@ -7,9 +7,10 @@ import Container from '@mui/material/Container';
 import RecyclingIcon from '@mui/icons-material/Recycling';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { Toolbar } from '@mui/material';
 
 import UserProfileIcon from './UserProfileIcon';
-import { Toolbar } from '@mui/material';
+import useSignout from '../hooks/useSignOut';
 
 interface Props {
   currentUser: string | undefined;
@@ -19,6 +20,8 @@ function NavBar({ currentUser }: Props) {
   const navigate = useNavigate();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const { mutate: signout } = useSignout();
+
   return (
     <AppBar elevation={1} sx={{ backgroundColor: 'appBg.navbar' }}>
       <Container
@@ -57,7 +60,7 @@ function NavBar({ currentUser }: Props) {
         <UserProfileIcon
           currentUser={currentUser}
           handleSigninClick={() => navigate('/signin')}
-          handleSignoutClick={() => navigate('/')}
+          handleSignoutClick={() => signout()}
           handleSignupClick={() => navigate('/signup')}
         />
       </Container>
