@@ -11,6 +11,7 @@ import errorHandler from './middleware/errorHandler';
 
 import usersRouter from './controllers/users';
 import loginRouter from './controllers/login';
+import logoutRouter from './controllers/logout';
 import categoriesRouter from './controllers/categories';
 import productsRouter from './controllers/products';
 
@@ -31,6 +32,7 @@ app.use(cookieParser());
 
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/logout', logoutRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/products', productsRouter);
 
