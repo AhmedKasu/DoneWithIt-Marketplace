@@ -36,6 +36,7 @@ export default function TextInput({
         error={!!error}
         {...register(name, { valueAsNumber: type === 'number' ? true : false })}
         label={label}
+        type={type}
         helperText={showHelperText ? (error?.message as string) : undefined}
         {...otherProps}>
         {children}
