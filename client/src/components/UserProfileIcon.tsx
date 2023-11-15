@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -67,13 +66,22 @@ export default function UserProfileIcon({
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
         <MenuItem>
-          <Avatar
+          {/* <Avatar
             sx={{
               width: { xs: 18, sm: 20, md: 23, lg: 25 },
               height: { xs: 18, sm: 20, md: 23, lg: 25 },
               mr: 2,
             }}
-          />{' '}
+          />{' '} */}
+          <UserAvatar
+            name={currentUser as string}
+            isCurrentUser={!!currentUser}
+            styles={{
+              width: { xs: 18, sm: 20, md: 23, lg: 25 },
+              height: { xs: 18, sm: 20, md: 23, lg: 25 },
+              mr: 2,
+            }}
+          />
           {currentUser ? currentUser : 'Guest'}
         </MenuItem>
         <Divider />
