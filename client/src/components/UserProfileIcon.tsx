@@ -48,13 +48,14 @@ export default function UserProfileIcon({
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}>
-            <Avatar
-              sx={{
+            <UserAvatar
+              name={currentUser as string}
+              isCurrentUser={!!currentUser}
+              styles={{
                 width: { xs: 25, sm: 30, md: 35, lg: 35 },
                 height: { xs: 25, sm: 30, md: 35, lg: 35 },
-              }}>
-              {currentUser ? <UserAvatar name={currentUser} /> : <Avatar />}
-            </Avatar>
+              }}
+            />
           </IconButton>
         </Tooltip>
       </Box>
