@@ -15,6 +15,7 @@ interface Props {
 
 export default function ImagePicker({ name }: Props) {
   const [previews, setPreviews] = useState<Array<string | ArrayBuffer>>([]);
+  const [rejectedError, setRejectedError] = useState<boolean>(false);
 
   const {
     formState: { errors, isDirty },
@@ -56,15 +57,18 @@ export default function ImagePicker({ name }: Props) {
     setPreviews(updatedPreviews);
   };
 
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
-    useDropzone({
-      onDrop,
-      accept: {
-        'image/png': ['.png'],
-        'image/jpg': ['.jpg'],
-      },
-      multiple: true,
-    });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'image/png': ['.png'],
+      'image/jpg': ['.jpg'],
+    },
+    maxSize: 2 * 1024 * 1024, // 2MB
+    multiple: true,
+
+    onDropRejected: () => setRejectedError(true),
+    onDropAccepted: () => setRejectedError(false),
+  });
 
   const validationError = errors[name];
   const previewsAvailable: boolean = previews.length > 0;
@@ -83,7 +87,6 @@ export default function ImagePicker({ name }: Props) {
     cursor: 'pointer',
   };
 
-  console.log('files to upload', acceptedFiles);
   const inputRef = register(name);
   return (
     <Grid item xs={12}>
@@ -154,6 +157,11 @@ export default function ImagePicker({ name }: Props) {
       {validationError && (
         <Typography color='error' sx={{ fontSize: 12, ml: 1, mt: 0.2 }}>
           {validationError.message as string}
+        </Typography>
+      )}
+      {rejectedError && (
+        <Typography color='error' sx={{ fontSize: 12, ml: 1, mt: 0.2 }}>
+          A valid image file (png or jpg) must be less than 2MB.
         </Typography>
       )}
     </Grid>
