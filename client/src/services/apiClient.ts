@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+export const baseURL = 'http://localhost:3001/api';
+
 const axiosInstance = axios.create({
   withCredentials: true,
-  baseURL: 'http://localhost:3001/api',
+  baseURL,
 });
 
 class APIClient<T, K = T> {
