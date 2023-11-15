@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 
 interface Props {
   name: string;
@@ -100,6 +101,19 @@ export default function ImagePicker({ name }: Props) {
               <p>Drop here ...</p>
             ) : (
               <Stack direction='column' spacing={1}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignSelf: 'center',
+                    p: 1,
+                    width: '40px',
+                    backgroundColor: '#E5E4E2',
+                    boxShadow: 1,
+                    borderRadius: '50%',
+                  }}>
+                  <AddToPhotosIcon />
+                </Box>
+
                 <Typography sx={{ fontWeight: 800 }}>Add Photos</Typography>
                 <Typography>or drag and drop</Typography>
               </Stack>
