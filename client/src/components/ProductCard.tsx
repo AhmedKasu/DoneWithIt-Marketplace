@@ -57,7 +57,6 @@ export default function ProductCard({ id, title, price, imageUrl }: Props) {
             }}
             variant='h6'>
             {title}
-            wedwedwedwe
           </Typography>
         </CardContent>
       </CardActionArea>
