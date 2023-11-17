@@ -19,7 +19,7 @@ import {
   capitalizeFirstLetter,
 } from '../helpers/product';
 
-import { useIsSmallScreen } from '../context/isSmallScreenContext';
+import { useIsSmallScreen } from '../context/screenBreakpoints';
 import useGetProduct from '../hooks/useGetProduct';
 
 interface ArrowProps {
@@ -80,7 +80,7 @@ export default function Product() {
   const { id } = useParams<{ id: string }>();
   const { data: product, isLoading } = useGetProduct(id);
 
-  const isSmallScreen = useIsSmallScreen();
+  const { isSmallScreen } = useIsSmallScreen();
 
   const listedDate = calculateDateDifference(product?.createdAt as string).days;
   const listedWeeks = calculateDateDifference(

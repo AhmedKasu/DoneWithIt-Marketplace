@@ -5,21 +5,19 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import RecyclingIcon from '@mui/icons-material/Recycling';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import { Toolbar } from '@mui/material';
 
 import UserProfileIcon from './UserProfileIcon';
 import useSignout from '../hooks/useSignOut';
 
+import { useIsSmallScreen } from '../context/screenBreakpoints';
 interface Props {
   currentUser: string | undefined;
 }
 
 function NavBar({ currentUser }: Props) {
   const navigate = useNavigate();
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const { isExtraSmallScreen } = useIsSmallScreen();
   const { mutate: signout } = useSignout();
 
   return (
@@ -39,7 +37,7 @@ function NavBar({ currentUser }: Props) {
               />
             </RouterLink>
           </Tooltip>
-          {!isSmallScreen && (
+          {!isExtraSmallScreen && (
             <Typography
               variant='h6'
               noWrap

@@ -10,7 +10,7 @@ import router from './Routing/Routes';
 const queryClient = new QueryClient();
 
 import { AuthProvider } from './context/authContext';
-import { IsSmallScreenProvider } from './context/isSmallScreenContext';
+import { ScreenBreakpointsProvider } from './context/screenBreakpoints';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -18,9 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AuthProvider>
-          <IsSmallScreenProvider>
+          <ScreenBreakpointsProvider>
             <RouterProvider router={router} />
-          </IsSmallScreenProvider>
+          </ScreenBreakpointsProvider>
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>

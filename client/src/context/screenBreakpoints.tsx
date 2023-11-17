@@ -2,10 +2,15 @@ import React, { createContext, useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const IsSmallScreenContext = createContext<boolean | null>(null);
+interface BreakpointsBooleans {
+  isSmallScreen: boolean;
+  isExtraSmallScreen: boolean;
+}
+
+const ScreenBreakPoints = createContext<BreakpointsBooleans | null>(null);
 
 export const useIsSmallScreen = () => {
-  const context = useContext(IsSmallScreenContext);
+  const context = useContext(ScreenBreakPoints);
   if (context === null) {
     throw new Error(
       'useIsSmallScreen must be used within a IsSmallScreenProvider'
@@ -18,13 +23,15 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const IsSmallScreenProvider: React.FC<Props> = ({ children }) => {
+export const ScreenBreakpointsProvider: React.FC<Props> = ({ children }) => {
   const theme = useTheme();
+
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const isExtraSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <IsSmallScreenContext.Provider value={isSmallScreen}>
+    <ScreenBreakPoints.Provider value={{ isSmallScreen, isExtraSmallScreen }}>
       {children}
-    </IsSmallScreenContext.Provider>
+    </ScreenBreakPoints.Provider>
   );
 };
