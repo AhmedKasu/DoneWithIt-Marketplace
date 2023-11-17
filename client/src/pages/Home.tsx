@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { FieldValues } from 'react-hook-form';
 
 import useGetProducts from '../hooks/useGetProducts';
 import useGetCategories from '../hooks/useGetCategories';
+
+import { useIsSmallScreen } from '../context/isSmallScreenContext';
 
 import Products from '../components/Products';
 import NoListing from '../components/NoListing';
@@ -20,7 +20,8 @@ export default function Home() {
 
   const { data: products } = useGetProducts(categoryId, searchQuery);
   const { data: categories } = useGetCategories();
-  const theme = useTheme();
+
+  const isSmallScreen = useIsSmallScreen();
 
   const handleProductSearch = (variables: FieldValues) => {
     setSearchQuery(variables.search);
@@ -31,7 +32,6 @@ export default function Home() {
     setCategoryId(undefined);
   };
 
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const showProductsHeader: boolean = searchQuery
     ? false
     : categoryId

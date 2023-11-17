@@ -8,7 +8,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './themes/customTheme';
 import router from './Routing/Routes';
 const queryClient = new QueryClient();
+
 import { AuthProvider } from './context/authContext';
+import { IsSmallScreenProvider } from './context/isSmallScreenContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -16,7 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AuthProvider>
-          <RouterProvider router={router} />
+          <IsSmallScreenProvider>
+            <RouterProvider router={router} />
+          </IsSmallScreenProvider>
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
