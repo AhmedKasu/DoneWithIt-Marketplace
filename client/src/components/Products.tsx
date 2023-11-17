@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router';
+
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -11,6 +13,7 @@ interface Props {
 }
 
 export default function Products({ products, showHeader = true }: Props) {
+  const navigate = useNavigate();
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       <Box
@@ -48,6 +51,7 @@ export default function Products({ products, showHeader = true }: Props) {
                 description={product.description}
                 price={product.price}
                 imageUrl={product.imageUrls[0]}
+                onSelect={(id) => navigate(`products/${id}`)}
               />
             </Grid>
           ))}
