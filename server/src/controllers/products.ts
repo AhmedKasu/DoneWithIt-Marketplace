@@ -44,7 +44,7 @@ singleProductRouter.get(
     return {
       attributes: { exclude: ['categoryId', 'userId'] },
       include: [
-        { model: User, as: 'seller', attributes: ['id', 'name'] },
+        { model: User, as: 'seller', attributes: ['id', 'name', 'createdAt'] },
         { model: Category, attributes: ['name'] },
         { model: PriceHistory, attributes: ['price', 'createdAt'] },
       ],
