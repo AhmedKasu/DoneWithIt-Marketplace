@@ -18,8 +18,8 @@ export interface Product {
   imageUrls: string[];
   status: 'available' | 'sold' | 'pending';
   condition: 'New' | 'Used - Like New' | 'Used - Good' | 'Used - Fair';
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export type CategoriesNames =
