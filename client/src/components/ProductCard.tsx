@@ -10,13 +10,20 @@ interface Props {
   description: string;
   price: number;
   imageUrl: string;
+  onSelect: (id: number) => void;
 }
 
-export default function ProductCard({ id, title, price, imageUrl }: Props) {
+export default function ProductCard({
+  id,
+  title,
+  price,
+  imageUrl,
+  onSelect,
+}: Props) {
   return (
     <Card elevation={0}>
       <CardActionArea
-        onClick={() => console.log('clicked', id)}
+        onClick={() => onSelect(id)}
         sx={{
           maxHeight: 370,
           backgroundColor: 'appBg.main',
