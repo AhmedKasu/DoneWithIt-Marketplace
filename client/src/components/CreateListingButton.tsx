@@ -35,7 +35,8 @@ export default function CreateListingButton({
       onClick={onCreateListing}
       sx={{
         mb: 2,
-        width: '90%',
+        ml: 1,
+        width: '92%',
         backgroundColor: '#e3f2fd',
         color: 'primary.main',
         '&:hover': {

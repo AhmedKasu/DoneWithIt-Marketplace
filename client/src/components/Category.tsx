@@ -53,7 +53,7 @@ export default function Category({
       direction='row'
       onClick={() => onSelect(categoryId)}
       sx={{
-        width: '97%',
+        width: '95%',
         borderRadius: '10px',
         backgroundColor: isSelected ? '#f7f7f7' : 'transparent',
         transition: 'background-color 0.1s ease',
@@ -70,7 +70,7 @@ export default function Category({
           borderRadius: 18,
           boxShadow: 1,
           m: 1,
-          ml: 0,
+          ml: 1,
           mr: 1.5,
           display: 'flex',
           justifyContent: 'center',

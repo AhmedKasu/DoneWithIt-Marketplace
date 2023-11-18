@@ -32,7 +32,8 @@ export default function CategoriesList({
     <Box>
       <Typography
         sx={{
-          mb: 1,
+          ml: 1,
+          mb: 0.5,
           alignSelf: 'center',
           fontSize: '1rem',
           color: 'black',

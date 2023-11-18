@@ -64,12 +64,13 @@ export default function SideBar({
         sx={{
           mt: '110px',
           width: sideBarWidth,
-          ml: 2,
+          ml: 1,
         }}>
         <CreateListingButton
           onCreateListing={() => navigate('createListing')}
         />
-        <Divider sx={{ mt: 1, mb: 1, width: '90%' }} />
+        <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
+
         {categories && (
           <CategoriesList
             categories={categories}
