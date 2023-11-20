@@ -10,14 +10,14 @@ import { Toolbar } from '@mui/material';
 import UserProfileIcon from './UserProfileIcon';
 import useSignout from '../hooks/useSignOut';
 
-import { useIsSmallScreen } from '../context/screenBreakpoints';
+import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 interface Props {
   currentUser: string | undefined;
 }
 
 function NavBar({ currentUser }: Props) {
   const navigate = useNavigate();
-  const { isExtraSmallScreen } = useIsSmallScreen();
+  const { isExtraSmallScreen } = useScreenBreakingPoints();
   const { mutate: signout } = useSignout();
 
   return (

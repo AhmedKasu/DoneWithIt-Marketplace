@@ -7,7 +7,7 @@ import { FieldValues } from 'react-hook-form';
 import useGetProducts from '../hooks/useGetProducts';
 import useGetCategories from '../hooks/useGetCategories';
 
-import { useIsSmallScreen } from '../context/screenBreakpoints';
+import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 
 import Products from '../components/Products';
 import NoListing from '../components/NoListing';
@@ -21,7 +21,7 @@ export default function Home() {
   const { data: products } = useGetProducts(categoryId, searchQuery);
   const { data: categories } = useGetCategories();
 
-  const { isSmallScreen } = useIsSmallScreen();
+  const { isSmallScreen } = useScreenBreakingPoints();
 
   const handleProductSearch = (variables: FieldValues) => {
     setSearchQuery(variables.search);

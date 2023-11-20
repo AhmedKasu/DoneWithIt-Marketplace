@@ -9,11 +9,11 @@ interface BreakpointsBooleans {
 
 const ScreenBreakPoints = createContext<BreakpointsBooleans | null>(null);
 
-export const useIsSmallScreen = () => {
+export const useScreenBreakingPoints = () => {
   const context = useContext(ScreenBreakPoints);
   if (context === null) {
     throw new Error(
-      'useIsSmallScreen must be used within a IsSmallScreenProvider'
+      'useScreenBreakingPoints must be used within a IsSmallScreenProvider'
     );
   }
   return context;
