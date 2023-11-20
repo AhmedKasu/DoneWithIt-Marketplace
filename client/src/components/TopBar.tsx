@@ -26,7 +26,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: { xs: 350, sm: 500 },
   bgcolor: 'background.paper',
   boxShadow: 24,
   pb: 2,
@@ -87,7 +87,7 @@ export default function Topbar({
               id='modal-modal-title'
               variant='h6'
               component='h2'
-              sx={{ m: 2, ml: 20, fontWeight: 800 }}>
+              sx={{ m: 2, ml: { sm: 20 }, fontWeight: 800 }}>
               Select Category
             </Typography>
 
