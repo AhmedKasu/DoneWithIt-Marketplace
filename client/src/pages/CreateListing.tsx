@@ -154,22 +154,28 @@ export default function CreateListing() {
   };
 
   return (
-    <Container component='main' maxWidth='xs' sx={{ pt: 15, height: '100vh' }}>
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}>
-        <Error message={uploadErrorMessage as string} open={!!uploadError} />
+    <Box sx={{ height: '100vh', overflowY: 'scroll' }}>
+      <Container component='main' maxWidth='xs' sx={{ pt: { xs: 8, sm: 15 } }}>
+        <Box
+          sx={{
+            marginTop: { xs: 0, sm: 8 },
+            pb: { xs: 5 },
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+          <Error message={uploadErrorMessage as string} open={!!uploadError} />
 
-        <Typography component='h1' variant='h5' sx={{ mb: 3, fontWeight: 800 }}>
-          Item For Sale
-        </Typography>
+          <Typography
+            component='h1'
+            variant='h5'
+            sx={{ mb: 3, fontWeight: 800 }}>
+            Item For Sale
+          </Typography>
 
-        {renderFormContent()}
-      </Box>
-    </Container>
+          {renderFormContent()}
+        </Box>
+      </Container>
+    </Box>
   );
 }
