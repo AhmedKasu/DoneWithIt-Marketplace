@@ -17,7 +17,7 @@ export default function Layout() {
 
   return (
     <>
-      <NavBar currentUser={currentUser as string} />
+      <NavBar currentUser={currentUser?.name} />
       <Box
         sx={{
           mt: 2,

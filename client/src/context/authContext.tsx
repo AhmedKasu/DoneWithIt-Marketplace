@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState } from 'react';
 
 interface AuthContext {
-  currentUser: string | undefined | null;
+  currentUser: { name: string; id: number } | undefined | null;
   setCurrentUser: React.Dispatch<
-    React.SetStateAction<string | undefined | null>
+    React.SetStateAction<{ name: string; id: number } | undefined | null>
   >;
   error: string | undefined;
   setError: React.Dispatch<React.SetStateAction<string | undefined>>;
@@ -24,9 +24,9 @@ interface Props {
 }
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<string | undefined | null>(
-    undefined
-  );
+  const [currentUser, setCurrentUser] = useState<
+    { name: string; id: number } | undefined | null
+  >(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
 
   return (
