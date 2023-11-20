@@ -22,6 +22,15 @@ export interface Product {
   updatedAt?: string;
 }
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+  products: Product[];
+}
+
 export type CategoriesNames =
   | 'Electronics'
   | 'Entertainment'
