@@ -29,6 +29,7 @@ interface ArrowProps {
 }
 
 const PrevArrow = (props: ArrowProps) => {
+  const isExtraSmallScreen = useScreenBreakingPoints();
   const { className, style, onClick } = props;
   return (
     <div
@@ -37,7 +38,7 @@ const PrevArrow = (props: ArrowProps) => {
         ...style,
         position: 'absolute',
         left: '80px',
-        top: '102%',
+        top: isExtraSmallScreen ? '104%' : '102%',
         zIndex: 10,
       }}
       onClick={onClick}
@@ -49,6 +50,7 @@ const PrevArrow = (props: ArrowProps) => {
 };
 
 const NextArrow = (props: ArrowProps) => {
+  const isExtraSmallScreen = useScreenBreakingPoints();
   const { className, style, onClick } = props;
   return (
     <div
@@ -57,7 +59,7 @@ const NextArrow = (props: ArrowProps) => {
         ...style,
         position: 'absolute',
         right: '50px',
-        top: '102%',
+        top: isExtraSmallScreen ? '104%' : '102%',
         zIndex: 10,
       }}
       onClick={onClick}
@@ -145,6 +147,7 @@ export default function Product() {
         elevation={3}
         sx={{
           p: 2,
+          pb: 4,
           height: { xs: '50vh', md: '100vh ' },
           overflowY: 'scroll',
         }}>
@@ -229,7 +232,7 @@ export default function Product() {
       </Paper>
       <style>{`
         .custom-slider .slick-slide {
-          height: ${isSmallScreen ? '47vh' : '90vh'};
+          height: ${isSmallScreen ? '45vh' : '90vh'};
         }
         .custom-slider .slick-prev:before{
           margin-left: -50px;

@@ -31,10 +31,9 @@ export default function ProductCard({
         }}>
         <CardMedia
           component='img'
-          height='255'
           image={imageUrl}
           alt={title}
-          sx={{ borderRadius: '6px' }}
+          sx={{ height: { xs: 180, sm: 255 }, borderRadius: '6px' }}
         />
         <CardContent
           sx={{
