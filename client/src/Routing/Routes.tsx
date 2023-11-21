@@ -8,6 +8,7 @@ import Signin from '../pages/Signin';
 import Home from '../pages/Home';
 import CreateListing from '../pages/CreateListing';
 import Product from '../pages/Product';
+import UserListings from '../pages/UserListings';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
     children: [
       { path: 'createListing', element: <CreateListing /> },
       { path: 'products/:id', element: <Product /> },
+      { path: 'me/selling', element: <UserListings /> },
     ],
   },
 ]);
