@@ -36,18 +36,16 @@ import { Product } from '../types';
 interface LongMenuProps {
   product: Product;
   onPendingClick: () => void;
-  // onViewClick: () => void;
+  onViewClick: () => void;
   // onDeleteClick: () => void;
 }
 
-function LongMenu({ product, onPendingClick }: LongMenuProps) {
+function LongMenu({ product, onPendingClick, onViewClick }: LongMenuProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const navigate = useNavigate();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -56,10 +54,6 @@ function LongMenu({ product, onPendingClick }: LongMenuProps) {
   const handlePendingClick = () => {
     setAnchorEl(null);
     onPendingClick();
-  };
-
-  const handleViewClick = () => {
-    navigate(`/products/${product.id}`);
   };
 
   const handleDeleteClick = () => {
@@ -108,7 +102,7 @@ function LongMenu({ product, onPendingClick }: LongMenuProps) {
             <ListItemText>Mark as Pending</ListItemText>
           </MenuItem>
         )}
-        <MenuItem onClick={handleViewClick}>
+        <MenuItem onClick={onViewClick}>
           <ListItemIcon>
             <PreviewIcon fontSize='medium' />
           </ListItemIcon>
@@ -309,6 +303,7 @@ export default function UserListings() {
                     </Button>
                     <LongMenu
                       product={product}
+                      onViewClick={() => navigate(`/products/${product.id}`)}
                       onPendingClick={() =>
                         updateProductStatus({
                           userId: +user.id,
