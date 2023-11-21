@@ -1,9 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import APIClient from '../services/apiClient';
-import { Product, User } from '../types';
-
-import { CustomAxiosError } from '../types';
+import { Product, User, CustomAxiosError } from '../types';
 
 const apiClient = new APIClient<{ status: Product['status'] }, Product>(
   '/products'
@@ -22,7 +20,7 @@ interface updateProductContext {
 const useUpdateProductstatus = () => {
   const queryClient = useQueryClient();
   return useMutation<Product, CustomAxiosError, Params, updateProductContext>({
-    onMutate: async ({ userId, productId, status }) => {
+    onMutate: ({ userId, productId, status }) => {
       const previousUser = queryClient.getQueryData<User>(['user', userId]);
       const previousProduct = previousUser?.products.find(
         (product) => product.id === productId
