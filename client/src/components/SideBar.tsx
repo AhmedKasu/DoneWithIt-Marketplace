@@ -12,6 +12,7 @@ import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
 
 import { Category } from '../types';
+import { useAuthContext } from '../context/authContext';
 
 interface Props {
   categories: Category[];
@@ -28,6 +29,7 @@ export default function SideBar({
   handleProductSearch,
   setCategoryId,
 }: Props) {
+  const { currentUser } = useAuthContext();
   const navigate = useNavigate();
 
   const sideBarWidth = '360px';
@@ -67,10 +69,12 @@ export default function SideBar({
           width: sideBarWidth,
           ml: 1,
         }}>
-        <UserListingsButton
-          onSelect={() => navigate('me/selling')}
-          isSelected={false}
-        />
+        {currentUser && (
+          <UserListingsButton
+            onSelect={() => navigate('me/selling')}
+            isSelected={false}
+          />
+        )}
         <CreateListingButton
           onCreateListing={() => navigate('createListing')}
         />

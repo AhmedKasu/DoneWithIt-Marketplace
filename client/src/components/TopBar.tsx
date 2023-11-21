@@ -16,6 +16,7 @@ import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
 
 import { Category } from '../types';
+import { useAuthContext } from '../context/authContext';
 
 interface Props {
   handleSearch: (variables: FieldValues) => void;
@@ -39,6 +40,8 @@ export default function Topbar({
   handleCategorySelect,
 }: Props) {
   const [open, setOpen] = useState(false);
+  const { currentUser } = useAuthContext();
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -53,10 +56,12 @@ export default function Topbar({
     <Box sx={{ p: 1, backgroundColor: 'white' }}>
       <Stack direction='column' spacing={1} sx={{ ml: 4 }}>
         <Stack direction='row' spacing={1}>
-          <UserListingsButton
-            isSmallScreen
-            onSelect={() => navigate('me/selling')}
-          />
+          {currentUser && (
+            <UserListingsButton
+              isSmallScreen
+              onSelect={() => navigate('me/selling')}
+            />
+          )}
           <CreateListingButton
             onCreateListing={() => navigate('createListing')}
             isSmallScreen
