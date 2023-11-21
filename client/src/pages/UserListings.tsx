@@ -122,7 +122,7 @@ function LongMenu({ product, onPendingClick, onViewClick }: LongMenuProps) {
 export default function UserListings() {
   const { currentUser } = useAuthContext();
   const { data: user } = useGetUser(currentUser?.id as number);
-  const { mutateAsync: updateProductStatus } = useUpdateProductStatus();
+  const { mutate: updateProductStatus } = useUpdateProductStatus();
 
   const { isSmallScreen } = useScreenBreakingPoints();
   const navigate = useNavigate();
