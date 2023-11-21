@@ -9,6 +9,7 @@ import SideBarHeader from './SideBarHeader';
 import SearchBar from './SearchBar';
 import CategoriesList from './CategoriesList';
 import CreateListingButton from './CreateListingButton';
+import UserListingsButton from './UserListingsButton';
 
 import { Category } from '../types';
 
@@ -66,6 +67,10 @@ export default function SideBar({
           width: sideBarWidth,
           ml: 1,
         }}>
+        <UserListingsButton
+          onSelect={() => navigate('me/selling')}
+          isSelected={false}
+        />
         <CreateListingButton
           onCreateListing={() => navigate('createListing')}
         />

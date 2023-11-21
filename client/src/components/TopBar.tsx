@@ -13,6 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchBar from './SearchBar';
 import CategoriesList from './CategoriesList';
 import CreateListingButton from './CreateListingButton';
+import UserListingsButton from './UserListingsButton';
 
 import { Category } from '../types';
 
@@ -52,6 +53,10 @@ export default function Topbar({
     <Box sx={{ p: 1, backgroundColor: 'white' }}>
       <Stack direction='column' spacing={1} sx={{ ml: 4 }}>
         <Stack direction='row' spacing={1}>
+          <UserListingsButton
+            isSmallScreen
+            onSelect={() => navigate('me/selling')}
+          />
           <CreateListingButton
             onCreateListing={() => navigate('createListing')}
             isSmallScreen
