@@ -19,18 +19,28 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import PreviewIcon from '@mui/icons-material/Preview';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 import CreateListingButton from '../components/CreateListingButton';
 import UserListingsButton from '../components/UserListingsButton';
 
 import { useAuthContext } from '../context/authContext';
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
+
 import useGetUser from '../hooks/useGetUser';
+import useUpdateProductStatus from '../hooks/useUpdateProductStatus';
 
 import { capitalizeFirstLetter } from '../helpers/product';
 import { Product } from '../types';
 
-function LongMenu({ product }: { product: Product }) {
+interface LongMenuProps {
+  product: Product;
+  onPendingClick: () => void;
+  // onViewClick: () => void;
+  // onDeleteClick: () => void;
+}
+
+function LongMenu({ product, onPendingClick }: LongMenuProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -45,6 +55,7 @@ function LongMenu({ product }: { product: Product }) {
 
   const handlePendingClick = () => {
     setAnchorEl(null);
+    onPendingClick();
   };
 
   const handleViewClick = () => {
@@ -117,6 +128,7 @@ function LongMenu({ product }: { product: Product }) {
 export default function UserListings() {
   const { currentUser } = useAuthContext();
   const { data: user } = useGetUser(currentUser?.id as number);
+  const { mutateAsync: updateProductStatus } = useUpdateProductStatus();
 
   const { isSmallScreen } = useScreenBreakingPoints();
   const navigate = useNavigate();
@@ -268,7 +280,19 @@ export default function UserListings() {
                     <Button
                       variant='contained'
                       disableElevation
-                      onClick={() => console.log('edit')}
+                      startIcon={
+                        product.status === 'sold' ? (
+                          <PlayCircleIcon />
+                        ) : undefined
+                      }
+                      onClick={() =>
+                        updateProductStatus({
+                          status:
+                            product.status !== 'sold' ? 'sold' : 'available',
+                          userId: +user.id,
+                          productId: product.id,
+                        })
+                      }
                       size={isSmallScreen ? 'small' : 'medium'}
                       sx={{
                         mb: 2,
@@ -279,9 +303,20 @@ export default function UserListings() {
                           backgroundColor: '#F8F8FF',
                         },
                       }}>
-                      ✔ Mark as sold
+                      {product.status !== 'sold'
+                        ? '✔ Mark as sold'
+                        : 'Mark as available'}
                     </Button>
-                    <LongMenu product={product} />
+                    <LongMenu
+                      product={product}
+                      onPendingClick={() =>
+                        updateProductStatus({
+                          userId: +user.id,
+                          productId: product.id,
+                          status: 'pending',
+                        })
+                      }
+                    />
                   </Box>
                 </Box>
               </Box>
