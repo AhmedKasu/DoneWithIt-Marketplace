@@ -29,6 +29,7 @@ import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 
 import useGetUser from '../hooks/useGetUser';
 import useUpdateProductStatus from '../hooks/useUpdateProductStatus';
+import useDeleteProduct from '../hooks/useDeleteProduct';
 
 import { capitalizeFirstLetter } from '../helpers/product';
 import { Product } from '../types';
@@ -37,10 +38,15 @@ interface LongMenuProps {
   product: Product;
   onPendingClick: () => void;
   onViewClick: () => void;
-  // onDeleteClick: () => void;
+  onDeleteClick: () => void;
 }
 
-function LongMenu({ product, onPendingClick, onViewClick }: LongMenuProps) {
+function LongMenu({
+  product,
+  onPendingClick,
+  onViewClick,
+  onDeleteClick,
+}: LongMenuProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -58,6 +64,7 @@ function LongMenu({ product, onPendingClick, onViewClick }: LongMenuProps) {
 
   const handleDeleteClick = () => {
     setAnchorEl(null);
+    onDeleteClick();
   };
 
   return (
@@ -123,6 +130,7 @@ export default function UserListings() {
   const { currentUser } = useAuthContext();
   const { data: user } = useGetUser(currentUser?.id as number);
   const { mutate: updateProductStatus } = useUpdateProductStatus();
+  const { mutate: deleteProduct } = useDeleteProduct();
 
   const { isSmallScreen } = useScreenBreakingPoints();
   const navigate = useNavigate();
@@ -321,6 +329,12 @@ export default function UserListings() {
                           userId: +user.id,
                           productId: product.id,
                           status: 'pending',
+                        })
+                      }
+                      onDeleteClick={() =>
+                        deleteProduct({
+                          productId: product.id,
+                          userId: +user.id,
                         })
                       }
                     />
