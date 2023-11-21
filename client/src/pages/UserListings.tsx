@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import Box from '@mui/material/Box';
@@ -23,6 +23,8 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 import CreateListingButton from '../components/CreateListingButton';
 import UserListingsButton from '../components/UserListingsButton';
+import Error from '../components/Error';
+import Success from '../components/Success';
 
 import { useAuthContext } from '../context/authContext';
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
@@ -129,12 +131,54 @@ function LongMenu({
 export default function UserListings() {
   const { currentUser } = useAuthContext();
   const { data: user } = useGetUser(currentUser?.id as number);
-  const { mutate: updateProductStatus } = useUpdateProductStatus();
-  const { mutate: deleteProduct } = useDeleteProduct();
+
+  const {
+    mutate: updateProductStatus,
+    isError: updateError,
+    isSuccess: updateSuccess,
+  } = useUpdateProductStatus();
+  const {
+    mutate: deleteProduct,
+    isError: deleteError,
+    isSuccess: deleteSuccess,
+  } = useDeleteProduct();
 
   const { isSmallScreen } = useScreenBreakingPoints();
   const navigate = useNavigate();
 
+  const [showError, setShowError] = useState(false);
+  const [showUpdateSuccess, setShowUpdateSuccess] = useState(false);
+  const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
+
+  useEffect(() => {
+    if (deleteError || updateError) {
+      setShowError(true);
+      const timer = setTimeout(() => {
+        setShowError(false);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [deleteError, updateError]);
+
+  useEffect(() => {
+    if (deleteSuccess) {
+      setShowDeleteSuccess(true);
+      const timer = setTimeout(() => {
+        setShowDeleteSuccess(false);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [deleteSuccess]);
+
+  useEffect(() => {
+    if (updateSuccess) {
+      setShowUpdateSuccess(true);
+      const timer = setTimeout(() => {
+        setShowUpdateSuccess(false);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [updateSuccess]);
   return (
     <Box
       sx={{
@@ -214,6 +258,19 @@ export default function UserListings() {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
+        <Error
+          message='Unexpected error occurred. Please try again.'
+          open={showError}
+        />
+        <Success
+          message='Successfully updated product status.'
+          open={showUpdateSuccess}
+        />
+        <Success
+          message='Successfully deleted product.'
+          open={showDeleteSuccess}
+        />
+
         {user?.products.map((product) => (
           <Card
             key={product.id}
