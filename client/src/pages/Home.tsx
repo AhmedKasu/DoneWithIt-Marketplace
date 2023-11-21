@@ -38,22 +38,32 @@ export default function Home() {
     ? false
     : true;
 
-  const renderMainContent = () => {
-    if (products && products.length > 0) {
-      if (isSmallScreen && categories) {
-        return (
-          <>
-            <Topbar
-              handleSearch={handleProductSearch}
-              categories={categories}
-              handleCategorySelect={(categoryId) => setCategoryId(categoryId)}
-            />
+  const isProductsAvailable = products && products.length > 0;
+
+  const smallScreenContent = () => {
+    if (categories) {
+      return (
+        <>
+          <Topbar
+            handleSearch={handleProductSearch}
+            categories={categories}
+            handleCategorySelect={(categoryId) => setCategoryId(categoryId)}
+          />
+          {isProductsAvailable ? (
             <Products products={products} showHeader={showProductsHeader} />
-          </>
-        );
-      } else {
-        return <Products products={products} showHeader={showProductsHeader} />;
-      }
+          ) : (
+            <NoListing refetch={handleRefetch} />
+          )}
+        </>
+      );
+    } else {
+      return <NoListing refetch={handleRefetch} />;
+    }
+  };
+
+  const largeScreenContent = () => {
+    if (categories && isProductsAvailable) {
+      return <Products products={products} showHeader={showProductsHeader} />;
     } else {
       return <NoListing refetch={handleRefetch} />;
     }
@@ -84,7 +94,7 @@ export default function Home() {
           overflowY: 'scroll',
           minWidth: { xs: '100vw', md: 'calc(100vw - 360px)' },
         }}>
-        {renderMainContent()}
+        {isSmallScreen ? smallScreenContent() : largeScreenContent()}
       </Box>
     </Box>
   );
