@@ -6,7 +6,7 @@ import { useAuthContext } from '../context/authContext';
 import { CustomAxiosError } from '../types';
 
 interface CurrentUser {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -23,7 +23,7 @@ const useGetCurrentUser = () => {
 
   useEffect(() => {
     if (!query.isLoading && query.data) {
-      setCurrentUser(query.data.name);
+      setCurrentUser(query.data);
     }
     if (query.isError) {
       setCurrentUser(null);
