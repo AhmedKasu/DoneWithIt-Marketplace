@@ -136,55 +136,67 @@ export default function UserListings() {
         height: '100vh',
         overflowY: 'scroll',
       }}>
-      <Paper elevation={2} sx={{ height: { xs: 280, md: '100%' }, pt: 8 }}>
-        <Stack direction='row'>
-          <Box
-            sx={{
-              ml: 2,
-              mt: 1,
-              height: '36px',
-              width: '36px',
-              borderRadius: 18,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'transparent',
-
-              '&:hover': {
-                cursor: 'pointer',
-                boxShadow: 1,
-                backgroundColor: '#f7f7f7',
-              },
-            }}>
-            <KeyboardBackspaceIcon
-              onClick={() => navigate('/')}
-              sx={{ color: 'gray' }}
-            />
-          </Box>
-          <Stack direction='column' sx={{ ml: 2, mb: 1 }}>
-            <Typography sx={{ fontSize: '.8rem', color: 'gray' }}>
-              Marketplace
-            </Typography>
-            <Typography
+      <Box
+        sx={{
+          position: 'sticky',
+          top: 0,
+          height: { xs: 180, md: '100vh' },
+          zIndex: 100,
+        }}>
+        <Paper elevation={2} sx={{ height: '100%', pt: { xs: 6, md: 8 } }}>
+          <Stack direction='row'>
+            <Box
               sx={{
-                fontSize: '1.5rem',
-                fontWeight: 900,
-                fontFamily: 'inherit',
-              }}
-              variant='h6'>
-              Selling
-            </Typography>
-          </Stack>
-        </Stack>
+                ml: 2,
+                mt: 1,
+                height: '36px',
+                width: '36px',
+                borderRadius: 18,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'transparent',
 
-        <Stack sx={{ ml: 1 }}>
-          <CreateListingButton
-            onCreateListing={() => navigate('/createListing')}
-          />
-          <UserListingsButton label='Your listings' isSelected />
-          <Divider sx={{ mt: 2, mr: 0, width: '95%' }} />
-        </Stack>
-      </Paper>
+                '&:hover': {
+                  cursor: 'pointer',
+                  boxShadow: 1,
+                  backgroundColor: '#f7f7f7',
+                },
+              }}>
+              <KeyboardBackspaceIcon
+                onClick={() => navigate('/')}
+                sx={{ color: 'gray' }}
+              />
+            </Box>
+            <Stack direction='column' sx={{ ml: 2, mb: 1 }}>
+              <Typography sx={{ fontSize: '.8rem', color: 'gray' }}>
+                Marketplace
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: '1.5rem',
+                  fontWeight: 900,
+                  fontFamily: 'inherit',
+                }}
+                variant='h6'>
+                Selling
+              </Typography>
+            </Stack>
+          </Stack>
+
+          <Stack sx={{ ml: 1 }}>
+            <CreateListingButton
+              onCreateListing={() => navigate('/createListing')}
+            />
+            {!isSmallScreen && (
+              <>
+                <UserListingsButton label='Your listings' isSelected />
+                <Divider sx={{ mt: 2, mr: 0, width: '95%' }} />
+              </>
+            )}
+          </Stack>
+        </Paper>
+      </Box>
 
       <Box
         sx={{
