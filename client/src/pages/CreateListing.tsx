@@ -17,6 +17,7 @@ import ImagePicker from '../components/forms/ImagePicker';
 
 import Error from '../components/Error';
 import Success from '../components/Success';
+import InteractiveCircularProgress from '../components/InteractiveCircularProgress';
 
 import { productSchema } from '../utils/validation/product';
 import { Product } from '../types';
@@ -38,8 +39,9 @@ export default function CreateListing() {
   const {
     mutate: uploadImage,
     data: newListing,
-    isPending,
-    error: uploadError,
+    isSuccess: createProductSuccess,
+    isPending: createProductPending,
+    error: createProductError,
   } = useCreateListing();
 
   const methods = useForm<FormData>({
@@ -56,14 +58,17 @@ export default function CreateListing() {
     uploadImage(variables as FormData);
   };
 
-  const uploadErrorMessage = uploadError?.response?.data.details;
+  const createProductErrorMessage = createProductError?.response?.data.details;
 
   const renderFormContent = () => {
-    if (isPending) return <p>loading...</p>;
+    if (createProductPending)
+      return <InteractiveCircularProgress success={createProductSuccess} />;
+
     if (newListing)
       return (
         <Success message='Listing successfuly created' open={!!newListing} />
       );
+
     return (
       <FormProvider {...methods}>
         <Form onSubmit={handleSubmit}>
@@ -164,7 +169,10 @@ export default function CreateListing() {
             flexDirection: 'column',
             alignItems: 'center',
           }}>
-          <Error message={uploadErrorMessage as string} open={!!uploadError} />
+          <Error
+            message={createProductErrorMessage as string}
+            open={!!createProductError}
+          />
 
           <Typography
             component='h1'
