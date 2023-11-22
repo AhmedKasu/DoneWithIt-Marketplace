@@ -37,14 +37,14 @@ import { capitalizeFirstLetter } from '../helpers/product';
 import { Product } from '../types';
 
 interface LongMenuProps {
-  product: Product;
+  productStatus: Product['status'];
   onPendingClick: () => void;
   onViewClick: () => void;
   onDeleteClick: () => void;
 }
 
 function LongMenu({
-  product,
+  productStatus,
   onPendingClick,
   onViewClick,
   onDeleteClick,
@@ -103,7 +103,7 @@ function LongMenu({
             },
           },
         }}>
-        {product.status !== 'pending' && (
+        {productStatus !== 'pending' && (
           <MenuItem onClick={handlePendingClick}>
             <ListItemIcon>
               <PauseCircleOutlineIcon fontSize='medium' />
@@ -379,7 +379,7 @@ export default function UserListings() {
                         : 'Mark as available'}
                     </Button>
                     <LongMenu
-                      product={product}
+                      productStatus={product.status}
                       onViewClick={() => navigate(`/products/${product.id}`)}
                       onPendingClick={() =>
                         updateProductStatus({
