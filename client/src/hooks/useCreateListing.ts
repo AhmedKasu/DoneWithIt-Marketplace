@@ -11,7 +11,7 @@ interface ResData extends NewProduct {
   status: 'available' | 'pending' | 'sold';
 }
 
-const cloudinaryUrl = import.meta.env.VITE_CLOUDINARY_URL;
+const cloudinaryUploadUrl = import.meta.env.VITE_CLOUDINARY_UPLOAD_URL;
 const cloudinaryPreset = import.meta.env.VITE_CLOUDINARY_PRESET;
 
 const useCreateListing = () => {
@@ -27,7 +27,7 @@ const useCreateListing = () => {
 
           const { data } = await axios({
             method: 'post',
-            url: cloudinaryUrl,
+            url: cloudinaryUploadUrl,
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' },
           });
