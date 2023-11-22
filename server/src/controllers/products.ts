@@ -1,11 +1,13 @@
 import { Router, Request, Response } from 'express';
 import _ from 'lodash';
+import { DeleteApiResponse } from 'cloudinary';
 
 import { Product } from '../models/Product';
 import { Category } from '../models/Category';
 import { User } from '../models/User';
 import { PriceHistory } from '../models/PriceHistory';
 
+import cloudinary from '../utils/cloudinary';
 import validateUserInput from '../utils/validation';
 import {
   productSchema,
@@ -13,6 +15,7 @@ import {
   productStatusSchema,
 } from '../utils/validation/schemas';
 import { productsQueryOptions } from '../services/products';
+import { getImagePublicId } from '../helpers/cloudinaryHelpers';
 
 import findById from '../middleware/findById';
 import checkOwner from '../middleware/checkOwner';
@@ -92,9 +95,20 @@ singleProductRouter.delete(
   findById(Product, 'product', paramsIdSchema),
   checkOwner('product'),
   async (req: Request, res: Response) => {
-    const product = req.entities!.product as Product;
+    const product = req.entities!.product as ProductType;
 
-    await product.destroy();
+    await Promise.all(
+      product.imageUrls.map(async (url) => {
+        const publicId = getImagePublicId(url);
+
+        if (!publicId) return;
+        return (await cloudinary.uploader.destroy(
+          publicId
+        )) as DeleteApiResponse;
+      })
+    );
+    await (req.entities?.product as Product).destroy();
+
     return res.status(204).end();
   }
 );
