@@ -18,6 +18,7 @@ export default function PrivateRoutes() {
 
   if (currentUser === null) return <Navigate to='/signin' />;
 
+  if (currentUser === undefined) return <div>Loading...</div>;
   return (
     <>
       <NavBar currentUser={currentUser?.name} />
