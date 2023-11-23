@@ -66,13 +66,6 @@ export default function UserProfileIcon({
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
         <MenuItem>
-          {/* <Avatar
-            sx={{
-              width: { xs: 18, sm: 20, md: 23, lg: 25 },
-              height: { xs: 18, sm: 20, md: 23, lg: 25 },
-              mr: 2,
-            }}
-          />{' '} */}
           <UserAvatar
             name={currentUser as string}
             isCurrentUser={!!currentUser}
