@@ -12,12 +12,21 @@ import { userSchema, paramsIdSchema } from '../utils/validation/schemas';
 import auth from '../middleware/auth';
 import findById from '../middleware/findById';
 
+import { ValidationError } from '../utils/errors';
+
 import { User as UserType } from '../types';
 
 const router = Router();
 
 router.post('/', async (req, res) => {
   const { name, email, password } = validateUserInput(userSchema, req.body);
+
+  const user = await User.findOne({ where: { email } });
+  if (user) {
+    throw new ValidationError(
+      'An account with the given email already exists. Try logging in instead.'
+    );
+  }
 
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
