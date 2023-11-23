@@ -271,6 +271,24 @@ export default function UserListings() {
           open={showDeleteSuccess}
         />
 
+        {(!user?.products || user.products.length === 0) && (
+          <Stack spacing={3}>
+            <Typography
+              variant='h6'
+              component='div'
+              sx={{
+                pt: { md: 10 },
+                fontSize: { xs: '1rem', sm: '1.2rem' },
+                fontWeight: 900,
+              }}>
+              You currently do not have any listings.
+            </Typography>
+            <CreateListingButton
+              onCreateListing={() => navigate('/createListing')}
+            />
+          </Stack>
+        )}
+
         {user?.products.map((product) => (
           <Card
             key={product.id}
