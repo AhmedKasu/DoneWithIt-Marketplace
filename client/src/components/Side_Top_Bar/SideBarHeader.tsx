@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 
-import { Category } from '../types';
+import { Category } from '../../types';
 
 interface Props {
   searchQuery: string;

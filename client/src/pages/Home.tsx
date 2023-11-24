@@ -11,8 +11,8 @@ import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 
 import Products from '../components/Product/Products';
 import NoListing from '../components/Feedback/NoListing';
-import SideBar from '../components/SideBar';
-import Topbar from '../components/TopBar';
+import SideBar from '../components/Side_Top_Bar/SideBar';
+import Topbar from '../components/Side_Top_Bar/TopBar';
 
 export default function Home() {
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined);

@@ -11,12 +11,12 @@ import Paper from '@mui/material/Paper';
 import CloseIcon from '@mui/icons-material/Close';
 
 import SearchBar from './SearchBar';
-import CategoriesList from './Category/CategoriesList';
+import CategoriesList from '../Category/CategoriesList';
 import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
 
-import { Category } from '../types';
-import { useAuthContext } from '../context/authContext';
+import { Category } from '../../types';
+import { useAuthContext } from '../../context/authContext';
 
 interface Props {
   handleSearch: (variables: FieldValues) => void;

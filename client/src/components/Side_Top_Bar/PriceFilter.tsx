@@ -6,8 +6,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import TextInput from './forms/TextInput';
-import Form from './forms';
+import TextInput from '../forms/TextInput';
+import Form from '../forms';
 
 interface FormData {
   min: number;

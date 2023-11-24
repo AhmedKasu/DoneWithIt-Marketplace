@@ -7,13 +7,13 @@ import Divider from '@mui/material/Divider';
 
 import SideBarHeader from './SideBarHeader';
 import SearchBar from './SearchBar';
-import CategoriesList from './Category/CategoriesList';
+import CategoriesList from '../Category/CategoriesList';
 import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
 import ProductFilters from './ProductFilters';
 
-import { Category } from '../types';
-import { useAuthContext } from '../context/authContext';
+import { Category } from '../../types';
+import { useAuthContext } from '../../context/authContext';
 
 interface Props {
   categories: Category[];

@@ -5,10 +5,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
-import TextInput from './forms/TextInput';
-import Form from './forms';
+import TextInput from '../forms/TextInput';
+import Form from '../forms';
 
-import { searchQuerySchema } from '../utils/validation/product';
+import { searchQuerySchema } from '../../utils/validation/product';
 
 type FormData = z.infer<typeof searchQuerySchema>;
 interface Props {
