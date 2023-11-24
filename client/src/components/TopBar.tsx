@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import CloseIcon from '@mui/icons-material/Close';
 
 import SearchBar from './SearchBar';
-import CategoriesList from './CategoriesList';
+import CategoriesList from './Category/CategoriesList';
 import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
 

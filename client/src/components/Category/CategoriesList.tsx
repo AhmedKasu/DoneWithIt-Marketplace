@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Category from './Category';
 import List from '@mui/material/List';
 
-import { Category as CategoryType } from '../types';
+import { Category as CategoryType } from '../../types';
 
 interface Props {
   categories: CategoryType[];

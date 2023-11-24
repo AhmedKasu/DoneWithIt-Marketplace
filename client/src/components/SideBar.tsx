@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 
 import SideBarHeader from './SideBarHeader';
 import SearchBar from './SearchBar';
-import CategoriesList from './CategoriesList';
+import CategoriesList from './Category/CategoriesList';
 import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
 import ProductFilters from './ProductFilters';
