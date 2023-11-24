@@ -17,12 +17,18 @@ const style: SxProps<Theme> = {
 };
 
 interface Props {
+  modalTitle: string;
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
 
-export default function CustomModal({ open, onClose, children }: Props) {
+export default function CustomModal({
+  modalTitle,
+  open,
+  onClose,
+  children,
+}: Props) {
   return (
     <Modal open={open} onClose={onClose}>
       <Box sx={style}>
@@ -38,7 +44,7 @@ export default function CustomModal({ open, onClose, children }: Props) {
             variant='h6'
             component='h2'
             sx={{ m: 2, ml: { sm: 20 }, fontWeight: 800 }}>
-            Select Category
+            {modalTitle}
           </Typography>
 
           <Box
