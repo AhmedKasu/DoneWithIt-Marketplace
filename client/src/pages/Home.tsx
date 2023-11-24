@@ -60,6 +60,8 @@ export default function Home() {
             handleSearch={handleProductSearch}
             categories={categories}
             handleCategorySelect={(categoryId) => setCategoryId(categoryId)}
+            searchQuery={searchQuery as string}
+            handlePriceFilter={handlePriceFilter}
           />
           {isProductsAvailable ? (
             <Products products={products} showHeader={showProductsHeader} />
