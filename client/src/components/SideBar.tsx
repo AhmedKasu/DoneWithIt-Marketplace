@@ -10,6 +10,7 @@ import SearchBar from './SearchBar';
 import CategoriesList from './CategoriesList';
 import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
+import ProductFilters from './ProductFilters';
 
 import { Category } from '../types';
 import { useAuthContext } from '../context/authContext';
@@ -19,6 +20,7 @@ interface Props {
   categoryId: number;
   searchQuery: string;
   handleProductSearch: (variables: FieldValues) => void;
+  handlePriceFilter: (variables: FieldValues) => void;
   setCategoryId: (categoryId: number) => void;
 }
 
@@ -27,6 +29,7 @@ export default function SideBar({
   categoryId,
   searchQuery,
   handleProductSearch,
+  handlePriceFilter,
   setCategoryId,
 }: Props) {
   const { currentUser } = useAuthContext();
@@ -79,6 +82,13 @@ export default function SideBar({
           onCreateListing={() => navigate('createListing')}
         />
         <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
+
+        {searchQuery && (
+          <>
+            <ProductFilters handlePriceFilter={handlePriceFilter} />
+            <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
+          </>
+        )}
 
         {categories && (
           <CategoriesList

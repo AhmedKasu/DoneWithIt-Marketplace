@@ -17,14 +17,26 @@ import Topbar from '../components/TopBar';
 export default function Home() {
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
   const [searchQuery, setSearchQuery] = useState<string | undefined>('');
+  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
+  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
 
-  const { data: products } = useGetProducts(categoryId, searchQuery);
+  const { data: products } = useGetProducts(
+    categoryId,
+    searchQuery,
+    minPrice,
+    maxPrice
+  );
   const { data: categories } = useGetCategories();
 
   const { isSmallScreen } = useScreenBreakingPoints();
 
   const handleProductSearch = (variables: FieldValues) => {
     setSearchQuery(variables.search);
+  };
+
+  const handlePriceFilter = (variables: FieldValues) => {
+    if (variables.min) setMinPrice(variables.min);
+    if (variables.max) setMaxPrice(variables.max);
   };
 
   const handleRefetch = () => {
@@ -84,6 +96,7 @@ export default function Home() {
           searchQuery={searchQuery as string}
           handleProductSearch={handleProductSearch}
           setCategoryId={setCategoryId}
+          handlePriceFilter={handlePriceFilter}
         />
       )}
 
