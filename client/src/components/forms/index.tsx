@@ -11,8 +11,19 @@ interface Props {
 
 export default function Form({ children, onSubmit }: Props) {
   const { handleSubmit } = useFormContext();
+
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSubmit(onSubmit)();
+    }
+  };
   return (
-    <Box component='form' noValidate onSubmit={handleSubmit(onSubmit)}>
+    <Box
+      component='form'
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      onKeyDown={handleOnKeyDown}>
       <Grid container spacing={2}>
         {children}
       </Grid>
