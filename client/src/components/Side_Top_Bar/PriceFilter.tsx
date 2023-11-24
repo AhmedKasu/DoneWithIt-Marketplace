@@ -67,7 +67,7 @@ export default function PriceFilter({ onFilterPrice }: Props) {
           <Form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <TextInput
-                gridProps={{ md: 5.5 }}
+                gridProps={{ xs: 5.5 }}
                 name='min'
                 label='Min'
                 type='number'
@@ -83,7 +83,7 @@ export default function PriceFilter({ onFilterPrice }: Props) {
               />
 
               <TextInput
-                gridProps={{ md: 5.5 }}
+                gridProps={{ xs: 5.5 }}
                 name='max'
                 label='Max'
                 type='number'
