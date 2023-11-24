@@ -5,15 +5,12 @@ import { useNavigate } from 'react-router';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import CloseIcon from '@mui/icons-material/Close';
 
 import SearchBar from './SearchBar';
 import CategoriesList from '../Category/CategoriesList';
 import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
+import CustomModal from './CustomModal';
 
 import { Category } from '../../types';
 import { useAuthContext } from '../../context/authContext';
@@ -23,16 +20,6 @@ interface Props {
   categories: Category[];
   handleCategorySelect: (categoryId: number) => void;
 }
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: { xs: 350, sm: 500 },
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  pb: 2,
-};
 
 export default function Topbar({
   handleSearch,
@@ -84,50 +71,13 @@ export default function Topbar({
         </Stack>
         <SearchBar onSubmit={handleSearch} />
       </Stack>
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <Paper
-            sx={{
-              mb: 2,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <Typography
-              id='modal-modal-title'
-              variant='h6'
-              component='h2'
-              sx={{ m: 2, ml: { sm: 20 }, fontWeight: 800 }}>
-              Select Category
-            </Typography>
-
-            <Box
-              onClick={handleClose}
-              sx={{
-                mr: 2,
-                p: 0.5,
-                display: 'flex',
-                justifyContent: 'space-between',
-                backgroundColor: '#e9ebee',
-                borderRadius: '50%',
-                '&:hover': {
-                  backgroundColor: '#D3D3D3',
-                  cursor: 'pointer',
-                },
-              }}>
-              <CloseIcon sx={{ color: 'black' }} />
-            </Box>
-          </Paper>
-
-          <Box sx={{ ml: 2 }}>
-            <CategoriesList
-              showHeader={false}
-              categories={categories}
-              onCategorySelect={handleCategorySelectAndClose}
-            />
-          </Box>
-        </Box>
-      </Modal>
+      <CustomModal onClose={handleClose} open={open}>
+        <CategoriesList
+          showHeader={false}
+          categories={categories}
+          onCategorySelect={handleCategorySelectAndClose}
+        />
+      </CustomModal>
     </Box>
   );
 }
