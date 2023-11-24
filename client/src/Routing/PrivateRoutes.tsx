@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import useGetCurrentUser from '../hooks/useGetCurrentUser';
 import { useAuthContext } from '../context/authContext';
 
-import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar/NavBar';
 
 export default function PrivateRoutes() {
   const { refetch } = useGetCurrentUser();

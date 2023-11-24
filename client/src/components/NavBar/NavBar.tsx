@@ -8,9 +8,9 @@ import RecyclingIcon from '@mui/icons-material/Recycling';
 import { Toolbar } from '@mui/material';
 
 import UserProfileIcon from './UserProfileIcon';
-import useSignout from '../hooks/useSignOut';
+import useSignout from '../../hooks/useSignOut';
 
-import { useScreenBreakingPoints } from '../context/screenBreakpoints';
+import { useScreenBreakingPoints } from '../../context/screenBreakpoints';
 interface Props {
   currentUser: string | undefined;
 }

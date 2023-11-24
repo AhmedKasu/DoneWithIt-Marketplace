@@ -12,7 +12,7 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import RecyclingIcon from '@mui/icons-material/Recycling';
 
-import UserAvatar from '../components/UserAvatar';
+import UserAvatar from '../components/NavBar/UserAvatar';
 
 import {
   calculateDateDifference,

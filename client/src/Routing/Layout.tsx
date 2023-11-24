@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Outlet } from 'react-router';
 import Box from '@mui/material/Box';
 
-import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar/NavBar';
 
 import { useAuthContext } from '../context/authContext';
 import useGetCurrentUser from '../hooks/useGetCurrentUser';
