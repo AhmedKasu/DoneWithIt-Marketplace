@@ -7,22 +7,28 @@ import PriceFilter from './PriceFilter';
 
 interface Props {
   handlePriceFilter: (variables: FieldValues) => void;
+  showHeader?: boolean;
 }
 
-export default function ProductFilters({ handlePriceFilter }: Props) {
+export default function ProductFilters({
+  showHeader = true,
+  handlePriceFilter,
+}: Props) {
   return (
     <Box sx={{ m: 1 }}>
-      <Typography
-        variant='h5'
-        sx={{
-          mb: 0.5,
-          fontSize: '1rem',
-          color: 'black',
-          fontFamily: 'inherit',
-          fontWeight: 'bold',
-        }}>
-        Filters
-      </Typography>
+      {showHeader && (
+        <Typography
+          variant='h5'
+          sx={{
+            mb: 0.5,
+            fontSize: '1rem',
+            color: 'black',
+            fontFamily: 'inherit',
+            fontWeight: 'bold',
+          }}>
+          Filters
+        </Typography>
+      )}
       <PriceFilter
         onFilterPrice={(variables) => {
           handlePriceFilter(variables);
