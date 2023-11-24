@@ -23,8 +23,8 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 import CreateListingButton from '../components/CreateListingButton';
 import UserListingsButton from '../components/UserListingsButton';
-import Error from '../components/Error';
-import Success from '../components/Success';
+import Error from '../components/Feedback/Error';
+import Success from '../components/Feedback/Success';
 
 import { useAuthContext } from '../context/authContext';
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';

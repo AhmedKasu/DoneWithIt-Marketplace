@@ -15,9 +15,9 @@ import Form from '../components/forms';
 import TextInput from '../components/forms/TextInput';
 import ImagePicker from '../components/forms/ImagePicker';
 
-import Error from '../components/Error';
-import Success from '../components/Success';
-import InteractiveCircularProgress from '../components/InteractiveCircularProgress';
+import Error from '../components/Feedback/Error';
+import Success from '../components/Feedback/Success';
+import InteractiveCircularProgress from '../components/Feedback/InteractiveCircularProgress';
 
 import { productSchema } from '../utils/validation/product';
 import { Product } from '../types';

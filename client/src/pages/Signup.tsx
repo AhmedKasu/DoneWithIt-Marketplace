@@ -20,8 +20,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Form from '../components/forms';
 import TextInput from '../components/forms/TextInput';
 
-import Error from '../components/Error';
-import Success from '../components/Success';
+import Error from '../components/Feedback/Error';
+import Success from '../components/Feedback/Success';
 
 import signupSchema from '../utils/validation/signup';
 import useSignup from '../hooks/useSignup';

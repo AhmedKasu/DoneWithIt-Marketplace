@@ -10,7 +10,7 @@ import useGetCategories from '../hooks/useGetCategories';
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 
 import Products from '../components/Product/Products';
-import NoListing from '../components/NoListing';
+import NoListing from '../components/Feedback/NoListing';
 import SideBar from '../components/SideBar';
 import Topbar from '../components/TopBar';
 
