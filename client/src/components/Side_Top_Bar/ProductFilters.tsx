@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import PriceFilter from './PriceFilter';
+import ConditionFilter from './ConditionFilter';
 
 interface Props {
   handlePriceFilter: (variables: FieldValues) => void;
@@ -31,6 +32,9 @@ export default function ProductFilters({
       )}
       <PriceFilter
         onFilterPrice={(variables) => handlePriceFilter(variables)}
+      />
+      <ConditionFilter
+        onFilterCondition={(condition) => console.log(condition)}
       />
     </Box>
   );
