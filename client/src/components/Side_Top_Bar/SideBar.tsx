@@ -12,7 +12,7 @@ import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
 import ProductFilters from './ProductFilters';
 
-import { Category } from '../../types';
+import { Category, Product } from '../../types';
 import { useAuthContext } from '../../context/authContext';
 
 interface Props {
@@ -21,6 +21,7 @@ interface Props {
   searchQuery: string;
   handleProductSearch: (variables: FieldValues) => void;
   handlePriceFilter: (variables: FieldValues) => void;
+  handleConditionFilter: (condition: Product['condition']) => void;
   setCategoryId: (categoryId: number) => void;
 }
 
@@ -30,6 +31,7 @@ export default function SideBar({
   searchQuery,
   handleProductSearch,
   handlePriceFilter,
+  handleConditionFilter,
   setCategoryId,
 }: Props) {
   const { currentUser } = useAuthContext();
@@ -86,7 +88,10 @@ export default function SideBar({
 
         {searchQuery && (
           <>
-            <ProductFilters handlePriceFilter={handlePriceFilter} />
+            <ProductFilters
+              handlePriceFilter={handlePriceFilter}
+              handleConditionFilter={handleConditionFilter}
+            />
             <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
           </>
         )}

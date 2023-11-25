@@ -8,6 +8,7 @@ import useGetProducts from '../hooks/useGetProducts';
 import useGetCategories from '../hooks/useGetCategories';
 
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
+import { Product } from '../types';
 
 import Products from '../components/Product/Products';
 import NoListing from '../components/Feedback/NoListing';
@@ -19,12 +20,16 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState<string | undefined>('');
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
+  const [condition, setCondition] = useState<Product['condition'] | undefined>(
+    undefined
+  );
 
   const { data: products } = useGetProducts(
     categoryId,
     searchQuery,
     minPrice,
-    maxPrice
+    maxPrice,
+    condition
   );
   const { data: categories } = useGetCategories();
 
@@ -37,6 +42,10 @@ export default function Home() {
   const handlePriceFilter = (variables: FieldValues) => {
     if (variables.min) setMinPrice(variables.min);
     if (variables.max) setMaxPrice(variables.max);
+  };
+
+  const handleConditionFilter = (condition: Product['condition']) => {
+    setCondition(condition);
   };
 
   const handleRefetch = () => {
@@ -62,6 +71,7 @@ export default function Home() {
             handleCategorySelect={(categoryId) => setCategoryId(categoryId)}
             searchQuery={searchQuery as string}
             handlePriceFilter={handlePriceFilter}
+            handleConditionFilter={handleConditionFilter}
           />
           {isProductsAvailable ? (
             <Products products={products} showHeader={showProductsHeader} />
@@ -99,6 +109,7 @@ export default function Home() {
           handleProductSearch={handleProductSearch}
           setCategoryId={setCategoryId}
           handlePriceFilter={handlePriceFilter}
+          handleConditionFilter={handleConditionFilter}
         />
       )}
 

@@ -6,14 +6,18 @@ import Typography from '@mui/material/Typography';
 import PriceFilter from './PriceFilter';
 import ConditionFilter from './ConditionFilter';
 
+import { Product } from '../../types';
+
 interface Props {
   handlePriceFilter: (variables: FieldValues) => void;
+  handleConditionFilter: (condition: Product['condition']) => void;
   showHeader?: boolean;
 }
 
 export default function ProductFilters({
   showHeader = true,
   handlePriceFilter,
+  handleConditionFilter,
 }: Props) {
   return (
     <Box sx={{ m: 1 }}>
@@ -30,12 +34,8 @@ export default function ProductFilters({
           Filters
         </Typography>
       )}
-      <PriceFilter
-        onFilterPrice={(variables) => handlePriceFilter(variables)}
-      />
-      <ConditionFilter
-        onFilterCondition={(condition) => console.log(condition)}
-      />
+      <PriceFilter onFilterPrice={handlePriceFilter} />
+      <ConditionFilter onFilterCondition={handleConditionFilter} />
     </Box>
   );
 }

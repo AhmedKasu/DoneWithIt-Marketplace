@@ -14,7 +14,7 @@ import UserListingsButton from './UserListingsButton';
 import CustomModal from './CustomModal';
 import ProductFilters from './ProductFilters';
 
-import { Category } from '../../types';
+import { Category, Product } from '../../types';
 import { useAuthContext } from '../../context/authContext';
 
 interface Props {
@@ -23,6 +23,7 @@ interface Props {
   handleCategorySelect: (categoryId: number) => void;
   searchQuery: string;
   handlePriceFilter: (variables: FieldValues) => void;
+  handleConditionFilter: (condition: Product['condition']) => void;
 }
 
 export default function Topbar({
@@ -31,6 +32,7 @@ export default function Topbar({
   handleCategorySelect,
   searchQuery,
   handlePriceFilter,
+  handleConditionFilter,
 }: Props) {
   const [openCategories, setOpen] = useState(false);
   const [openFilters, setOpenFilters] = useState(false);
@@ -117,6 +119,7 @@ export default function Topbar({
         modalTitle='Filters'>
         <ProductFilters
           handlePriceFilter={handlePriceFilter}
+          handleConditionFilter={handleConditionFilter}
           showHeader={false}
         />
       </CustomModal>

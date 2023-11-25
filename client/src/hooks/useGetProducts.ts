@@ -9,12 +9,13 @@ const useGetProducts = (
   categoryId?: number,
   search?: string,
   minPrice?: number,
-  maxPrice?: number
+  maxPrice?: number,
+  condition?: Product['condition']
 ) => {
   categoryId = categoryId === 0 ? undefined : categoryId;
-  //console.log(minPrice, maxPrice);
+
   return useQuery<Product[], CustomAxiosError>({
-    queryKey: ['products', categoryId, search, minPrice, maxPrice],
+    queryKey: ['products', categoryId, search, minPrice, maxPrice, condition],
     queryFn: () =>
       axios
         .get(productsURL, {
@@ -23,6 +24,7 @@ const useGetProducts = (
             search,
             minPrice,
             maxPrice,
+            condition,
           },
         })
         .then((res) => res.data),
