@@ -85,9 +85,23 @@ export default function Product() {
   const { isSmallScreen } = useScreenBreakingPoints();
 
   const listedDate = calculateDateDifference(product?.createdAt as string).days;
+  const listedDay =
+    listedDate === 0
+      ? 'Today.'
+      : listedDate === 1
+      ? 'Yesterday.'
+      : `Listed ${listedDate} days ago.`;
+
   const listedWeeks = calculateDateDifference(
     product?.createdAt as string
   ).weeks;
+
+  const listedWeek =
+    listedWeeks === 0
+      ? 'This week.'
+      : listedWeeks === 1
+      ? 'Last week.'
+      : `Listed ${listedWeeks} ${listedWeeks < 2 ? 'week' : 'weeks'} ago.`;
 
   const productStatusColor =
     product?.status === 'sold'
@@ -171,9 +185,7 @@ export default function Product() {
             fontSize: '.9rem',
             color: 'gray',
           }}>
-          {listedWeeks > 0
-            ? `Listed ${listedWeeks} ${listedWeeks < 2 ? 'week' : 'weeks'} ago.`
-            : `Listed ${listedDate} ${listedDate < 2 ? 'day' : 'days'} ago.`}
+          {listedWeeks > 0 ? `Listed ${listedWeek} ` : `Listed ${listedDay}`}
         </Typography>
 
         <Typography
