@@ -12,30 +12,23 @@ import CreateListingButton from './CreateListingButton';
 import UserListingsButton from './UserListingsButton';
 import ProductFilters from './ProductFilters';
 
-import { Category, Product } from '../../types';
+import { Category } from '../../types';
 import { useAuthContext } from '../../context/authContext';
+import { useFiltersContext } from '../../context/FiltersContext';
 
 interface Props {
   categories: Category[];
-  categoryId: number;
-  searchQuery: string;
-  handleProductSearch: (variables: FieldValues) => void;
-  handlePriceFilter: (variables: FieldValues) => void;
-  handleConditionFilter: (condition: Product['condition']) => void;
-  setCategoryId: (categoryId: number) => void;
 }
 
-export default function SideBar({
-  categories,
-  categoryId,
-  searchQuery,
-  handleProductSearch,
-  handlePriceFilter,
-  handleConditionFilter,
-  setCategoryId,
-}: Props) {
+export default function SideBar({ categories }: Props) {
   const { currentUser } = useAuthContext();
+  const { setSearchQuery, searchQuery, setCategoryId, categoryId } =
+    useFiltersContext();
   const navigate = useNavigate();
+
+  const handleProductSearch = (variables: FieldValues) => {
+    setSearchQuery(variables.search);
+  };
 
   const sideBarWidth = '360px';
   return (
@@ -61,8 +54,8 @@ export default function SideBar({
         <Box sx={{ ml: 2 }}>
           <SideBarHeader
             categories={categories}
-            categoryId={categoryId}
-            searchQuery={searchQuery}
+            categoryId={categoryId as number}
+            searchQuery={searchQuery as string}
           />
           <SearchBar onSubmit={handleProductSearch} />
           <Divider sx={{ mt: 1, mb: 1, width: '95%' }} />
@@ -88,10 +81,7 @@ export default function SideBar({
 
         {searchQuery && (
           <>
-            <ProductFilters
-              handlePriceFilter={handlePriceFilter}
-              handleConditionFilter={handleConditionFilter}
-            />
+            <ProductFilters />
             <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
           </>
         )}

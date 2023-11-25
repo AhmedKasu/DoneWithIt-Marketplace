@@ -1,14 +1,10 @@
-import { useState } from 'react';
-
 import Box from '@mui/material/Box';
-
-import { FieldValues } from 'react-hook-form';
 
 import useGetProducts from '../hooks/useGetProducts';
 import useGetCategories from '../hooks/useGetCategories';
 
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
-import { Product } from '../types';
+import { useFiltersContext } from '../context/FiltersContext';
 
 import Products from '../components/Product/Products';
 import NoListing from '../components/Feedback/NoListing';
@@ -16,13 +12,15 @@ import SideBar from '../components/Side_Top_Bar/SideBar';
 import Topbar from '../components/Side_Top_Bar/TopBar';
 
 export default function Home() {
-  const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
-  const [searchQuery, setSearchQuery] = useState<string | undefined>('');
-  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
-  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
-  const [condition, setCondition] = useState<Product['condition'] | undefined>(
-    undefined
-  );
+  const {
+    categoryId,
+    setCategoryId,
+    searchQuery,
+    setSearchQuery,
+    minPrice,
+    maxPrice,
+    condition,
+  } = useFiltersContext();
 
   const { data: products } = useGetProducts(
     categoryId,
@@ -31,22 +29,10 @@ export default function Home() {
     maxPrice,
     condition
   );
+
   const { data: categories } = useGetCategories();
 
   const { isSmallScreen } = useScreenBreakingPoints();
-
-  const handleProductSearch = (variables: FieldValues) => {
-    setSearchQuery(variables.search);
-  };
-
-  const handlePriceFilter = (variables: FieldValues) => {
-    if (variables.min) setMinPrice(variables.min);
-    if (variables.max) setMaxPrice(variables.max);
-  };
-
-  const handleConditionFilter = (condition: Product['condition']) => {
-    setCondition(condition);
-  };
 
   const handleRefetch = () => {
     setSearchQuery('');
@@ -65,14 +51,7 @@ export default function Home() {
     if (categories) {
       return (
         <>
-          <Topbar
-            handleSearch={handleProductSearch}
-            categories={categories}
-            handleCategorySelect={(categoryId) => setCategoryId(categoryId)}
-            searchQuery={searchQuery as string}
-            handlePriceFilter={handlePriceFilter}
-            handleConditionFilter={handleConditionFilter}
-          />
+          <Topbar categories={categories} />
           {isProductsAvailable ? (
             <Products products={products} showHeader={showProductsHeader} />
           ) : (
@@ -101,17 +80,7 @@ export default function Home() {
         backgroundColor: 'appBg.main',
         height: '100vh',
       }}>
-      {!isSmallScreen && categories && (
-        <SideBar
-          categories={categories}
-          categoryId={categoryId as number}
-          searchQuery={searchQuery as string}
-          handleProductSearch={handleProductSearch}
-          setCategoryId={setCategoryId}
-          handlePriceFilter={handlePriceFilter}
-          handleConditionFilter={handleConditionFilter}
-        />
-      )}
+      {!isSmallScreen && categories && <SideBar categories={categories} />}
 
       <Box
         sx={{

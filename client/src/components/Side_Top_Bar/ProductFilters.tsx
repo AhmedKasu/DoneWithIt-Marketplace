@@ -6,19 +6,25 @@ import Typography from '@mui/material/Typography';
 import PriceFilter from './PriceFilter';
 import ConditionFilter from './ConditionFilter';
 
+import { useFiltersContext } from '../../context/FiltersContext';
 import { Product } from '../../types';
 
 interface Props {
-  handlePriceFilter: (variables: FieldValues) => void;
-  handleConditionFilter: (condition: Product['condition']) => void;
   showHeader?: boolean;
 }
 
-export default function ProductFilters({
-  showHeader = true,
-  handlePriceFilter,
-  handleConditionFilter,
-}: Props) {
+export default function ProductFilters({ showHeader = true }: Props) {
+  const { setMinPrice, setMaxPrice, setCondition } = useFiltersContext();
+
+  const handlePriceFilter = (variables: FieldValues) => {
+    if (variables.min) setMinPrice(variables.min);
+    if (variables.max) setMaxPrice(variables.max);
+  };
+
+  const handleConditionFilter = (condition: Product['condition']) => {
+    setCondition(condition);
+  };
+
   return (
     <Box sx={{ m: 1 }}>
       {showHeader && (

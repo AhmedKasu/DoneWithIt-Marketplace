@@ -14,29 +14,19 @@ import UserListingsButton from './UserListingsButton';
 import CustomModal from './CustomModal';
 import ProductFilters from './ProductFilters';
 
-import { Category, Product } from '../../types';
+import { Category } from '../../types';
 import { useAuthContext } from '../../context/authContext';
+import { useFiltersContext } from '../../context/FiltersContext';
 
 interface Props {
-  handleSearch: (variables: FieldValues) => void;
   categories: Category[];
-  handleCategorySelect: (categoryId: number) => void;
-  searchQuery: string;
-  handlePriceFilter: (variables: FieldValues) => void;
-  handleConditionFilter: (condition: Product['condition']) => void;
 }
 
-export default function Topbar({
-  handleSearch,
-  categories,
-  handleCategorySelect,
-  searchQuery,
-  handlePriceFilter,
-  handleConditionFilter,
-}: Props) {
+export default function Topbar({ categories }: Props) {
   const [openCategories, setOpen] = useState(false);
   const [openFilters, setOpenFilters] = useState(false);
   const { currentUser } = useAuthContext();
+  const { setSearchQuery, searchQuery, setCategoryId } = useFiltersContext();
 
   const handleOpenCategories = () => setOpen(true);
   const handleCloseCategories = () => setOpen(false);
@@ -46,9 +36,13 @@ export default function Topbar({
 
   const navigate = useNavigate();
 
-  const handleCategorySelectAndClose = (categoryId: number) => {
-    handleCategorySelect(categoryId);
+  const handleCategorySelect = (categoryId: number) => {
+    setCategoryId(categoryId);
     handleCloseCategories();
+  };
+
+  const handleSearch = (variables: FieldValues) => {
+    setSearchQuery(variables.search);
   };
 
   return (
@@ -109,7 +103,7 @@ export default function Topbar({
         <CategoriesList
           showHeader={false}
           categories={categories}
-          onCategorySelect={handleCategorySelectAndClose}
+          onCategorySelect={handleCategorySelect}
         />
       </CustomModal>
 
@@ -117,11 +111,7 @@ export default function Topbar({
         onClose={handleCloseFilters}
         open={openFilters}
         modalTitle='Filters'>
-        <ProductFilters
-          handlePriceFilter={handlePriceFilter}
-          handleConditionFilter={handleConditionFilter}
-          showHeader={false}
-        />
+        <ProductFilters showHeader={false} />
       </CustomModal>
     </Box>
   );
