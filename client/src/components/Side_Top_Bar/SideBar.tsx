@@ -40,6 +40,7 @@ export default function SideBar({
     <Box
       sx={{
         pt: 6.4,
+        pb: 8,
         width: '360px',
         height: '100%',
         overflowY: 'scroll',
