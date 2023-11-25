@@ -30,9 +30,7 @@ export default function ProductFilters({
         </Typography>
       )}
       <PriceFilter
-        onFilterPrice={(variables) => {
-          handlePriceFilter(variables);
-        }}
+        onFilterPrice={(variables) => handlePriceFilter(variables)}
       />
     </Box>
   );
