@@ -2,6 +2,7 @@ import React, { useState, createContext, useContext } from 'react';
 import { Product } from '../types';
 
 type Condition = Product['condition'];
+type Status = Product['status'];
 
 interface FiltersContextProps {
   categoryId: number | undefined;
@@ -14,6 +15,8 @@ interface FiltersContextProps {
   setMaxPrice: (maxPrice: number | undefined) => void;
   condition: Condition | undefined;
   setCondition: (condition: Condition | undefined) => void;
+  status: Status | undefined;
+  setStatus: (status: Status | undefined) => void;
 }
 
 const FiltersContext = createContext<FiltersContextProps | undefined>(
@@ -38,6 +41,7 @@ export const FiltersProvider: React.FC<Props> = ({ children }) => {
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
   const [condition, setCondition] = useState<Condition | undefined>(undefined);
+  const [status, setStatus] = useState<Status | undefined>(undefined);
 
   return (
     <FiltersContext.Provider
@@ -52,6 +56,8 @@ export const FiltersProvider: React.FC<Props> = ({ children }) => {
         setMaxPrice,
         condition,
         setCondition,
+        status,
+        setStatus,
       }}>
       {children}
     </FiltersContext.Provider>
