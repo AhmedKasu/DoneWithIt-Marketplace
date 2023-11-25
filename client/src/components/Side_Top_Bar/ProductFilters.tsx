@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 
 import PriceFilter from './PriceFilter';
 import ConditionFilter from './ConditionFilter';
+import StatusFilter from './StatusFilter';
 
 import { useFiltersContext } from '../../context/FiltersContext';
 import { Product } from '../../types';
@@ -14,7 +15,8 @@ interface Props {
 }
 
 export default function ProductFilters({ showHeader = true }: Props) {
-  const { setMinPrice, setMaxPrice, setCondition } = useFiltersContext();
+  const { setMinPrice, setMaxPrice, setCondition, setStatus } =
+    useFiltersContext();
 
   const handlePriceFilter = (variables: FieldValues) => {
     if (variables.min) setMinPrice(variables.min);
@@ -23,6 +25,10 @@ export default function ProductFilters({ showHeader = true }: Props) {
 
   const handleConditionFilter = (condition: Product['condition']) => {
     setCondition(condition);
+  };
+
+  const handleStatusFilter = (status: Product['status']) => {
+    setStatus(status);
   };
 
   return (
@@ -42,6 +48,7 @@ export default function ProductFilters({ showHeader = true }: Props) {
       )}
       <PriceFilter onFilterPrice={handlePriceFilter} />
       <ConditionFilter onFilterCondition={handleConditionFilter} />
+      <StatusFilter onFilterStatus={handleStatusFilter} />
     </Box>
   );
 }

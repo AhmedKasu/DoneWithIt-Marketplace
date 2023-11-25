@@ -20,6 +20,7 @@ export default function Home() {
     minPrice,
     maxPrice,
     condition,
+    status,
   } = useFiltersContext();
 
   const { data: products } = useGetProducts(
@@ -27,7 +28,8 @@ export default function Home() {
     searchQuery,
     minPrice,
     maxPrice,
-    condition
+    condition,
+    status
   );
 
   const { data: categories } = useGetCategories();
