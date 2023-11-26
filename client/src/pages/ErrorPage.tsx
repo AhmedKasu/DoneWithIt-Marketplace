@@ -23,6 +23,11 @@ function HomeButton() {
   );
 }
 
+const textStyles = {
+  textAlign: 'center',
+  whiteSpace: 'normal',
+};
+
 export default function ErrorPage() {
   const error = useRouteError();
 
@@ -37,13 +42,14 @@ export default function ErrorPage() {
         height: '100vh',
         backgroundColor: 'appBg.main',
       }}>
-      <Box sx={{ pt: '15%' }}>
+      <Box sx={{ pt: { xs: '20%', md: '15%' } }}>
         {isRouteErrorResponse(error) ? (
           <Stack
             direction='column'
             sx={{
               display: 'flex',
               alignItems: 'center',
+              width: '70vw',
             }}>
             <img
               alt='Not found'
@@ -51,21 +57,15 @@ export default function ErrorPage() {
               height={120}
             />
             <Typography variant='h1'>404!</Typography>
-            <Typography>
+            <Box sx={textStyles}>
               <i>We are sorry, the page you requested couldn't be found.</i>
-            </Typography>
+            </Box>
             <HomeButton />
           </Stack>
         ) : (
-          <Stack
-            direction='column'
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-            }}>
+          <Stack direction='column'>
             <Typography variant='h1'>500!</Typography>
-            <Typography>
-              {' '}
+            <Typography sx={textStyles}>
               Sorry, an unexpected server error has occurred.
             </Typography>
             <HomeButton />
