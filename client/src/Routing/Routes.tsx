@@ -9,11 +9,13 @@ import Home from '../pages/Home';
 import CreateListing from '../pages/CreateListing';
 import Product from '../pages/Product';
 import UserListings from '../pages/UserListings';
+import ErrorPage from '../pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
       { path: 'signup', element: <Signup /> },
