@@ -44,7 +44,7 @@ export default function Category({
   onSelect,
   isSelected,
 }: Props) {
-  const CategoryIcon = icons[categoryId];
+  const CategoryIcon = icons[categoryId] || DefaultCategoryIcon;
 
   const iconColor = isSelected ? 'white' : 'black';
   const containerColor = isSelected ? 'primary.main' : '#e9ebee';
@@ -76,9 +76,7 @@ export default function Category({
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        {<CategoryIcon sx={{ color: iconColor }} fontSize='small' /> || (
-          <DefaultCategoryIcon sx={{ color: iconColor }} fontSize='small' />
-        )}
+        <CategoryIcon sx={{ color: iconColor }} fontSize='small' />
       </Box>
       <Typography
         sx={{
