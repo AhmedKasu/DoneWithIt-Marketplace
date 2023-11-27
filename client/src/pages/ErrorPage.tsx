@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 function HomeButton() {
   const navigate = useNavigate();
@@ -28,6 +29,12 @@ const textStyles = {
   whiteSpace: 'normal',
 };
 
+const containerStyles = {
+  display: 'flex',
+  alignItems: 'center',
+  width: '70vw',
+};
+
 export default function ErrorPage() {
   const error = useRouteError();
 
@@ -44,13 +51,7 @@ export default function ErrorPage() {
       }}>
       <Box sx={{ pt: { xs: '20%', md: '15%' } }}>
         {isRouteErrorResponse(error) ? (
-          <Stack
-            direction='column'
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              width: '70vw',
-            }}>
+          <Stack direction='column' sx={containerStyles}>
             <img
               alt='Not found'
               src='https://static.xx.fbcdn.net/rsrc.php/y_/r/Krj1JsX3uTI.svg'
@@ -63,8 +64,8 @@ export default function ErrorPage() {
             <HomeButton />
           </Stack>
         ) : (
-          <Stack direction='column'>
-            <Typography variant='h1'>500!</Typography>
+          <Stack direction='column' sx={containerStyles}>
+            <SentimentVeryDissatisfiedIcon sx={{ fontSize: '8rem' }} />
             <Typography sx={textStyles}>
               Sorry, an unexpected server error has occurred.
             </Typography>
