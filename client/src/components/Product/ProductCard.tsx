@@ -7,7 +7,6 @@ import { CardActionArea } from '@mui/material';
 interface Props {
   id: number;
   title: string;
-  description: string;
   price: number;
   imageUrl: string;
   onSelect: (id: number) => void;

@@ -48,7 +48,6 @@ export default function Products({ products, showHeader = true }: Props) {
               <ProductCard
                 id={product.id}
                 title={product.title}
-                description={product.description}
                 price={product.price}
                 imageUrl={product.imageUrls[0]}
                 onSelect={(id) => navigate(`products/${id}`)}
