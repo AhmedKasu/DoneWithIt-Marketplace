@@ -80,7 +80,7 @@ const settings = {
 
 export default function Product() {
   const { id } = useParams<{ id: string }>();
-  const { data: product, isLoading } = useGetProduct(id);
+  const { data: product, isLoading, isError } = useGetProduct(id);
 
   const { isSmallScreen } = useScreenBreakingPoints();
 
@@ -111,6 +111,8 @@ export default function Product() {
       : 'green';
 
   if (isLoading) return <div>Loading...</div>;
+  if (isError)
+    return <div>Sorry, an unexpected server error has occurred.</div>;
   return (
     <Box
       sx={{
@@ -148,7 +150,7 @@ export default function Product() {
               <div key={index} className='slick-slide'>
                 <img
                   src={image}
-                  alt='productimage'
+                  alt={product?.title + index}
                   style={{
                     width: '100%',
                     height: '100%',
