@@ -9,8 +9,8 @@ export type CustomAxiosError = AxiosError<ErrorResponse>;
 export interface Product {
   id: number;
   userId: number;
-  categoryId: {
-    name: string;
+  category: {
+    name: CategoriesNames;
   };
   title: string;
   price: number;
