@@ -6,8 +6,11 @@ import { AuthProvider } from '../../context/authContext';
 import { ScreenBreakpointsProvider } from '../../context/screenBreakpoints';
 import { FiltersProvider } from '../../context/FiltersContext';
 
+import ErrorPage from '../../pages/ErrorPage';
+
 interface RenderOptions {
   element: ReactElement;
+  errorElement?: ReactElement;
   path: string;
 }
 
@@ -20,7 +23,7 @@ const renderWithRouter = (
   routes: RenderOptions[] = []
 ): ReturnType<typeof render> => {
   const options: RenderOptions = isReactElement(children)
-    ? { element: children, path: '/' }
+    ? { element: children, path: '/', errorElement: <ErrorPage /> }
     : children;
 
   const router = createMemoryRouter([{ ...options }, ...routes], {
