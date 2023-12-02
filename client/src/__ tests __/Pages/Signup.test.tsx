@@ -26,31 +26,31 @@ describe('<SignUp />', () => {
       renderWithRouter(<SignUp />, routes);
     });
 
-    test('renders signin title', () => {
+    test('Renders page title', () => {
       expect(
         screen.getByRole('heading', { name: 'Sign up' })
       ).toBeInTheDocument();
     });
 
-    test('renders first name input', () => {
+    test('Renders first name input', () => {
       expect(
         screen.getByRole('textbox', { name: 'First Name' })
       ).toBeInTheDocument();
     });
 
-    test('renders last name input', () => {
+    test('Renders last name input', () => {
       expect(
         screen.getByRole('textbox', { name: 'Last Name' })
       ).toBeInTheDocument();
     });
 
-    test('renders email input', () => {
+    test('Renders email input', () => {
       expect(
         screen.getByRole('textbox', { name: /Email Address/i })
       ).toBeInTheDocument();
     });
 
-    test('renders password input', () => {
+    test('Renders password input', () => {
       expect(
         screen.getByLabelText(/Password/i, {
           selector: 'input[type="password"]',
@@ -58,13 +58,13 @@ describe('<SignUp />', () => {
       ).toBeInTheDocument();
     });
 
-    test('renders signin button', () => {
+    test('Renders signin button', () => {
       expect(
         screen.getByRole('button', { name: 'Sign Up' })
       ).toBeInTheDocument();
     });
 
-    test('renders signin link', () => {
+    test('Renders signin link', () => {
       expect(
         screen.getByRole('link', {
           name: /Already have an account\? sign in/i,
