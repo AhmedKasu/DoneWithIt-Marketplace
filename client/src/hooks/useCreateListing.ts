@@ -6,13 +6,15 @@ import { baseURL } from '../services/apiClient';
 import { CustomAxiosError } from '../types';
 import { FormData as NewProduct } from '../pages/CreateListing';
 
+import {
+  CLOUDINARY_UPLOAD_PRESET,
+  CLOUDINARY_UPLOAD_URL,
+} from '../utils/config';
+
 interface ResData extends NewProduct {
   userId: number;
   status: 'available' | 'pending' | 'sold';
 }
-
-const cloudinaryUploadUrl = import.meta.env.VITE_CLOUDINARY_UPLOAD_URL;
-const cloudinaryPreset = import.meta.env.VITE_CLOUDINARY_PRESET;
 
 const useCreateListing = () => {
   const navigate = useNavigate();
@@ -23,11 +25,11 @@ const useCreateListing = () => {
         imageDataUrls.map(async (file) => {
           const formData = new FormData();
           formData.append('file', file);
-          formData.append('upload_preset', cloudinaryPreset);
+          formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
           const { data } = await axios({
             method: 'post',
-            url: cloudinaryUploadUrl,
+            url: CLOUDINARY_UPLOAD_URL,
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' },
           });
