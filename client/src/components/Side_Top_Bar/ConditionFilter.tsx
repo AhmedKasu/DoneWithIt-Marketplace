@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Product } from '../../types';
-import CustomSelect from '../forms/CustomSelect';
+import CustomSelect from '../Forms/CustomSelect';
 
 type Condition = Product['condition'];
 type Conditions = Array<Condition>;

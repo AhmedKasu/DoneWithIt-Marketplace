@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CustomSelect from '../forms/CustomSelect';
+import CustomSelect from '../Forms/CustomSelect';
 import { Product } from '../../types';
 
 type Status = Product['status'];

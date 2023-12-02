@@ -11,9 +11,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 
-import Form from '../components/forms';
-import TextInput from '../components/forms/TextInput';
-import ImagePicker from '../components/forms/ImagePicker';
+import Form from '../components/Forms';
+import TextInput from '../components/Forms/TextInput';
+import ImagePicker from '../components/Forms/ImagePicker';
 
 import Error from '../components/Feedback/Error';
 import Success from '../components/Feedback/Success';

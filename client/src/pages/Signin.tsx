@@ -17,8 +17,8 @@ import Typography from '@mui/material/Typography';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import Form from '../components/forms';
-import TextInput from '../components/forms/TextInput';
+import Form from '../components/Forms';
+import TextInput from '../components/Forms/TextInput';
 
 import Error from '../components/Feedback/Error';
 import Success from '../components/Feedback/Success';

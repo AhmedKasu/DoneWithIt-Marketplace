@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
-import TextInput from '../forms/TextInput';
-import Form from '../forms';
+import TextInput from '../Forms/TextInput';
+import Form from '../Forms';
 
 import { searchQuerySchema } from '../../utils/validation/product';
 
