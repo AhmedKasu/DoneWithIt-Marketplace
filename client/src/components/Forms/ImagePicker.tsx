@@ -98,7 +98,10 @@ export default function ImagePicker({ name }: Props) {
           overflowX: 'scroll',
         }}>
         {!maxPreviewsReached && (
-          <Box {...getRootProps()} style={dropzoneStyle}>
+          <Box
+            aria-label='image-picker'
+            {...getRootProps()}
+            style={dropzoneStyle}>
             <input {...inputRef} {...getInputProps()} {...register(name)} />
             {isDragActive ? (
               <p>Drop here ...</p>
