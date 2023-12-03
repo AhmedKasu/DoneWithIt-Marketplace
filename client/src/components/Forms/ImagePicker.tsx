@@ -74,9 +74,9 @@ export default function ImagePicker({ name }: Props) {
   const previewsAvailable: boolean = previews.length > 0;
   const maxPreviewsReached: boolean = previews.length >= 4;
 
-  const borderColor = validationError ? 'error.main' : '#cccccc';
+  const borderColor = validationError || rejectedError ? '#d50000' : '#cccccc';
   const dropzoneStyle = {
-    border: `1px solid ${borderColor}`,
+    border: `1px dashed ${borderColor}`,
     marginLeft: previewsAvailable ? '7px' : '0px',
     height: '200px',
     width: previewsAvailable ? '150px' : '100%',
@@ -111,7 +111,6 @@ export default function ImagePicker({ name }: Props) {
                     p: 1,
                     width: '40px',
                     backgroundColor: '#E5E4E2',
-                    boxShadow: 1,
                     borderRadius: '50%',
                   }}>
                   <AddToPhotosIcon />
