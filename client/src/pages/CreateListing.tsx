@@ -90,8 +90,6 @@ export default function CreateListing() {
               autoComplete: 'price',
               required: true,
               fullWidth: true,
-              type: 'number',
-
               InputProps: {
                 startAdornment: formState.dirtyFields.price && (
                   <InputAdornment position='start'>€</InputAdornment>
