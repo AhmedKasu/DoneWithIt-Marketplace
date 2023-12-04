@@ -23,7 +23,7 @@ const useSignin = () => {
   return useMutation<ResData, CustomAxiosError, SignupData>({
     mutationFn: apiClient.post,
     onSuccess: (result) => {
-      setCurrentUser(result.name);
+      setCurrentUser(result);
       setTimeout(() => {
         navigate('/');
       }, 300);
