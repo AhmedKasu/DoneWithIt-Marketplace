@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { Product, CustomAxiosError } from '../types';
+import { baseURL } from '../services/apiClient';
 
-const productsURL = 'http://localhost:3001/api/products';
+const productsURL = `${baseURL}/products`;
 
 const useGetProducts = (
   categoryId?: number,
