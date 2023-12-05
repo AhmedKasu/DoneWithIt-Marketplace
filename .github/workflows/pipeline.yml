@@ -27,3 +27,9 @@ jobs:
 
       - name: Check style
         run: cd server && npm run lint
+
+      - name: Create production build
+        run: cd server && npm run build
+
+      - name: Run unit tests
+        run: cd client && npm test
