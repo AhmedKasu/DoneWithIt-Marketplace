@@ -7,7 +7,7 @@ const sequelizeOptions: SequelizeOptions = {
   define: {
     underscored: true,
   },
-  models: [`${__dirname}/../models/*.ts`],
+  models: [`${__dirname}/../models/*.{ts,js}`],
 };
 
 if (NODE_ENV === 'production') {
