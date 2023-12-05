@@ -5,6 +5,7 @@ npm-debug.log
 # Build directories
 dist/
 build/
+public/
 
 # Environment variables
 .env
