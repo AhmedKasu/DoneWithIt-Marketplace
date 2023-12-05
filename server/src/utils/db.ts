@@ -1,6 +1,6 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
-import { DATABASE_URL } from '../utils/config';
+import { DATABASE_URL, NODE_ENV } from '../utils/config';
 
 const sequelizeOptions: SequelizeOptions = {
   logging: false,
@@ -9,6 +9,15 @@ const sequelizeOptions: SequelizeOptions = {
   },
   models: [`${__dirname}/../models/*.{ts,js}`],
 };
+
+if (NODE_ENV === 'production') {
+  sequelizeOptions.dialectOptions = {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  };
+}
 
 const sequelize = new Sequelize(DATABASE_URL, sequelizeOptions);
 
