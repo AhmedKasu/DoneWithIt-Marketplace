@@ -1,6 +1,6 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
-import { DATABASE_URL, NODE_ENV } from '../utils/config';
+import { DATABASE_URL } from '../utils/config';
 
 const sequelizeOptions: SequelizeOptions = {
   logging: false,
@@ -10,14 +10,6 @@ const sequelizeOptions: SequelizeOptions = {
   models: [`${__dirname}/../models/*.{ts,js}`],
 };
 
-if (NODE_ENV === 'production') {
-  sequelizeOptions.dialectOptions = {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  };
-}
-
 const sequelize = new Sequelize(DATABASE_URL, sequelizeOptions);
 
 const connectToDatabase = async () => {
@@ -25,7 +17,7 @@ const connectToDatabase = async () => {
     await sequelize.authenticate();
     console.log('connected to the database');
   } catch (err) {
-    console.log('failed to connect to the database');
+    console.log('failed to connect to the database', err);
     return process.exit(1);
   }
 
