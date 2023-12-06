@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import useGetProducts from '../hooks/useGetProducts';
 import useGetCategories from '../hooks/useGetCategories';
@@ -23,7 +24,11 @@ export default function Home() {
     status,
   } = useFiltersContext();
 
-  const { data: products } = useGetProducts(
+  const {
+    data: products,
+    isLoading: productsLoading,
+    isError: productsError,
+  } = useGetProducts(
     categoryId,
     searchQuery,
     minPrice,
@@ -32,7 +37,11 @@ export default function Home() {
     status
   );
 
-  const { data: categories } = useGetCategories();
+  const {
+    data: categories,
+    isLoading: categoriesLoading,
+    isError: categoriesError,
+  } = useGetCategories();
 
   const { isSmallScreen } = useScreenBreakingPoints();
 
@@ -48,6 +57,9 @@ export default function Home() {
     : true;
 
   const isProductsAvailable = products && products.length > 0;
+  const isCategoriesAvailable = categories && categories.length > 0;
+  const isResoursesAvailable = isProductsAvailable && isCategoriesAvailable;
+  const isErrors = productsError || categoriesError;
 
   const smallScreenContent = () => {
     if (categories) {
@@ -61,18 +73,34 @@ export default function Home() {
           )}
         </>
       );
-    } else {
-      return <NoListing refetch={handleRefetch} />;
     }
+
+    if (!isErrors && !isResoursesAvailable)
+      return <NoListing refetch={handleRefetch} />;
   };
 
   const largeScreenContent = () => {
-    if (categories && isProductsAvailable) {
+    if (isResoursesAvailable)
       return <Products products={products} showHeader={showProductsHeader} />;
-    } else {
+
+    if (!isErrors && !isResoursesAvailable)
       return <NoListing refetch={handleRefetch} />;
-    }
   };
+
+  if (productsLoading || categoriesLoading)
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}>
+        <CircularProgress />
+      </Box>
+    );
+
+  if (isErrors) throw new Error('Something went wrong!');
 
   return (
     <Box
