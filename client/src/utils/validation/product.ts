@@ -17,7 +17,7 @@ const productSchema = z.object({
     .min(3, 'Title should have at least 3 characters.')
     .max(50, 'Title should not exceed 50 characters.'),
   price: z
-    .number({ invalid_type_error: 'Price is required' })
+    .number({ invalid_type_error: 'Price is required.' })
     .min(1, 'Price must be greater than 0')
     .max(30000, 'Price cannot exceed 30,000'),
   categoryId: z.number().int().positive(),
