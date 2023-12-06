@@ -21,6 +21,7 @@ export default function Products({ products, showHeader = true }: Props) {
           pl: 4,
           pr: 4,
           mt: 2,
+          mb: 2,
           alignItems: 'center',
           width: '100%',
           maxWidth: '2000px',

@@ -109,6 +109,7 @@ export default function Home() {
         display: 'flex',
         backgroundColor: 'appBg.main',
         height: '100vh',
+        pb: 3,
       }}>
       {!isSmallScreen && categories && <SideBar categories={categories} />}
 

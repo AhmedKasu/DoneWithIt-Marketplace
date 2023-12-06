@@ -121,6 +121,7 @@ export default function Product() {
         gridTemplateColumns: { xs: '1fr', md: '1fr 360px' },
         height: '100vh',
         overflowY: 'scroll',
+        mb: 2,
       }}>
       <Box
         sx={{
