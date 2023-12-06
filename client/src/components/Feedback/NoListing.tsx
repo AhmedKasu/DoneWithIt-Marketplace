@@ -16,7 +16,7 @@ export default function NoListing({ refetch }: Props) {
       alignItems='center'
       justifyContent='center'>
       <Stack
-        sx={{ width: '400px' }}
+        sx={{ width: { xs: '300px', sm: '400px' } }}
         direction='column'
         alignItems='center'
         justifyContent='center'>
@@ -37,13 +37,15 @@ export default function NoListing({ refetch }: Props) {
         </Typography>
         <Typography
           variant='subtitle1'
-          sx={{ fontSize: '1rem', color: textColor }}>
-          Try a new search. Check spelling,
-        </Typography>
-        <Typography
-          variant='subtitle1'
-          sx={{ fontSize: '1rem', color: textColor }}>
-          change your filters, or try a less specific search term.
+          sx={{
+            fontSize: '1rem',
+            color: textColor,
+            textAlign: 'center',
+            whiteSpace: 'normal',
+            lineHeight: '1.6rem',
+          }}>
+          Try a new search. Check spelling, change your filters, or try a less
+          specific search term.
         </Typography>
         <Button sx={{ m: 2 }} variant='contained' onClick={refetch}>
           Browse Marketplace
