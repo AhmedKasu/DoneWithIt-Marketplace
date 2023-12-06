@@ -147,7 +147,7 @@ export default function CreateListing() {
               type='submit'
               fullWidth
               variant='contained'
-              sx={{ mt: 3, mb: 2 }}>
+              sx={{ mt: 2, mb: 2 }}>
               Create Listing
             </Button>
           </Grid>
@@ -162,7 +162,7 @@ export default function CreateListing() {
         <Box
           sx={{
             marginTop: { xs: 0, sm: 8 },
-            pb: { xs: 5 },
+            pb: { xs: 10 },
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
