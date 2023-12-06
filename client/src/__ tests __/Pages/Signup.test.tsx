@@ -112,14 +112,8 @@ describe('<SignUp />', () => {
       test('All fields are validated & error messages are rendered', async () => {
         await userEvent.click(screen.getByRole('button', { name: 'Sign Up' }));
 
-        expect(
-          screen.getByText('First name must be at least 2 characters long.')
-        ).toBeInTheDocument();
-
-        expect(
-          screen.getByText('Last name must be at least 2 characters long.')
-        ).toBeInTheDocument();
-
+        expect(screen.getByText('First name is required.')).toBeInTheDocument();
+        expect(screen.getByText('Last name is required.')).toBeInTheDocument();
         expect(screen.getByText('Email is required.')).toBeInTheDocument();
         expect(screen.getByText('Password is required.')).toBeInTheDocument();
       });
