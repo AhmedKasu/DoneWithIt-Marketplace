@@ -13,6 +13,7 @@ const searchQuerySchema = z.object({
 const productSchema = z.object({
   title: z
     .string()
+    .min(1, 'Title is required.')
     .min(3, 'Title should have at least 3 characters.')
     .max(50, 'Title should not exceed 50 characters.'),
   price: z
@@ -23,6 +24,7 @@ const productSchema = z.object({
   condition: z.enum(['New', 'Used - Like New', 'Used - Good', 'Used - Fair']),
   description: z
     .string()
+    .min(1, 'Description is required.')
     .min(10, 'Description is too short! Should be at least 10 characters.')
     .max(200, 'Description is too long! Should not exceed 200 characters.'),
   imageUrls: z
