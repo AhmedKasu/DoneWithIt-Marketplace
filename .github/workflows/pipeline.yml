@@ -42,6 +42,10 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_APP_EMAIL}}
           procfile: 'web: npm start'
+          healthcheck: 'https://donewithit-marketplace-6ab68864c928.herokuapp.com/health'
+          checkstring: 'ok'
+          delay: 5
+          rollbackonhealthcheckfailed: true
 
   tag_release:
     needs: [deployment_pipeline]
