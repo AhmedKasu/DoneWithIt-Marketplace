@@ -40,6 +40,10 @@ app.use('/api/logout', logoutRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/products', productsRouter);
 
+app.get('/health', (_req, res) => {
+  res.status(200).send('ok');
+});
+
 app.get('*', (_req, res) => {
   res.sendFile(root + '/index.html');
 });
