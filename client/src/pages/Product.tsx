@@ -121,7 +121,6 @@ export default function Product() {
         gridTemplateColumns: { xs: '1fr', md: '1fr 360px' },
         height: '100vh',
         overflowY: 'scroll',
-        mb: 2,
       }}>
       <Box
         sx={{
@@ -140,7 +139,7 @@ export default function Product() {
               xl: '70%',
               xxxl: '45%',
             },
-            height: { xs: '50vh' },
+            height: { xs: '45vh' },
           }}>
           <Slider
             {...settings}
@@ -168,8 +167,8 @@ export default function Product() {
         elevation={3}
         sx={{
           p: 2,
-          pb: 4,
-          height: { xs: '50vh', md: '100vh ' },
+          pb: 10,
+          height: { xs: '55vh', md: '100vh ' },
           overflowY: 'scroll',
         }}>
         <Typography
@@ -251,7 +250,7 @@ export default function Product() {
       </Paper>
       <style>{`
         .custom-slider .slick-slide {
-          height: ${isSmallScreen ? '45vh' : '90vh'};
+          height: ${isSmallScreen ? '40vh' : '90vh'};
         }
         .custom-slider .slick-prev:before{
           margin-left: -50px;
