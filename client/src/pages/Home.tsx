@@ -64,14 +64,14 @@ export default function Home() {
   const smallScreenContent = () => {
     if (categories) {
       return (
-        <>
+        <Box sx={{ pb: 10 }}>
           <Topbar categories={categories} />
           {isProductsAvailable ? (
             <Products products={products} showHeader={showProductsHeader} />
           ) : (
             <NoListing refetch={handleRefetch} />
           )}
-        </>
+        </Box>
       );
     }
 
@@ -109,7 +109,6 @@ export default function Home() {
         display: 'flex',
         backgroundColor: 'appBg.main',
         height: '100vh',
-        pb: 3,
       }}>
       {!isSmallScreen && categories && <SideBar categories={categories} />}
 
