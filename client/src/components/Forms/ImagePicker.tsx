@@ -18,7 +18,7 @@ export default function ImagePicker({ name }: Props) {
   const [rejectedError, setRejectedError] = useState<boolean>(false);
 
   const {
-    formState: { errors, isDirty },
+    formState: { errors, dirtyFields },
     register,
     setValue,
     trigger,
@@ -48,8 +48,8 @@ export default function ImagePicker({ name }: Props) {
 
   useEffect(() => {
     setValue(name, previews, { shouldDirty: previews.length > 0 });
-    if (isDirty) trigger(name);
-  }, [previews, setValue, name, trigger, isDirty]);
+    if (dirtyFields[name]) trigger(name);
+  }, [previews, setValue, name, trigger, dirtyFields]);
 
   const removeImage = (index: number) => {
     const updatedPreviews = [...previews];
