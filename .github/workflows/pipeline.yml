@@ -24,7 +24,7 @@ jobs:
         run: npm run install-all
 
       - name: Check style
-        run: run npm run lint
+        run: npm run lint
 
       - name: Create production builds
         run: npm run build
