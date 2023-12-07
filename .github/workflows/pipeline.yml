@@ -21,15 +21,13 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: |
-          cd server && npm install
-          cd ../client && npm install
+        run: npm run install-all
 
       - name: Check style
-        run: cd server && npm run lint
+        run: run npm run lint
 
-      - name: Create production build
-        run: cd server && npm run build
+      - name: Create production builds
+        run: npm run build
 
       - name: Run unit tests
         run: cd client && npm test
