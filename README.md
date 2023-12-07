@@ -33,7 +33,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them.
 
-> This project was developed using TypeScript & node 20.
+> This project was developed using TypeScript & node version 20.
 
 ### Installing
 
@@ -57,26 +57,49 @@ npm run dev
 
 Required for uploading product images to the cloud.
 
-> VITE_CLOUDINARY_UPLOAD_URL
-> VITE_CLOUDINARY_UPLOAD_PRESET
+```
+VITE_CLOUDINARY_UPLOAD_URL
+```
+
+```
+VITE_CLOUDINARY_UPLOAD_PRESET
+```
 
 ### Server env variables
 
 Required for database connection.
 
-> POSTGRES_USER
-> POSTGRES_PASSWORD
-> DATABASE_URL
+```
+POSTGRES_USER
+```
+
+```
+POSTGRES_PASSWORD
+```
+
+```
+DATABASE_URL
+```
 
 Required for authentication & authorization.
 
-> JWT_SECRET
+```
+JWT_SECRET
+```
 
 Required for deleting product images from the cloud.
 
-> CLOUDINARY_API_KEY
-> CLOUDINARY_CLOUD_NAME
-> CLOUDINARY_API_SECRET
+```
+CLOUDINARY_API_KEY
+```
+
+```
+CLOUDINARY_CLOUD_NAME
+```
+
+```
+CLOUDINARY_API_SECRET
+```
 
 ## 🔧 Running the tests <a name = "tests"></a>
 
