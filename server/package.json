@@ -15,6 +15,10 @@
     "migration:down": "node src/utils/migrate.js down",
     "seed:up": "node src/utils/seed.js up",
     "seed:down": "node src/utils/seed.js down",
+    "test-migration:up": "NODE_ENV=test node src/utils/migrate.js up",
+    "test-migration:down": "NODE_ENV=test node src/utils/migrate.js down",
+    "test-seed:up": "NODE_ENV=test node src/utils/seed.js up",
+    "test-seed:down": "NODE_ENV=test node src/utils/seed.js down",
     "start:test": "NODE_ENV=test ts-node-dev --files src/index.ts"
   },
   "author": "Ahmed Kasu",
