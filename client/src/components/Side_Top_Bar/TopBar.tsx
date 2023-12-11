@@ -26,7 +26,8 @@ export default function Topbar({ categories }: Props) {
   const [openCategories, setOpen] = useState(false);
   const [openFilters, setOpenFilters] = useState(false);
   const { currentUser } = useAuthContext();
-  const { setSearchQuery, searchQuery, setCategoryId } = useFiltersContext();
+  const { setSearchQuery, searchQuery, setCategoryId, categoryId } =
+    useFiltersContext();
 
   const handleOpenCategories = () => setOpen(true);
   const handleCloseCategories = () => setOpen(false);
@@ -104,6 +105,7 @@ export default function Topbar({ categories }: Props) {
           showHeader={false}
           categories={categories}
           onCategorySelect={handleCategorySelect}
+          selectedCategory={categoryId}
         />
       </CustomModal>
 
