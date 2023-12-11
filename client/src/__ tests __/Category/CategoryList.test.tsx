@@ -22,6 +22,7 @@ describe('<CategoryList/>', () => {
       <CategoriesList
         categories={categories}
         onCategorySelect={handleCategorySelect}
+        selectedCategory={defaultCategory.id}
       />
     );
     container = renderContainer;
@@ -66,6 +67,7 @@ describe('<CategoryList/> with no header', () => {
         categories={categories}
         onCategorySelect={handleCategorySelect}
         showHeader={false}
+        selectedCategory={defaultCategory.id}
       />
     );
     expect(screen.getByText('Categories')).toHaveStyle('display: none');
