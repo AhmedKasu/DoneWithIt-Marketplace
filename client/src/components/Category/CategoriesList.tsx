@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
@@ -11,18 +9,17 @@ import { Category as CategoryType } from '../../types';
 interface Props {
   categories: CategoryType[];
   onCategorySelect: (categoryId: number) => void;
+  selectedCategory: number;
   showHeader?: boolean;
 }
 
 export default function CategoriesList({
   categories,
   onCategorySelect,
+  selectedCategory,
   showHeader = true,
 }: Props) {
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(0);
-
   const handleCategorySelect = (categoryId: number) => {
-    setSelectedCategory(categoryId);
     onCategorySelect(categoryId);
   };
 

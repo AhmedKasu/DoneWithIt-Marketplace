@@ -54,7 +54,7 @@ export default function SideBar({ categories }: Props) {
         <Box sx={{ ml: 2 }}>
           <SideBarHeader
             categories={categories}
-            categoryId={categoryId as number}
+            categoryId={categoryId}
             searchQuery={searchQuery as string}
           />
           <SearchBar onSubmit={handleProductSearch} />
@@ -90,6 +90,7 @@ export default function SideBar({ categories }: Props) {
           <CategoriesList
             categories={categories}
             onCategorySelect={(categoryId) => setCategoryId(categoryId)}
+            selectedCategory={categoryId}
           />
         )}
       </Box>
