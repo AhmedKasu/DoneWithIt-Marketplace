@@ -19,7 +19,10 @@ const env: Env = load({
     default: 'development',
   },
   DATABASE_URL: String,
-  TEST_DATABASE_URL: String,
+  TEST_DATABASE_URL: {
+    type: String,
+    optional: process.env.NODE_ENV === 'production',
+  },
   JWT_SECRET: String,
   CLOUDINARY_CLOUD_NAME: String,
   CLOUDINARY_API_KEY: String,
