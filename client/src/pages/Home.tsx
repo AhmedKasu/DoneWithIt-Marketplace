@@ -47,7 +47,7 @@ export default function Home() {
 
   const handleRefetch = () => {
     setSearchQuery('');
-    setCategoryId(undefined);
+    setCategoryId(0);
   };
 
   const showProductsHeader: boolean = searchQuery
