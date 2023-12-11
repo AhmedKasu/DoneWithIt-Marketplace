@@ -1,6 +1,6 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
-import { DATABASE_URL, NODE_ENV } from '../utils/config';
+import { DATABASE_URL, TEST_DATABASE_URL, NODE_ENV } from '../utils/config';
 
 const sequelizeOptions: SequelizeOptions = {
   logging: false,
@@ -19,7 +19,9 @@ if (NODE_ENV === 'production') {
   };
 }
 
-const sequelize = new Sequelize(DATABASE_URL, sequelizeOptions);
+const databaseUrl = NODE_ENV === 'test' ? TEST_DATABASE_URL : DATABASE_URL;
+
+const sequelize = new Sequelize(databaseUrl, sequelizeOptions);
 
 const connectToDatabase = async () => {
   try {

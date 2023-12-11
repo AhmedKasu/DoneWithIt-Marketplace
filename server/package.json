@@ -15,7 +15,7 @@
     "migration:down": "node src/utils/migrate.js down",
     "seed:up": "node src/utils/seed.js up",
     "seed:down": "node src/utils/seed.js down",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:test": "NODE_ENV=test ts-node-dev --files src/index.ts"
   },
   "author": "Ahmed Kasu",
   "license": "ISC",
