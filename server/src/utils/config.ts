@@ -21,7 +21,7 @@ const env: Env = load({
   DATABASE_URL: String,
   TEST_DATABASE_URL: {
     type: String,
-    optional: process.env.NODE_ENV === 'production',
+    optional: process.env.NODE_ENV !== 'test',
   },
   JWT_SECRET: String,
   CLOUDINARY_CLOUD_NAME: String,
