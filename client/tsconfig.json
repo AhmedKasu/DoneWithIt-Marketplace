@@ -19,9 +19,12 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Types */
+    "types": ["cypress"]
   },
 
-  "include": ["src", "types/mui.d.ts"],
+  "include": ["src", "cypress", "types/mui.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
