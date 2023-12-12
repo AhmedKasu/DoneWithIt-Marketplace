@@ -38,10 +38,10 @@ export default function SearchBar({ onSubmit }: Props) {
           label='Search Marketplace'
           showHelperText={false}
           otherProps={{
+            id: 'search-bar',
             autoComplete: 'off',
             variant: 'filled',
             size: 'small',
-
             InputProps: {
               sx: { height: '40px', borderRadius: 20, pb: 2 },
               startAdornment: (
