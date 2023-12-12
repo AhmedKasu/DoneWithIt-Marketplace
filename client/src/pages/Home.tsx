@@ -110,7 +110,9 @@ export default function Home() {
         backgroundColor: 'appBg.main',
         height: '100vh',
       }}>
-      {!isSmallScreen && categories && <SideBar categories={categories} />}
+      {!isSmallScreen && categories && (
+        <SideBar categories={categories} showFilters={!!isProductsAvailable} />
+      )}
 
       <Box
         sx={{

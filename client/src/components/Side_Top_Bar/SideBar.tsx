@@ -18,9 +18,10 @@ import { useFiltersContext } from '../../context/FiltersContext';
 
 interface Props {
   categories: Category[];
+  showFilters: boolean;
 }
 
-export default function SideBar({ categories }: Props) {
+export default function SideBar({ categories, showFilters }: Props) {
   const { currentUser } = useAuthContext();
   const { setSearchQuery, searchQuery, setCategoryId, categoryId } =
     useFiltersContext();
@@ -79,7 +80,7 @@ export default function SideBar({ categories }: Props) {
         />
         <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
 
-        {searchQuery && (
+        {searchQuery && showFilters && (
           <>
             <ProductFilters />
             <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
