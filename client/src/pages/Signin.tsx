@@ -71,6 +71,7 @@ export default function SignIn() {
               label='Email Address'
               name='email'
               otherProps={{
+                id: 'email',
                 autoComplete: 'email',
                 required: true,
                 fullWidth: true,
@@ -81,6 +82,7 @@ export default function SignIn() {
               label='Password'
               type={showPassword ? 'text' : 'password'}
               otherProps={{
+                id: 'password',
                 autoComplete: 'current-password',
                 required: true,
                 fullWidth: true,

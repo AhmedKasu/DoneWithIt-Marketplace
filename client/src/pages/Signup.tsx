@@ -82,6 +82,7 @@ export default function SignUp() {
               name='firstName'
               label='First Name'
               otherProps={{
+                id: 'firstName',
                 autoComplete: 'given-name',
                 required: true,
                 fullWidth: true,
@@ -92,6 +93,7 @@ export default function SignUp() {
               label='Last Name'
               name='lastName'
               otherProps={{
+                id: 'lastName',
                 autoComplete: 'family-name',
                 required: true,
                 fullWidth: true,
@@ -101,6 +103,7 @@ export default function SignUp() {
               label='Email Address'
               name='email'
               otherProps={{
+                id: 'email',
                 autoComplete: 'email',
                 required: true,
                 fullWidth: true,
@@ -111,6 +114,7 @@ export default function SignUp() {
               label='Password'
               type={showPassword ? 'text' : 'password'}
               otherProps={{
+                id: 'password',
                 autoComplete: 'new-password',
                 required: true,
                 fullWidth: true,
