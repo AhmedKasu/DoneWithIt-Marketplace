@@ -25,6 +25,7 @@
     "types": ["cypress"]
   },
 
-  "include": ["src", "cypress", "types/mui.d.ts"],
+  "exclude": ["cypress"],
+  "include": ["src", "types/mui.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
