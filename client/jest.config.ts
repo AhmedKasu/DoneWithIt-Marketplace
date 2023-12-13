@@ -8,5 +8,5 @@ export default {
     '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/src/test/__ mocks __/fileMock.ts',
     '\\.(css)$': '<rootDir>/src/test/__mocks__/styleMock.ts',
   },
-  setupFiles: ['<rootDir>/src/test/test-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test/test-setup.ts'],
 };
