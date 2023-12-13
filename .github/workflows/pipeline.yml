@@ -33,8 +33,42 @@ jobs:
       - name: Run unit tests
         run: npm test
 
-  deployment_pipeline:
+  e2e_test:
     needs: [build_and_test]
+    runs-on: ubuntu-20.04
+    services:
+      postgres_test_db:
+        image: postgres:alpine3.18
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: ${{secrets.TEST_POSTGRES_PASSWORD}}
+          POSTGRES_DB: test_marketplace
+        ports:
+          - 5432:5432
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Start test database
+        run: docker-compose -f server/docker-compose.test-db.yml up -d
+
+      - name: Wait for database to start
+        run: docker-compose -f server/docker-compose.test-db.yml exec -T postgres_test_db sh -c 'while ! pg_isready -q -h localhost -p 5432 -U test_user -d test_marketplace; do sleep 1; done'
+
+      - name: Install dependencies
+        run: npm install-all
+
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start:test
+
+      - name: Stop and remove test database container
+        run: docker-compose -f docker-compose.test-db.yml down
+
+  deployment_pipeline:
+    needs: [e2e_test]
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
