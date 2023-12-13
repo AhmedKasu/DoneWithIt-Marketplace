@@ -6,7 +6,7 @@ services:
     image: postgres:alpine3.18
     environment:
       POSTGRES_USER: test_user
-      POSTGRES_PASSWORD: test_password
+      POSTGRES_PASSWORD: ${TEST_POSTGRES_PASSWORD}
       POSTGRES_DB: test_marketplace
     ports:
       - '5432:5432'
