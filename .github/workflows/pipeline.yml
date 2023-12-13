@@ -50,6 +50,9 @@ jobs:
       - name: Install dependencies
         run: npm install-all
 
+      - name: Start test app
+        run: npm run start:test
+
       - name: Run test-migrations
         run: cd server && npm run test-migration:up
 
@@ -60,7 +63,6 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
-          start: npm run start:test
 
       - name: Stop and remove test database container
         run: docker-compose -f docker-compose.test-db.yml down
