@@ -47,9 +47,6 @@ jobs:
         env:
           DB_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}
 
-      - name: Wait for database to start
-        run: docker-compose -f server/docker-compose.test-db.yml exec -T postgres_test_db sh -c 'while ! pg_isready -h localhost -p 5432 -U test_user -d test_marketplace; do sleep 1; done'
-
       - name: Install dependencies
         run: npm install-all
 
