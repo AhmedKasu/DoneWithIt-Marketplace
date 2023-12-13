@@ -10,10 +10,11 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  deployment_pipeline:
+  build_and_test:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -32,6 +33,12 @@ jobs:
       - name: Run unit tests
         run: npm test
 
+  deployment_pipeline:
+    needs: [build_and_test]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.14
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
