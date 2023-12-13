@@ -30,7 +30,7 @@ jobs:
         run: npm run build
 
       - name: Run unit tests
-        run: cd client && npm test
+        run: npm test
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.14
