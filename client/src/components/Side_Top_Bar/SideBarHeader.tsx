@@ -27,7 +27,7 @@ export default function SideBarHeader({
       {searchQuery
         ? 'Search results'
         : categories && categoryId
-        ? `${categories[categoryId - 1].name}`
+        ? `${categories[categories.findIndex((c) => c.id === categoryId)].name}`
         : 'Marketplace'}
     </Typography>
   );
