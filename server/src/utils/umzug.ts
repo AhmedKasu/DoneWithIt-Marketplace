@@ -1,5 +1,6 @@
 import { Umzug, SequelizeStorage } from 'umzug';
 import { sequelize } from './db';
+import { NODE_ENV } from './config';
 
 const migrator = new Umzug({
   migrations: {
@@ -16,9 +17,12 @@ type Migration = typeof migrator._types.migration;
 
 export { migrator, Migration };
 
+const seedersPath =
+  NODE_ENV === 'test' ? '../test_seeders/*.ts' : '../seeders/*.ts';
+
 export const seeder = new Umzug({
   migrations: {
-    glob: ['../seeders/*.ts', { cwd: __dirname }],
+    glob: [seedersPath, { cwd: __dirname }],
   },
   context: sequelize,
   storage: new SequelizeStorage({
