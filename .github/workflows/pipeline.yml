@@ -88,7 +88,6 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
-          wait-on: 'npx wait-on --timeout 60000 tcp:5173'
         env:
           TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
