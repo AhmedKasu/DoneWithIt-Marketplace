@@ -64,22 +64,18 @@ jobs:
 
           echo "Postgres is up and running"
 
-      - name: Start test app
-        run: npm run start:test
-        env:
-          TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-
-      - name: Run test-migrations
-        run: cd server && npm run test-migration:up
-
-      - name: Run test-seed
-        run: cd server && npm run test-seed:up
-
       - name: Run e2e tests
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
+          start: |
+            npm run start:test &&
+            cd server && npm run test-migration:up &&
+            cd server && npm run test-seed:up
+          wait-on: 'http://localhost:5173'
+        env:
+          TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
       - name: Stop and remove test database container
         run: docker-compose -f server/docker-compose.test-db.yml down
