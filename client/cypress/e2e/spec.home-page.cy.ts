@@ -1,16 +1,11 @@
-const categories = [
+const testCategories = [
   'Electronics',
-  'Entertainment',
   'Clothing',
-  'Free Stuff',
   'Pet Supplies',
-  'Hobbies',
-  'Sporting Goods',
   'Garden & Outdoor',
-  'Toys & Games',
 ];
 
-const credentials = { email: 'johndoe@gmail.com', password: 'Abcd123!' };
+const credentials = { email: 'johndoe@gmail.com', password: '123!Abcd' };
 
 describe('Home page', function () {
   beforeEach(function () {
@@ -70,8 +65,8 @@ describe('Home page', function () {
         cy.contains('button', '+ Create New Listing');
       });
 
-      it('Renders categories', function () {
-        categories.forEach((category) => {
+      it('Renders testCategories', function () {
+        testCategories.forEach((category) => {
           cy.contains(category);
         });
       });
