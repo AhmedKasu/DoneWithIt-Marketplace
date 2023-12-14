@@ -69,8 +69,8 @@ jobs:
         with:
           command: npm run test:e2e
           start: |
-            npm run start:test &&
-            npm run test-migration:up &&
+            npm run start:test
+            npm run test-migration:up 
             npm run test-seed:up
           wait-on: 'http://localhost:5173'
         env:
