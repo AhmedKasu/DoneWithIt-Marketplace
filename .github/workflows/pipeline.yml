@@ -45,9 +45,6 @@ jobs:
         env:
           TEST_POSTGRES_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}
 
-      - name: Print test database logs
-        run: docker logs marketplace_test_database
-
       - name: Install dependencies
         run: npm run install-all
 
