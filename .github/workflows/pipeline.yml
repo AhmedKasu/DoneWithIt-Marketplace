@@ -43,7 +43,7 @@ jobs:
       - name: Start test database
         run: docker-compose -f server/docker-compose.test-db.yml up -d
         env:
-          DB_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}
+          POSTGRES_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}
 
       - name: Print test database logs
         run: docker logs marketplace_test_database
