@@ -74,15 +74,24 @@ jobs:
         run: |
           sleep 10 
           npm run test-migration:up
+        env:
+          TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
       - name: Run test-seed
         run: npm run test-seed:up
+        env:
+          TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
       - name: Run e2e tests
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
           wait-on: 'http://localhost:5173'
+        env:
+          TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
       - name: Stop and remove test database container
         run: docker-compose -f server/docker-compose.test-db.yml down
