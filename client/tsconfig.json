@@ -22,7 +22,7 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Types */
-    "types": ["cypress"]
+    "types": ["cypress", "cypress-file-upload"]
   },
   "include": ["src", "cypress", "types/mui.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
