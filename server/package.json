@@ -6,6 +6,8 @@
   "engines": {
     "node": "20"
   },
+  "author": "Ahmed Kasu",
+  "license": "ISC",
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .ts .",
@@ -21,8 +23,6 @@
     "test-seed:down": "NODE_ENV=test node src/utils/seed.js down",
     "start:test": "NODE_ENV=test ts-node-dev --files src/index.ts"
   },
-  "author": "Ahmed Kasu",
-  "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.1",
     "@types/cookie-parser": "^1.4.5",
