@@ -1,11 +1,10 @@
+import { credentials } from '../helpers';
 const testCategories = [
   'Electronics',
   'Clothing',
   'Pet Supplies',
   'Garden & Outdoor',
 ];
-
-const credentials = { email: 'johndoe@gmail.com', password: '123!Abcd' };
 
 describe('Home page', function () {
   beforeEach(function () {
@@ -250,10 +249,7 @@ describe('Home page', function () {
 
     describe('When authenticated', function () {
       beforeEach(function () {
-        cy.visit('http://localhost:5173/signin');
-        cy.get('#email').type(credentials.email);
-        cy.get('#password').type(credentials.password);
-        cy.get('button').contains('Sign In').click();
+        cy.login(credentials);
       });
 
       it('Clicking on CreateNewListing button redirects to CreateListing page', function () {
