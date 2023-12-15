@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": "20"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && mv dist ../server/public",
@@ -11,9 +14,6 @@
     "test": "jest",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
-  },
-  "engines": {
-    "node": "20"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
