@@ -13,3 +13,11 @@ Cypress.Commands.add('login', (credentials) => {
   cy.get('#password').should('not.be.disabled').type(credentials.password);
   cy.get('button').contains('Sign In').click();
 });
+
+Cypress.Commands.add('checkValidationError', (selector, errorMessage) => {
+  cy.get(selector)
+    .scrollIntoView()
+    .should('contain', errorMessage)
+    .and('be.visible')
+    .and('have.css', 'color', 'rgb(211, 47, 47)');
+});
