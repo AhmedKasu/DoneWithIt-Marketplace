@@ -1,10 +1,4 @@
-import { credentials } from '../helpers';
-const testCategories = [
-  'Electronics',
-  'Clothing',
-  'Pet Supplies',
-  'Garden & Outdoor',
-];
+import { credentials, testCategories } from '../helpers';
 
 describe('Home page', function () {
   describe('On large screen', function () {
