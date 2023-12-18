@@ -291,6 +291,7 @@ export default function UserListings() {
 
         {user?.products.map((product) => (
           <Card
+            id={`product-${product.id}`}
             key={product.id}
             sx={{
               mt: 2,
@@ -367,6 +368,7 @@ export default function UserListings() {
 
                   <Box sx={{ display: 'flex' }}>
                     <Button
+                      id={`product-${product.id}-status`}
                       variant='contained'
                       disableElevation
                       startIcon={
