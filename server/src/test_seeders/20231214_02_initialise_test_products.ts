@@ -1,7 +1,6 @@
 import { Seeder } from '../utils/umzug';
 const testProducts = [
   {
-    id: 1,
     userId: 1,
     categoryId: 1,
     title: 'Test Ps5',
@@ -17,7 +16,6 @@ const testProducts = [
     updated_at: new Date(),
   },
   {
-    id: 2,
     userId: 1,
     categoryId: 10,
     title: 'Test cat tree',
