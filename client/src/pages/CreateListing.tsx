@@ -77,6 +77,7 @@ export default function CreateListing() {
             name='title'
             label='Title'
             otherProps={{
+              id: 'title',
               autoComplete: 'title',
               required: true,
               fullWidth: true,
@@ -87,6 +88,7 @@ export default function CreateListing() {
             label='Price'
             type='number'
             otherProps={{
+              id: 'price',
               autoComplete: 'price',
               required: true,
               fullWidth: true,
@@ -102,6 +104,7 @@ export default function CreateListing() {
               name='categoryId'
               label='Category'
               otherProps={{
+                id: 'category',
                 autoComplete: 'category',
                 required: true,
                 fullWidth: true,
@@ -119,6 +122,7 @@ export default function CreateListing() {
             name='condition'
             label='Condition'
             otherProps={{
+              id: 'condition',
               autoComplete: 'condition',
               required: true,
               fullWidth: true,
@@ -135,6 +139,7 @@ export default function CreateListing() {
             name='description'
             label='Description'
             otherProps={{
+              id: 'description',
               autoComplete: 'description',
               required: true,
               fullWidth: true,
