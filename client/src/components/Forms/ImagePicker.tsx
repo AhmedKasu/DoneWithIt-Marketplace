@@ -102,7 +102,12 @@ export default function ImagePicker({ name }: Props) {
             aria-label='image-picker'
             {...getRootProps()}
             style={dropzoneStyle}>
-            <input {...inputRef} {...getInputProps()} {...register(name)} />
+            <input
+              id='picker-input'
+              {...inputRef}
+              {...getInputProps()}
+              {...register(name)}
+            />
             {isDragActive ? (
               <p>Drop here ...</p>
             ) : (
@@ -157,12 +162,18 @@ export default function ImagePicker({ name }: Props) {
         ))}
       </Box>
       {validationError && (
-        <Typography color='error' sx={{ fontSize: 12, ml: 1, mt: 0.2 }}>
+        <Typography
+          id='imagePicker-validationError'
+          color='error'
+          sx={{ fontSize: 12, ml: 1, mt: 0.2 }}>
           {validationError.message as string}
         </Typography>
       )}
       {rejectedError && (
-        <Typography color='error' sx={{ fontSize: 12, ml: 1, mt: 0.2 }}>
+        <Typography
+          id='imagePicker-rejectionError'
+          color='error'
+          sx={{ fontSize: 12, ml: 1, mt: 0.2 }}>
           A valid image file (png or jpg) must be less than 2MB.
         </Typography>
       )}
