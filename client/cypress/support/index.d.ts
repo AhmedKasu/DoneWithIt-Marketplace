@@ -8,8 +8,14 @@ declare namespace Cypress {
       errorMessage: string
     ): Chainable<unknown>;
 
-    checkSuccessAlert(successMessage: string): Chainable<unknown>;
+    checkSuccessAlert(
+      successMessage: string,
+      selector?: string
+    ): Chainable<unknown>;
 
-    checkErrorAlert(errorMessage: string): Chainable<unknown>;
+    checkErrorAlert(
+      errorMessage: string,
+      selector?: string
+    ): Chainable<unknown>;
   }
 }
