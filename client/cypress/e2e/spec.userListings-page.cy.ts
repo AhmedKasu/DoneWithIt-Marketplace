@@ -23,9 +23,12 @@ describe('User Listings Page', function () {
   });
 
   describe('Listing availability', function () {
+    const statusUpdateSuccessMessage = 'Successfully updated product status.';
+
     it('When Available listing can be marked as sold', function () {
       cy.get('#product-1-status').should('have.text', '✔ Mark as sold').click();
-      cy.contains('Successfully updated product status.').should('be.visible');
+
+      cy.checkSuccessAlert(statusUpdateSuccessMessage);
 
       cy.get('#product-1-status').should('have.text', 'Mark as available');
     });
@@ -34,7 +37,8 @@ describe('User Listings Page', function () {
       cy.get('#product-1-status')
         .should('have.text', 'Mark as available')
         .click();
-      cy.contains('Successfully updated product status.').should('be.visible');
+
+      cy.checkSuccessAlert(statusUpdateSuccessMessage);
 
       cy.get('#product-2-status').should('have.text', '✔ Mark as sold');
     });
@@ -51,9 +55,7 @@ describe('User Listings Page', function () {
         cy.get('#product-1').find('#long-button').click();
         cy.contains('Mark as Pending').should('be.visible').click();
 
-        cy.contains('Successfully updated product status.').should(
-          'be.visible'
-        );
+        cy.checkSuccessAlert(statusUpdateSuccessMessage);
 
         cy.get('#product-1').find('#long-button').click();
         cy.contains('Mark as Pending').should('not.exist');
@@ -70,7 +72,8 @@ describe('User Listings Page', function () {
         cy.get('#product-1').find('#long-button').click();
         cy.contains('Delete Listing').should('be.visible').click();
 
-        cy.contains('Successfully deleted product.').should('be.visible');
+        cy.checkSuccessAlert('Successfully deleted product.');
+
         cy.get('#product-1').should('not.exist');
       });
     });

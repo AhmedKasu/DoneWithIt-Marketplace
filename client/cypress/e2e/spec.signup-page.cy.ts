@@ -112,6 +112,7 @@ describe('Signup Page', () => {
     describe('Invalid password', () => {
       const errorMessage =
         'Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character.';
+
       it('Should display error message', () => {
         cy.get('#password').type('12345678');
         cy.get('h1').should('have.text', 'Sign up').click();
@@ -157,12 +158,9 @@ describe('Signup Page', () => {
       cy.get('#password').type(credentials.password);
       cy.get('button[type="submit"]').should('have.text', 'Sign Up').click();
 
-      cy.get('#error-alert')
-        .should(
-          'have.text',
-          'An account with the given email already exists. Try logging in instead.'
-        )
-        .and('have.css', 'background-color', 'rgb(253, 237, 237)');
+      cy.checkErrorAlert(
+        'An account with the given email already exists. Try logging in instead.'
+      );
     });
 
     it('When all fields are valid, a new user is created', () => {
@@ -172,9 +170,7 @@ describe('Signup Page', () => {
       cy.get('#password').type('Test1234!');
       cy.get('button[type="submit"]').should('have.text', 'Sign Up').click();
 
-      cy.get('#success-alert')
-        .should('have.text', 'User Test User created successfully!')
-        .and('have.css', 'background-color', 'rgb(237, 247, 237)');
+      cy.checkSuccessAlert('User Test User created successfully!');
     });
   });
 });

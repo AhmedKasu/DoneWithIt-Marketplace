@@ -56,6 +56,7 @@ describe('Sign in page', () => {
     describe('Invalid password', () => {
       const errorMessage =
         'Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character.';
+
       it('Should display error message', () => {
         cy.get('#password').type('12345678');
         cy.get('h1').should('have.text', 'Sign in').click();
@@ -94,30 +95,27 @@ describe('Sign in page', () => {
   });
 
   describe('Submiting a valid form', () => {
+    const invalidCredentialsError = 'Invalid email or password.';
+
     it('When unregistered email is submitted, a server error is returned', () => {
       cy.get('#email').type('wrongcredentials@gmail.com');
       cy.get('#password').type(credentials.password);
       cy.get('button[type="submit"]').should('have.text', 'Sign In').click();
 
-      cy.get('#error-alert')
-        .should('have.text', 'Invalid email or password.')
-        .and('have.css', 'background-color', 'rgb(253, 237, 237)');
+      cy.checkErrorAlert(invalidCredentialsError);
     });
+
     it('When unregistered password is submitted, a server error is returned', () => {
       cy.get('#email').type(credentials.email);
       cy.get('#password').type('wrongPassword-1234');
       cy.get('button[type="submit"]').should('have.text', 'Sign In').click();
 
-      cy.get('#error-alert')
-        .should('have.text', 'Invalid email or password.')
-        .and('have.css', 'background-color', 'rgb(253, 237, 237)');
+      cy.checkErrorAlert(invalidCredentialsError);
     });
 
     it('When valid credentials are submitted, a user successfully signed in and redirected to the home page', () => {
       cy.login(credentials);
-      cy.get('#success-alert')
-        .should('have.text', 'Successfully logged in!')
-        .and('have.css', 'background-color', 'rgb(237, 247, 237)');
+      cy.checkSuccessAlert('Successfully logged in!');
 
       cy.url().should('eq', `${Cypress.config('baseUrl')}/`);
     });
