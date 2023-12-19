@@ -5,7 +5,7 @@ describe('Create Listing Page', function () {
     cy.viewport('macbook-13');
     cy.login(credentials);
     cy.wait(2000);
-    cy.visit('http://localhost:5173/createListing');
+    cy.visit('/createListing');
   });
 
   describe('Renders form content', function () {

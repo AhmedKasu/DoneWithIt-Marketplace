@@ -5,7 +5,7 @@ describe('User Listings Page', function () {
     cy.viewport('macbook-13');
     cy.login(credentials);
     cy.wait(2000);
-    cy.visit('http://localhost:5173/me/selling');
+    cy.visit('/me/selling');
   });
 
   it("Renders user's listings", function () {

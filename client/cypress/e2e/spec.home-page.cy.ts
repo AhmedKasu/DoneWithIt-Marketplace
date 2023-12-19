@@ -4,7 +4,7 @@ describe('Home page', function () {
   describe('On large screen', function () {
     beforeEach(function () {
       cy.viewport('macbook-13');
-      cy.visit('http://localhost:5173');
+      cy.visit('/');
     });
 
     describe('Renders page content', function () {
@@ -20,7 +20,7 @@ describe('Home page', function () {
           });
 
           it('Clicking on App logo/icon redirects to Home page', function () {
-            cy.visit('http://localhost:5173/signin');
+            cy.visit('/signin');
             cy.url().should('include', '/signin');
 
             cy.get('[data-testid="RecyclingIcon"]').click();
