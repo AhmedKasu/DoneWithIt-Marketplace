@@ -72,7 +72,10 @@ describe('User Listings Page', function () {
         cy.get('#product-1').find('#long-button').click();
         cy.contains('Delete Listing').should('be.visible').click();
 
-        cy.checkSuccessAlert('Successfully deleted product.');
+        cy.checkSuccessAlert(
+          'Successfully deleted product.',
+          '#delete-success-alert'
+        );
 
         cy.get('#product-1').should('not.exist');
       });
