@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress';
 
 export default defineConfig({
   e2e: {
+    projectId: 'k8gz1x',
     baseUrl: 'http://localhost:5173',
     specPattern: [
       'cypress/e2e/spec.signup-page.cy.ts',

@@ -87,8 +87,10 @@ jobs:
       - name: Run e2e tests
         uses: cypress-io/github-action@v5
         with:
+          record: true
           command: npm run test:e2e
         env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
