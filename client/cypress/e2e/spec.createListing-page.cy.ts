@@ -214,7 +214,7 @@ describe('Create Listing Page', function () {
 
       cy.wait(5000);
 
-      cy.contains('Listing successfuly created').should('be.visible');
+      cy.checkSuccessAlert('Listing successfuly created');
     });
   });
 });
