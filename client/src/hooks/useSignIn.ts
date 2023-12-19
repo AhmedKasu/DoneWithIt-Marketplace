@@ -26,7 +26,7 @@ const useSignin = () => {
       setCurrentUser(result);
       setTimeout(() => {
         navigate('/');
-      }, 300);
+      }, 1000);
     },
   });
 };
