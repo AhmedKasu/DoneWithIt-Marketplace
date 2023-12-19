@@ -269,6 +269,7 @@ export default function UserListings() {
         <Success
           message='Successfully deleted product.'
           open={showDeleteSuccess}
+          testId='delete-success-alert'
         />
 
         {(!user?.products || user.products.length === 0) && (
