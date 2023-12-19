@@ -9,7 +9,7 @@ interface Props {
 export default function Error({ message, open }: Props) {
   return (
     <Collapse in={open}>
-      <MuiAlert severity='error' sx={{ mb: 5 }}>
+      <MuiAlert id='error-alert' severity='error' sx={{ mb: 5 }}>
         {message}
       </MuiAlert>
     </Collapse>

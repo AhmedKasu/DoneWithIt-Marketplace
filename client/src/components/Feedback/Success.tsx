@@ -9,7 +9,7 @@ interface Props {
 export default function Success({ message, open }: Props) {
   return (
     <Collapse in={open}>
-      <MuiAlert severity='success' sx={{ mb: 5 }}>
+      <MuiAlert id='success-alert' severity='success' sx={{ mb: 5 }}>
         {message}
       </MuiAlert>
     </Collapse>
