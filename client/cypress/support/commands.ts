@@ -21,3 +21,23 @@ Cypress.Commands.add('checkValidationError', (selector, errorMessage) => {
     .and('be.visible')
     .and('have.css', 'color', 'rgb(211, 47, 47)');
 });
+
+Cypress.Commands.add('checkSuccessAlert', (successMessage) => {
+  let successAlertColor = 'rgb(30, 70, 32)';
+  if (Cypress.isBrowser('electron')) {
+    successAlertColor = 'rgb(237, 247, 237)';
+  }
+  cy.get('#success-alert', { timeout: 10000 })
+    .scrollIntoView()
+    .should('have.text', successMessage)
+    .and('be.visible')
+    .and('have.css', 'background-color', successAlertColor);
+});
+
+Cypress.Commands.add('checkErrorAlert', (errorMessage) => {
+  cy.get('#error-alert', { timeout: 10000 })
+    .scrollIntoView()
+    .should('have.text', errorMessage)
+    .and('be.visible')
+    .and('have.css', 'background-color', 'rgb(253, 237, 237)');
+});
