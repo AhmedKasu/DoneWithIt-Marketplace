@@ -117,6 +117,7 @@ describe('Sign in page', () => {
       cy.login(credentials);
       cy.checkSuccessAlert('Successfully logged in!');
 
+      cy.wait(1000);
       cy.url().should('eq', `${Cypress.config('baseUrl')}/`);
     });
   });
