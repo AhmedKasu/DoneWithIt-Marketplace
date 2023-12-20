@@ -33,7 +33,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them.
 
-> This project was developed using TypeScript & node version 20.
+> This project was developed using TypeScript & node version 21.1.0.
 
 ### Installing
 
