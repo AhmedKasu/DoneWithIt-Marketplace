@@ -15,6 +15,9 @@ const isTest = process.env.NODE_ENV === 'test';
 
 const env: Env = load({
   JWT_SECRET: String,
+  CLOUDINARY_CLOUD_NAME: String,
+  CLOUDINARY_API_KEY: String,
+  CLOUDINARY_API_SECRET: String,
   PORT: { type: Number, optional: true, default: 3001 },
   NODE_ENV: {
     type: ['production', 'test'],
@@ -28,18 +31,6 @@ const env: Env = load({
   TEST_DATABASE_URL: {
     type: String,
     optional: !isTest,
-  },
-  CLOUDINARY_CLOUD_NAME: {
-    type: String,
-    optional: isTest,
-  },
-  CLOUDINARY_API_KEY: {
-    type: String,
-    optional: isTest,
-  },
-  CLOUDINARY_API_SECRET: {
-    type: String,
-    optional: isTest,
   },
 }) as Env;
 
