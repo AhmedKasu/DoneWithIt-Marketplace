@@ -3,8 +3,11 @@ import { load } from 'ts-dotenv';
 type Env = {
   PORT?: number;
   NODE_ENV?: 'development' | 'production' | 'test';
+  POSTGRES_USER: string;
+  POSTGRES_PASSWORD: string;
   DATABASE_URL: string;
   TEST_DATABASE_URL: string;
+  TEST_POSTGRES_PASSWORD: string;
   JWT_SECRET: string;
   CLOUDINARY_CLOUD_NAME: string;
   CLOUDINARY_API_KEY: string;
@@ -12,6 +15,7 @@ type Env = {
 };
 
 const isTest = process.env.NODE_ENV === 'test';
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 const env: Env = load({
   JWT_SECRET: String,
@@ -20,7 +24,7 @@ const env: Env = load({
   CLOUDINARY_API_SECRET: String,
   PORT: { type: Number, optional: true, default: 3001 },
   NODE_ENV: {
-    type: ['production', 'test'],
+    type: ['production', 'test', 'development'],
     optional: true,
     default: 'development',
   },
@@ -28,10 +32,13 @@ const env: Env = load({
     type: String,
     optional: isTest,
   },
+  POSTGRES_PASSWORD: { type: String, optional: !isDevelopment },
+  POSTGRES_USER: { type: String, optional: !isDevelopment },
   TEST_DATABASE_URL: {
     type: String,
     optional: !isTest,
   },
+  TEST_POSTGRES_PASSWORD: { type: String, optional: !isTest },
 }) as Env;
 
 const PORT = env.PORT;
