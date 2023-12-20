@@ -45,6 +45,11 @@ jobs:
         env:
           TEST_POSTGRES_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21.1.0
+
       - name: Install dependencies
         run: npm run install-all
 
