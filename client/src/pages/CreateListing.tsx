@@ -66,7 +66,7 @@ export default function CreateListing() {
 
     if (newListing)
       return (
-        <Success message='Listing successfuly created' open={!!newListing} />
+        <Success message='Listing successfully created' open={!!newListing} />
       );
 
     return (
