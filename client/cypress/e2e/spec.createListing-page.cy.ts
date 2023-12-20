@@ -212,9 +212,11 @@ describe('Create Listing Page', function () {
 
       cy.get('button').contains('Create Listing').click();
 
-      cy.wait(5000);
+      cy.get('#circular-progress', { timeout: 10000 }).should('exist');
 
-      cy.checkSuccessAlert('Listing successfuly created');
+      cy.get('#circular-progress', { timeout: 10000 }).should('not.exist');
+
+      cy.checkSuccessAlert('Listing successfully created');
     });
   });
 });
