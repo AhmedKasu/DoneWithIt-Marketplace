@@ -2,7 +2,7 @@
   "name": "donewithit-marketplace",
   "version": "1.0.0",
   "engines": {
-    "node": "20"
+    "node": "21.1.0"
   },
   "scripts": {
     "start": "npm start --prefix server",
