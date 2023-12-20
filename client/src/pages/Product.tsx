@@ -87,9 +87,9 @@ export default function Product() {
   const listedDate = calculateDateDifference(product?.createdAt as string).days;
   const listedDay =
     listedDate === 0
-      ? 'Today.'
+      ? 'Listed Today.'
       : listedDate === 1
-      ? 'Yesterday.'
+      ? 'Listed Yesterday.'
       : `Listed ${listedDate} days ago.`;
 
   const listedWeeks = calculateDateDifference(
@@ -98,9 +98,9 @@ export default function Product() {
 
   const listedWeek =
     listedWeeks === 0
-      ? 'This week.'
+      ? 'Listed this week.'
       : listedWeeks === 1
-      ? 'Last week.'
+      ? 'Listed last week.'
       : `Listed ${listedWeeks} ${listedWeeks < 2 ? 'week' : 'weeks'} ago.`;
 
   const productStatusColor =
@@ -113,6 +113,7 @@ export default function Product() {
   if (isLoading) return <div>Loading...</div>;
   if (isError)
     return <div>Sorry, an unexpected server error has occurred.</div>;
+
   return (
     <Box
       sx={{
@@ -191,7 +192,7 @@ export default function Product() {
             fontSize: '.9rem',
             color: 'gray',
           }}>
-          {listedWeeks > 0 ? `Listed ${listedWeek} ` : `Listed ${listedDay}`}
+          {listedWeeks > 0 ? `${listedWeek}` : `${listedDay}`}
         </Typography>
 
         <Typography
