@@ -20,7 +20,7 @@ export default function InteractiveCircularProgress({ success }: Props) {
   };
 
   return (
-    <Box sx={{ m: 1, mt: 10, position: 'relative' }}>
+    <Box id='circular-progress' sx={{ m: 1, mt: 10, position: 'relative' }}>
       <Fab aria-label='save' color='primary' sx={buttonSx}>
         {success ? <CheckIcon /> : <SaveIcon />}
       </Fab>
