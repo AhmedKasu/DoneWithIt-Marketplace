@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import Box from '@mui/material/Box';
@@ -32,6 +32,7 @@ import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 import useGetUser from '../hooks/useGetUser';
 import useUpdateProductStatus from '../hooks/useUpdateProductStatus';
 import useDeleteProduct from '../hooks/useDeleteProduct';
+import useHandleNotifications from '../hooks/useHandleNotifications';
 
 import { capitalizeFirstLetter } from '../helpers/product';
 import { Product } from '../types';
@@ -150,35 +151,11 @@ export default function UserListings() {
   const [showUpdateSuccess, setShowUpdateSuccess] = useState(false);
   const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
 
-  useEffect(() => {
-    if (deleteError || updateError) {
-      setShowError(true);
-      const timer = setTimeout(() => {
-        setShowError(false);
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [deleteError, updateError]);
+  useHandleNotifications(deleteError, setShowError);
+  useHandleNotifications(updateError, setShowError);
+  useHandleNotifications(deleteSuccess, setShowDeleteSuccess);
+  useHandleNotifications(updateSuccess, setShowUpdateSuccess);
 
-  useEffect(() => {
-    if (deleteSuccess) {
-      setShowDeleteSuccess(true);
-      const timer = setTimeout(() => {
-        setShowDeleteSuccess(false);
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [deleteSuccess]);
-
-  useEffect(() => {
-    if (updateSuccess) {
-      setShowUpdateSuccess(true);
-      const timer = setTimeout(() => {
-        setShowUpdateSuccess(false);
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [updateSuccess]);
   return (
     <Box
       sx={{
