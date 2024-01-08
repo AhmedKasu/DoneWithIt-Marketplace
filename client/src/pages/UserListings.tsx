@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import Box from '@mui/material/Box';
@@ -10,19 +10,12 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
-import PreviewIcon from '@mui/icons-material/Preview';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 import CreateListingButton from '../components/Side_Top_Bar/CreateListingButton';
 import UserListingsButton from '../components/Side_Top_Bar/UserListingsButton';
+import LongMenu from '../components/Product/LongMenu';
 import Error from '../components/Feedback/Error';
 import Success from '../components/Feedback/Success';
 
@@ -35,99 +28,6 @@ import useDeleteProduct from '../hooks/useDeleteProduct';
 import useHandleNotifications from '../hooks/useHandleNotifications';
 
 import { capitalizeFirstLetter } from '../helpers/product';
-import { Product } from '../types';
-
-interface LongMenuProps {
-  productStatus: Product['status'];
-  onPendingClick: () => void;
-  onViewClick: () => void;
-  onDeleteClick: () => void;
-}
-
-function LongMenu({
-  productStatus,
-  onPendingClick,
-  onViewClick,
-  onDeleteClick,
-}: LongMenuProps) {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handlePendingClick = () => {
-    setAnchorEl(null);
-    onPendingClick();
-  };
-
-  const handleDeleteClick = () => {
-    setAnchorEl(null);
-    onDeleteClick();
-  };
-
-  return (
-    <div>
-      <IconButton
-        sx={{
-          width: '50px',
-          height: { xs: '30px', md: '35px' },
-          ml: 1,
-          backgroundColor: '#E5E4E2',
-          borderRadius: 1,
-          '&:hover': {
-            backgroundColor: '#D3D3D3',
-            cursor: 'pointer',
-          },
-        }}
-        aria-label='more'
-        id='long-button'
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup='true'
-        onClick={handleClick}>
-        <MoreHorizIcon />
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        slotProps={{
-          paper: {
-            style: {
-              maxHeight: 150,
-              width: 200,
-            },
-          },
-        }}>
-        {productStatus !== 'pending' && (
-          <MenuItem onClick={handlePendingClick}>
-            <ListItemIcon>
-              <PauseCircleOutlineIcon fontSize='medium' />
-            </ListItemIcon>
-            <ListItemText>Mark as Pending</ListItemText>
-          </MenuItem>
-        )}
-        <MenuItem onClick={onViewClick}>
-          <ListItemIcon>
-            <PreviewIcon fontSize='medium' />
-          </ListItemIcon>
-          <ListItemText>View</ListItemText>
-        </MenuItem>
-        <MenuItem onClick={handleDeleteClick}>
-          <ListItemIcon>
-            <DeleteForeverIcon fontSize='medium' />
-          </ListItemIcon>
-          <ListItemText>Delete Listing</ListItemText>
-        </MenuItem>
-      </Menu>
-    </div>
-  );
-}
 
 export default function UserListings() {
   const { currentUser } = useAuthContext();
