@@ -13,15 +13,16 @@ import Paper from '@mui/material/Paper';
 import RecyclingIcon from '@mui/icons-material/Recycling';
 
 import UserAvatar from '../components/NavBar/UserAvatar';
+import PrevPrice from '../components/Product/PrevPrice';
 
 import {
   calculateDateDifference,
   capitalizeFirstLetter,
+  getPreviousPrice,
 } from '../helpers/product';
 
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 import useGetProduct from '../hooks/useGetProduct';
-
 interface ArrowProps {
   className?: string;
   style?: React.CSSProperties;
@@ -83,6 +84,8 @@ export default function Product() {
   const { data: product, isLoading, isError } = useGetProduct(id);
 
   const { isSmallScreen } = useScreenBreakingPoints();
+
+  const { prevPrice } = getPreviousPrice(product?.priceHistories);
 
   const listedDate = calculateDateDifference(product?.createdAt as string).days;
   const listedDay =
@@ -183,7 +186,7 @@ export default function Product() {
         </Typography>
 
         <Typography sx={{ fontSize: '1rem', fontWeight: 900 }}>
-          €{product?.price}
+          €{product?.price} {prevPrice && <PrevPrice prevPrice={prevPrice} />}
         </Typography>
 
         <Typography
