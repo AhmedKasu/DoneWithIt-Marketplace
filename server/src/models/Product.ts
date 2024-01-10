@@ -9,6 +9,7 @@ import {
   Model,
   PrimaryKey,
   Table,
+  AfterCreate,
 } from 'sequelize-typescript';
 
 import { User } from './User';
@@ -89,6 +90,14 @@ export class Product extends Model<ProductType> {
 
   @HasMany(() => PriceHistory)
   priceHistories!: PriceHistory[];
+
+  @AfterCreate
+  static async createPriceHistory(instance: Product) {
+    await PriceHistory.create({
+      productId: instance.id,
+      price: instance.price,
+    } as PriceHistoryType);
+  }
 
   @AfterUpdate
   static async updatePriceHistory(instance: Product) {
