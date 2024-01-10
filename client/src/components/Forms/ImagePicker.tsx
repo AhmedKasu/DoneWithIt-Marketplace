@@ -11,9 +11,10 @@ import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 
 interface Props {
   name: string;
+  editPreviews?: string[];
 }
 
-export default function ImagePicker({ name }: Props) {
+export default function ImagePicker({ name, editPreviews }: Props) {
   const [previews, setPreviews] = useState<Array<string | ArrayBuffer>>([]);
   const [rejectedError, setRejectedError] = useState<boolean>(false);
 
@@ -46,10 +47,21 @@ export default function ImagePicker({ name }: Props) {
     [previews]
   );
 
+  const previewsAvailable: boolean = previews.length > 0;
+  const maxPreviewsReached: boolean = previews.length >= 4;
+
   useEffect(() => {
-    setValue(name, previews, { shouldDirty: previews.length > 0 });
+    setValue(name, previews, {
+      shouldDirty: previewsAvailable,
+    });
     if (dirtyFields[name]) trigger(name);
-  }, [previews, setValue, name, trigger, dirtyFields]);
+  }, [previews, previewsAvailable, setValue, name, trigger, dirtyFields]);
+
+  useEffect(() => {
+    if (!editPreviews) return;
+
+    setPreviews(editPreviews);
+  }, [editPreviews]);
 
   const removeImage = (index: number) => {
     const updatedPreviews = [...previews];
@@ -71,8 +83,6 @@ export default function ImagePicker({ name }: Props) {
   });
 
   const validationError = errors[name];
-  const previewsAvailable: boolean = previews.length > 0;
-  const maxPreviewsReached: boolean = previews.length >= 4;
 
   const borderColor = validationError || rejectedError ? '#d50000' : '#cccccc';
   const dropzoneStyle = {
