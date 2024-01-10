@@ -20,19 +20,12 @@ import Success from '../components/Feedback/Success';
 import InteractiveCircularProgress from '../components/Feedback/InteractiveCircularProgress';
 
 import { productSchema } from '../utils/validation/product';
-import { Product } from '../types';
+import { productConditions } from '../utils/constants';
 
 import useGetCategories from '../hooks/useGetCategories';
 import useCreateListing from '../hooks/useCreateListing';
 
 export type FormData = z.infer<typeof productSchema>;
-
-const productConditions: Array<Product['condition']> = [
-  'Used - Good',
-  'Used - Fair',
-  'Used - Like New',
-  'New',
-];
 
 export default function CreateListing() {
   const { data: categories } = useGetCategories();
