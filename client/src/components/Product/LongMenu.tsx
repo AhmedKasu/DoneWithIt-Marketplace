@@ -8,6 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import PreviewIcon from '@mui/icons-material/Preview';
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import { Product } from '../../types';
@@ -16,6 +17,7 @@ interface LongMenuProps {
   productStatus: Product['status'];
   onPendingClick: () => void;
   onViewClick: () => void;
+  onEditClick: () => void;
   onDeleteClick: () => void;
 }
 
@@ -23,6 +25,7 @@ export default function LongMenu({
   productStatus,
   onPendingClick,
   onViewClick,
+  onEditClick,
   onDeleteClick,
 }: LongMenuProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -87,12 +90,21 @@ export default function LongMenu({
             <ListItemText>Mark as Pending</ListItemText>
           </MenuItem>
         )}
+
         <MenuItem onClick={onViewClick}>
           <ListItemIcon>
             <PreviewIcon fontSize='medium' />
           </ListItemIcon>
           <ListItemText>View</ListItemText>
         </MenuItem>
+
+        <MenuItem onClick={onEditClick}>
+          <ListItemIcon>
+            <EditIcon fontSize='medium' />
+          </ListItemIcon>
+          <ListItemText>Edit Listing</ListItemText>
+        </MenuItem>
+
         <MenuItem onClick={handleDeleteClick}>
           <ListItemIcon>
             <DeleteForeverIcon fontSize='medium' />
