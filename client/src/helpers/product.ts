@@ -20,4 +20,18 @@ const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export { calculateDateDifference, capitalizeFirstLetter };
+const getPreviousPrice = (
+  priceHistories: { price: number; createdAt: string }[] | undefined
+) => {
+  const priceHistoriesLength = priceHistories?.length ?? 0;
+  const priceChanged: boolean = priceHistoriesLength > 1;
+  const prevPriceIndex = priceHistoriesLength - 2;
+
+  const prevPrice: number | undefined = priceChanged
+    ? priceHistories?.[prevPriceIndex].price
+    : undefined;
+
+  return { prevPrice };
+};
+
+export { calculateDateDifference, capitalizeFirstLetter, getPreviousPrice };
