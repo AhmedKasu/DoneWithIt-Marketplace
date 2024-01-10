@@ -16,6 +16,7 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import CreateListingButton from '../components/Side_Top_Bar/CreateListingButton';
 import UserListingsButton from '../components/Side_Top_Bar/UserListingsButton';
 import LongMenu from '../components/Product/LongMenu';
+
 import Error from '../components/Feedback/Error';
 import Success from '../components/Feedback/Success';
 
@@ -279,6 +280,9 @@ export default function UserListings() {
                     <LongMenu
                       productStatus={product.status}
                       onViewClick={() => navigate(`/products/${product.id}`)}
+                      onEditClick={() =>
+                        navigate(`/products/edit/${product.id}`)
+                      }
                       onPendingClick={() =>
                         updateProductStatus({
                           userId: +user.id,
