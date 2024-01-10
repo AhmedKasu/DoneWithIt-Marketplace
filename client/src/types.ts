@@ -14,6 +14,10 @@ export interface Product {
   };
   title: string;
   price: number;
+  priceHistories: {
+    price: number;
+    createdAt: string;
+  }[];
   description: string;
   imageUrls: string[];
   status: 'available' | 'sold' | 'pending';
