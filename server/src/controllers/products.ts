@@ -27,7 +27,10 @@ const router = Router();
 const singleProductRouter = Router({ mergeParams: true });
 
 router.get('/', async (req: Request, res: Response) => {
-  const allProducts = await Product.findAll(productsQueryOptions(req));
+  const allProducts = await Product.findAll({
+    ...productsQueryOptions(req),
+    include: [{ model: PriceHistory, attributes: ['price', 'createdAt'] }],
+  });
   res.status(200).json(allProducts);
 });
 
