@@ -4,10 +4,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
+import PrevPrice from './PrevPrice';
+
 interface Props {
   id: number;
   title: string;
   price: number;
+  prevPrice?: number;
   imageUrl: string;
   onSelect: (id: number) => void;
 }
@@ -16,6 +19,7 @@ export default function ProductCard({
   id,
   title,
   price,
+  prevPrice,
   imageUrl,
   onSelect,
 }: Props) {
@@ -47,7 +51,7 @@ export default function ProductCard({
               margin: 0,
               fontSize: '1rem',
             }}>
-            {`€${price}`}
+            €{price} {prevPrice && <PrevPrice prevPrice={prevPrice} />}
           </Typography>
           <Typography
             sx={{
