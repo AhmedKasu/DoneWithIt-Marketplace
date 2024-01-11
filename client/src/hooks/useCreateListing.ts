@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { baseURL } from '../services/apiClient';
 import { CustomAxiosError } from '../types';
-import { FormData as NewProduct } from '../pages/CreateListing';
+import { FormData as NewProduct } from '../components/Product/ProductForm';
 
 import {
   CLOUDINARY_UPLOAD_PRESET,

@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 
 import APIClient from '../services/apiClient';
-import { FormData as UpdatedProduct } from '../pages/CreateListing';
+import { FormData as UpdatedProduct } from '../components/Product/ProductForm';
 
 import { CustomAxiosError } from '../types';
 
