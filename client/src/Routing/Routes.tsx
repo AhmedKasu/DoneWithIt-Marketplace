@@ -25,6 +25,7 @@ const router = createBrowserRouter([
   },
   {
     element: <PrivateRoutes />,
+    errorElement: <ErrorPage />,
     children: [
       { path: 'createListing', element: <CreateListing /> },
       { path: 'products/:id', element: <Product /> },
