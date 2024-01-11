@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { Category } from '../models/Category';
 import { Product } from '../models/Product';
 import { User } from '../models/User';
+import { PriceHistory } from '../models/PriceHistory';
 
 import validateUserInput from '../utils/validation';
 import { userSchema, paramsIdSchema } from '../utils/validation/schemas';
@@ -56,7 +57,10 @@ router.get(
         {
           model: Product,
           attributes: { exclude: ['categoryId', 'userId'] },
-          include: [{ model: Category, attributes: ['name'] }],
+          include: [
+            { model: Category, attributes: ['name'] },
+            { model: PriceHistory, attributes: ['price', 'createdAt'] },
+          ],
         },
       ],
     };
