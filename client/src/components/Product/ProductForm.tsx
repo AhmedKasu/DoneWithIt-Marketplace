@@ -25,7 +25,10 @@ import { Category, Product } from '../../types';
 
 export type FormData = z.infer<typeof productSchema>;
 
-type ListingToEdit = Omit<Product, 'category' | 'userId' | 'id'> & {
+type ListingToEdit = Omit<
+  Product,
+  'category' | 'userId' | 'id' | 'priceHistories'
+> & {
   categoryId: number;
 };
 
