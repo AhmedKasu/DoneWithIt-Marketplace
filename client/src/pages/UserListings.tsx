@@ -16,6 +16,7 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import CreateListingButton from '../components/Side_Top_Bar/CreateListingButton';
 import UserListingsButton from '../components/Side_Top_Bar/UserListingsButton';
 import LongMenu from '../components/Product/LongMenu';
+import PrevPrice from '../components/Product/PrevPrice';
 
 import Error from '../components/Feedback/Error';
 import Success from '../components/Feedback/Success';
@@ -28,7 +29,7 @@ import useUpdateProductStatus from '../hooks/useUpdateProductStatus';
 import useDeleteProduct from '../hooks/useDeleteProduct';
 import useHandleNotifications from '../hooks/useHandleNotifications';
 
-import { capitalizeFirstLetter } from '../helpers/product';
+import { capitalizeFirstLetter, getPreviousPrice } from '../helpers/product';
 
 export default function UserListings() {
   const { currentUser } = useAuthContext();
@@ -168,141 +169,149 @@ export default function UserListings() {
           </Stack>
         )}
 
-        {user?.products.map((product) => (
-          <Card
-            id={`product-${product.id}`}
-            key={product.id}
-            sx={{
-              mt: 2,
-              width: { xs: 350, sm: 600, md: 538, ml: 630, lg: 800 },
-              height: { xs: 130, sm: 155, md: 160, lg: 170 },
-              borderRadius: 2,
-            }}>
-            <CardContent>
-              <Box sx={{ display: 'flex' }}>
-                <Box
-                  onClick={() => navigate(`/products/${product.id}`)}
-                  sx={{
-                    height: { xs: 100, sm: 120, md: 130, lg: 140 },
-                    width: { xs: 100, sm: 120, md: 130, lg: 140 },
-                    '&:hover': {
-                      cursor: 'pointer',
-                    },
-                  }}>
-                  <img
-                    width='100%'
-                    height='100%'
-                    style={{ objectFit: 'cover', borderRadius: 9 }}
-                    src={product.imageUrls[0]}
-                    alt={product.title}
-                  />
-                </Box>
-
-                <Box
-                  sx={{
-                    width: { sm: 430, md: 450, lg: 600 },
-                    ml: 1.5,
-                  }}>
-                  <Typography
-                    variant='h5'
-                    component='div'
+        {user?.products.map((product) => {
+          const { prevPrice } = getPreviousPrice(product.priceHistories);
+          return (
+            <Card
+              id={`product-${product.id}`}
+              key={product.id}
+              sx={{
+                mt: 2,
+                width: { xs: 350, sm: 600, md: 538, ml: 630, lg: 800 },
+                height: { xs: 130, sm: 155, md: 160, lg: 170 },
+                borderRadius: 2,
+              }}>
+              <CardContent>
+                <Box sx={{ display: 'flex' }}>
+                  <Box
+                    onClick={() => navigate(`/products/${product.id}`)}
                     sx={{
-                      fontSize: { xs: '1rem', sm: '1.2rem' },
-                      fontWeight: 900,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 1,
-                      WebkitBoxOrient: 'vertical',
+                      height: { xs: 100, sm: 120, md: 130, lg: 140 },
+                      width: { xs: 100, sm: 120, md: 130, lg: 140 },
+                      '&:hover': {
+                        cursor: 'pointer',
+                      },
                     }}>
-                    {product.title}
-                  </Typography>
-                  <Typography variant='body2'>€{product.price}</Typography>
-                  <Typography
-                    sx={{
-                      fontSize: { xs: '.8rem', sm: '.9rem' },
-                      mb: { xs: 1, sm: 0 },
-                    }}
-                    color='text.secondary'>
-                    {`${capitalizeFirstLetter(
-                      product.status
-                    )}.  Listed on ${new Date(
-                      product.createdAt as string
-                    ).toLocaleDateString()}`}
-                  </Typography>
-
-                  <Typography
-                    sx={{
-                      fontSize: { xs: '.8rem', sm: '.9rem' },
-                      mb: { xs: 1, lg: 1.5 },
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      display: { xs: 'none', sm: '-webkit-box' },
-                      WebkitLineClamp: 1,
-                      WebkitBoxOrient: 'vertical',
-                    }}
-                    color='text.secondary'>
-                    {product.description}
-                  </Typography>
-
-                  <Box sx={{ display: 'flex' }}>
-                    <Button
-                      id={`product-${product.id}-status`}
-                      variant='contained'
-                      disableElevation
-                      startIcon={
-                        product.status === 'sold' ? (
-                          <PlayCircleIcon />
-                        ) : undefined
-                      }
-                      onClick={() =>
-                        updateProductStatus({
-                          status:
-                            product.status !== 'sold' ? 'sold' : 'available',
-                          userId: +user.id,
-                          productId: product.id,
-                        })
-                      }
-                      size={isSmallScreen ? 'small' : 'medium'}
-                      sx={{
-                        mb: 2,
-                        ml: 1,
-                        backgroundColor: '#e3f2fd',
-                        color: 'primary.main',
-                        '&:hover': {
-                          backgroundColor: '#F8F8FF',
-                        },
-                      }}>
-                      {product.status !== 'sold'
-                        ? '✔ Mark as sold'
-                        : 'Mark as available'}
-                    </Button>
-                    <LongMenu
-                      productStatus={product.status}
-                      onViewClick={() => navigate(`/products/${product.id}`)}
-                      onEditClick={() =>
-                        navigate(`/products/edit/${product.id}`)
-                      }
-                      onPendingClick={() =>
-                        updateProductStatus({
-                          userId: +user.id,
-                          productId: product.id,
-                          status: 'pending',
-                        })
-                      }
-                      onDeleteClick={() =>
-                        deleteProduct({
-                          productId: product.id,
-                          userId: +user.id,
-                        })
-                      }
+                    <img
+                      width='100%'
+                      height='100%'
+                      style={{ objectFit: 'cover', borderRadius: 9 }}
+                      src={product.imageUrls[0]}
+                      alt={product.title}
                     />
                   </Box>
+
+                  <Box
+                    sx={{
+                      width: { sm: 430, md: 450, lg: 600 },
+                      ml: 1.5,
+                    }}>
+                    <Typography
+                      variant='h5'
+                      component='div'
+                      sx={{
+                        fontSize: { xs: '1rem', sm: '1.2rem' },
+                        fontWeight: 900,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 1,
+                        WebkitBoxOrient: 'vertical',
+                      }}>
+                      {product.title}
+                    </Typography>
+
+                    <Typography variant='body2'>
+                      €{product.price}{' '}
+                      {prevPrice && <PrevPrice prevPrice={prevPrice} />}
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        fontSize: { xs: '.8rem', sm: '.9rem' },
+                        mb: { xs: 1, sm: 0 },
+                      }}
+                      color='text.secondary'>
+                      {`${capitalizeFirstLetter(
+                        product.status
+                      )}.  Listed on ${new Date(
+                        product.createdAt as string
+                      ).toLocaleDateString()}`}
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        fontSize: { xs: '.8rem', sm: '.9rem' },
+                        mb: { xs: 1, lg: 1.5 },
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: { xs: 'none', sm: '-webkit-box' },
+                        WebkitLineClamp: 1,
+                        WebkitBoxOrient: 'vertical',
+                      }}
+                      color='text.secondary'>
+                      {product.description}
+                    </Typography>
+
+                    <Box sx={{ display: 'flex' }}>
+                      <Button
+                        id={`product-${product.id}-status`}
+                        variant='contained'
+                        disableElevation
+                        startIcon={
+                          product.status === 'sold' ? (
+                            <PlayCircleIcon />
+                          ) : undefined
+                        }
+                        onClick={() =>
+                          updateProductStatus({
+                            status:
+                              product.status !== 'sold' ? 'sold' : 'available',
+                            userId: +user.id,
+                            productId: product.id,
+                          })
+                        }
+                        size={isSmallScreen ? 'small' : 'medium'}
+                        sx={{
+                          mb: 2,
+                          ml: 1,
+                          backgroundColor: '#e3f2fd',
+                          color: 'primary.main',
+                          '&:hover': {
+                            backgroundColor: '#F8F8FF',
+                          },
+                        }}>
+                        {product.status !== 'sold'
+                          ? '✔ Mark as sold'
+                          : 'Mark as available'}
+                      </Button>
+                      <LongMenu
+                        productStatus={product.status}
+                        onViewClick={() => navigate(`/products/${product.id}`)}
+                        onEditClick={() =>
+                          navigate(`/products/edit/${product.id}`)
+                        }
+                        onPendingClick={() =>
+                          updateProductStatus({
+                            userId: +user.id,
+                            productId: product.id,
+                            status: 'pending',
+                          })
+                        }
+                        onDeleteClick={() =>
+                          deleteProduct({
+                            productId: product.id,
+                            userId: +user.id,
+                          })
+                        }
+                      />
+                    </Box>
+                  </Box>
                 </Box>
-              </Box>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          );
+        })}
       </Box>
     </Box>
   );
