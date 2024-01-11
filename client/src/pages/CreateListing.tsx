@@ -1,6 +1,6 @@
 import { FieldValues } from 'react-hook-form';
 
-import ProductForm from '../components/Product/ProductForm';
+import ProductForm, { FormData } from '../components/Product/ProductForm';
 
 import useGetCategories from '../hooks/useGetCategories';
 import useCreateListing from '../hooks/useCreateListing';
