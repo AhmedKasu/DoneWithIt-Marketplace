@@ -9,7 +9,6 @@ const useGetUser = (userId: number) => {
   return useQuery<User, CustomAxiosError>({
     queryKey: ['user', userId],
     queryFn: () => apiClient.getOne(`/${userId}`),
-    staleTime: 1000 * 60 * 60, // 1 hour
   });
 };
 

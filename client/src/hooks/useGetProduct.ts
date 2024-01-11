@@ -19,7 +19,6 @@ const useGetProduct = (productId?: string) => {
   return useQuery<ResData, CustomAxiosError>({
     queryKey: ['products', productId],
     queryFn: () => apiClient.getOne(productId as string),
-    staleTime: 60 * 60 * 1000, // 1 hour
   });
 };
 
