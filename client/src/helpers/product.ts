@@ -23,12 +23,16 @@ const capitalizeFirstLetter = (string: string) => {
 const getPreviousPrice = (
   priceHistories: { price: number; createdAt: string }[] | undefined
 ) => {
-  const priceHistoriesLength = priceHistories?.length ?? 0;
+  const sortedPriceHistories = priceHistories?.sort(
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  );
+
+  const priceHistoriesLength = sortedPriceHistories?.length ?? 0;
   const priceChanged: boolean = priceHistoriesLength > 1;
   const prevPriceIndex = priceHistoriesLength - 2;
 
   const prevPrice: number | undefined = priceChanged
-    ? priceHistories?.[prevPriceIndex].price
+    ? sortedPriceHistories?.[prevPriceIndex].price
     : undefined;
 
   return { prevPrice };
