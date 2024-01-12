@@ -29,7 +29,11 @@ import useUpdateProductStatus from '../hooks/useUpdateProductStatus';
 import useDeleteProduct from '../hooks/useDeleteProduct';
 import useHandleNotifications from '../hooks/useHandleNotifications';
 
-import { capitalizeFirstLetter, getPreviousPrice } from '../helpers/product';
+import {
+  capitalizeFirstLetter,
+  getPreviousPrice,
+  getProductStatusColor,
+} from '../helpers/product';
 
 export default function UserListings() {
   const { currentUser } = useAuthContext();
@@ -133,6 +137,7 @@ export default function UserListings() {
 
         {user?.products.map((product) => {
           const { prevPrice } = getPreviousPrice(product.priceHistories);
+          const statusColor = getProductStatusColor(product.status);
           return (
             <Card
               id={`product-${product.id}`}
@@ -188,18 +193,28 @@ export default function UserListings() {
                       {prevPrice && <PrevPrice prevPrice={prevPrice} />}
                     </Typography>
 
-                    <Typography
-                      sx={{
-                        fontSize: { xs: '.8rem', sm: '.9rem' },
-                        mb: { xs: 1, sm: 0 },
-                      }}
-                      color='text.secondary'>
-                      {`${capitalizeFirstLetter(
-                        product.status
-                      )}.  Listed on ${new Date(
-                        product.createdAt as string
-                      ).toLocaleDateString()}`}
-                    </Typography>
+                    <Stack direction='row' spacing={1}>
+                      <Typography
+                        sx={{
+                          fontSize: { xs: '.8rem', sm: '.9rem' },
+                          mb: { xs: 1, sm: 0 },
+                          color: statusColor,
+                        }}
+                        color='text.secondary'>
+                        {`${capitalizeFirstLetter(product.status)}.`}
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          fontSize: { xs: '.8rem', sm: '.9rem' },
+                          mb: { xs: 1, sm: 0 },
+                        }}
+                        color='text.secondary'>
+                        {`Listed on ${new Date(
+                          product.createdAt as string
+                        ).toLocaleDateString()}`}
+                      </Typography>
+                    </Stack>
 
                     <Typography
                       sx={{
