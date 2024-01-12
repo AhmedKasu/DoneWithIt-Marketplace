@@ -20,6 +20,7 @@ import {
   calculateDateDifference,
   capitalizeFirstLetter,
   getPreviousPrice,
+  getProductStatusColor,
 } from '../helpers/product';
 
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
@@ -107,12 +108,7 @@ export default function Product() {
       ? 'Listed last week.'
       : `Listed ${listedWeeks} ${listedWeeks < 2 ? 'week' : 'weeks'} ago.`;
 
-  const productStatusColor =
-    product?.status === 'sold'
-      ? 'red'
-      : product?.status == 'pending'
-      ? 'orange'
-      : 'green';
+  const productStatusColor = getProductStatusColor(product?.status);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError)
