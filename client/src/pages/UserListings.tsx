@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -20,6 +19,7 @@ import PrevPrice from '../components/Product/PrevPrice';
 
 import Error from '../components/Feedback/Error';
 import Success from '../components/Feedback/Success';
+import GoBack from '../components/Feedback/GoBack';
 
 import { useAuthContext } from '../context/authContext';
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
@@ -75,45 +75,7 @@ export default function UserListings() {
           zIndex: 100,
         }}>
         <Paper elevation={2} sx={{ height: '100%', pt: { xs: 6, md: 8 } }}>
-          <Stack direction='row'>
-            <Box
-              sx={{
-                ml: 2,
-                mt: 1,
-                height: '36px',
-                width: '36px',
-                borderRadius: 18,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'transparent',
-
-                '&:hover': {
-                  cursor: 'pointer',
-                  boxShadow: 1,
-                  backgroundColor: '#f7f7f7',
-                },
-              }}>
-              <KeyboardBackspaceIcon
-                onClick={() => navigate('/')}
-                sx={{ color: 'gray' }}
-              />
-            </Box>
-            <Stack direction='column' sx={{ ml: 2, mb: 1 }}>
-              <Typography sx={{ fontSize: '.8rem', color: 'gray' }}>
-                Marketplace
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: '1.5rem',
-                  fontWeight: 900,
-                  fontFamily: 'inherit',
-                }}
-                variant='h6'>
-                Selling
-              </Typography>
-            </Stack>
-          </Stack>
+          <GoBack currentPage='Selling' previousPage='Marketplace' />
 
           <Stack sx={{ ml: 1 }}>
             <CreateListingButton
