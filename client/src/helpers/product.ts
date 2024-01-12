@@ -1,3 +1,5 @@
+import { Product } from '../types';
+
 const calculateDateDifference = (targetDate: string) => {
   const currentDate = new Date();
   const targetDateTime = new Date(targetDate);
@@ -38,4 +40,13 @@ const getPreviousPrice = (
   return { prevPrice };
 };
 
-export { calculateDateDifference, capitalizeFirstLetter, getPreviousPrice };
+const getProductStatusColor = (status: Product['status'] | undefined) => {
+  return status === 'sold' ? 'red' : status == 'pending' ? 'orange' : 'green';
+};
+
+export {
+  calculateDateDifference,
+  capitalizeFirstLetter,
+  getPreviousPrice,
+  getProductStatusColor,
+};
