@@ -9,15 +9,12 @@ import { Toolbar } from '@mui/material';
 
 import UserProfileIcon from './UserProfileIcon';
 import useSignout from '../../hooks/useSignOut';
-
-import { useScreenBreakingPoints } from '../../context/screenBreakpoints';
 interface Props {
   currentUser: string | undefined;
 }
 
 function NavBar({ currentUser }: Props) {
   const navigate = useNavigate();
-  const { isExtraSmallScreen } = useScreenBreakingPoints();
   const { mutate: signout } = useSignout();
 
   return (
@@ -37,22 +34,22 @@ function NavBar({ currentUser }: Props) {
               />
             </RouterLink>
           </Tooltip>
-          {!isExtraSmallScreen && (
-            <Typography
-              variant='h6'
-              noWrap
-              sx={{
-                mr: 2,
-                display: { md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: { md: '.2rem', lg: '.3rem' },
-                color: 'red',
-                textDecoration: 'none',
-              }}>
-              DoneWithIt
-            </Typography>
-          )}
+
+          <Typography
+            variant='h6'
+            noWrap
+            sx={{
+              mr: 2,
+              display: { md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              fontSize: { xs: '.9rem', sm: '1rem', md: '1.2rem', lg: '1.3rem' },
+              letterSpacing: { md: '.1rem', lg: '.2rem' },
+              color: 'red',
+              textDecoration: 'none',
+            }}>
+            DoneWithIt
+          </Typography>
         </Toolbar>
 
         <UserProfileIcon
