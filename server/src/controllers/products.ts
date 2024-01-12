@@ -66,10 +66,19 @@ singleProductRouter.put(
   async (req: Request, res: Response) => {
     const product = req.entities?.product as Product;
 
+    const editedProduct = validateUserInput(productSchema, req.body);
+
+    const deletedImages = product.imageUrls.filter(
+      (url) => !editedProduct.imageUrls.includes(url)
+    );
+
+    if (deleteImages) await deleteImages(deletedImages);
+
     product.set({
-      ...validateUserInput(productSchema, req.body),
+      ...editedProduct,
       userId: req.authUser!.id,
     });
+
     await product.save();
 
     return res.status(200).json(product);
