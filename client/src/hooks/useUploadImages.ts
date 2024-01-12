@@ -8,10 +8,11 @@ import {
 const useUploadImages = () => {
   const uploadImage = async (imageUrls: string[]) => {
     return await Promise.all(
-      imageUrls.map(async (file) => {
+      imageUrls.map(async (file, i) => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        formData.append('public_id', `${i}-${Date.now()}`);
 
         const { data } = await axios({
           method: 'post',
