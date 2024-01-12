@@ -257,6 +257,7 @@ export default function UserListings() {
                           '&:hover': {
                             backgroundColor: '#F8F8FF',
                           },
+                          fontSize: { xs: '.7rem', sm: '.9rem', md: '1rem' },
                         }}>
                         {product.status !== 'sold'
                           ? '✔ Mark as sold'
