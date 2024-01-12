@@ -14,6 +14,7 @@ import RecyclingIcon from '@mui/icons-material/Recycling';
 
 import UserAvatar from '../components/NavBar/UserAvatar';
 import PrevPrice from '../components/Product/PrevPrice';
+import GoBack from '../components/Feedback/GoBack';
 
 import {
   calculateDateDifference,
@@ -132,12 +133,19 @@ export default function Product() {
           flexDirection: { xs: 'column', md: 'row' },
           justifyContent: 'center',
           overflow: 'hidden',
+          pl: { xs: 0, md: 1 },
         }}>
+        {!isSmallScreen && (
+          <Box sx={{ pt: 10, mr: 1 }}>
+            <GoBack />
+          </Box>
+        )}
+
         <Box
           sx={{
             order: { xs: 1, md: 0 },
             width: {
-              md: '100%',
+              md: '98%',
               ml: '98%',
               lg: '80%',
               xl: '70%',
