@@ -4,14 +4,13 @@ import { useParams } from 'react-router';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import ProductForm from '../components/Product/ProductForm';
+import ProductForm, { FormData } from '../components/Product/ProductForm';
 
 import useGetCategories from '../hooks/useGetCategories';
 import useGetProduct from '../hooks/useGetProduct';
 import useEditListing from '../hooks/useEditListing';
 
 import { Product } from '../types';
-import { FormData } from '../components/Product/ProductForm';
 
 const feedbackStyles = {
   display: 'flex',
