@@ -11,6 +11,7 @@ import useGetProduct from '../hooks/useGetProduct';
 import useEditListing from '../hooks/useEditListing';
 
 import { Product } from '../types';
+import { FormData } from '../components/Product/ProductForm';
 
 const feedbackStyles = {
   display: 'flex',
@@ -32,8 +33,12 @@ export default function CreateListing() {
   } = useEditListing();
 
   const handleSubmit = (variables: FieldValues) => {
-    if (!id) return;
-    updateListing({ productId: +id, updatedProduct: variables as FormData });
+    if (!id || !product) return;
+    updateListing({
+      productId: +id,
+      initialImageUrls: product.imageUrls,
+      updatedProduct: variables as FormData,
+    });
   };
 
   const errorMessage = error?.response?.data.details;
