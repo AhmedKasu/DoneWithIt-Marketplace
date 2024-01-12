@@ -125,7 +125,8 @@ npm run lint
 
 [DoneWithIt-Marketplace](https://donewithit-marketplace-6ab68864c928.herokuapp.com/) full-stack app is an online second hand shop web app inspired by Facebook marketplace.
 
-User authentication is required to post a new listing for sell or to view a product's details.
+- User authentication is required to post a new listing for sell or to view a product's details.
+- Clicking the app logo redirects to the home page.
 
 Feel free to create a new user or use available credentials.
 
