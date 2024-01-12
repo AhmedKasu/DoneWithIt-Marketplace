@@ -18,6 +18,7 @@ import ImagePicker from '../Forms/ImagePicker';
 import Error from '../Feedback/Error';
 import Success from '../Feedback/Success';
 import InteractiveCircularProgress from '../Feedback/InteractiveCircularProgress';
+import GoBack from '../Feedback/GoBack';
 
 import { productSchema } from '../../utils/validation/product';
 import { productConditions } from '../../utils/constants';
@@ -172,10 +173,18 @@ export default function ProductForm({
 
   return (
     <Box sx={{ height: '100vh', overflowY: 'scroll' }}>
-      <Container component='main' maxWidth='xs' sx={{ pt: { xs: 8, sm: 15 } }}>
+      <Box
+        sx={{
+          pt: { xs: 5, sm: 7, md: 10 },
+          pl: { sm: 5, md: 15, lg: 20, xl: 30 },
+        }}>
+        <GoBack />
+      </Box>
+
+      <Container component='main' maxWidth='xs' sx={{ pt: { xs: 2, sm: 8 } }}>
         <Box
           sx={{
-            marginTop: { xs: 0, sm: 8 },
+            marginTop: { xs: 0, sm: 8, lg: 0 },
             pb: { xs: 10 },
             display: 'flex',
             flexDirection: 'column',
