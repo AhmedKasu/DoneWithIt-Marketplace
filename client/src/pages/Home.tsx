@@ -3,6 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import useGetProducts from '../hooks/useGetProducts';
 import useGetCategories from '../hooks/useGetCategories';
+import useResetFilters from '../hooks/useResetFilters';
 
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 import { useFiltersContext } from '../context/FiltersContext';
@@ -17,7 +18,6 @@ export default function Home() {
     categoryId,
     setCategoryId,
     searchQuery,
-    setSearchQuery,
     minPrice,
     maxPrice,
     condition,
@@ -43,10 +43,12 @@ export default function Home() {
     isError: categoriesError,
   } = useGetCategories();
 
+  const resetFilters = useResetFilters();
+
   const { isSmallScreen } = useScreenBreakingPoints();
 
   const handleRefetch = () => {
-    setSearchQuery('');
+    resetFilters();
     setCategoryId(0);
   };
 
