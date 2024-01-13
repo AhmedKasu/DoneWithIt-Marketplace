@@ -16,6 +16,8 @@ import { Category } from '../../types';
 import { useAuthContext } from '../../context/authContext';
 import { useFiltersContext } from '../../context/FiltersContext';
 
+import useResetFilters from '../../hooks/useResetFilters';
+
 interface Props {
   categories: Category[];
   showFilters: boolean;
@@ -26,9 +28,16 @@ export default function SideBar({ categories, showFilters }: Props) {
   const { setSearchQuery, searchQuery, setCategoryId, categoryId } =
     useFiltersContext();
   const navigate = useNavigate();
+  const resetFilters = useResetFilters();
 
   const handleProductSearch = (variables: FieldValues) => {
     setSearchQuery(variables.search);
+    setCategoryId(undefined);
+  };
+
+  const handleCategorySelect = (categoryId: number) => {
+    setCategoryId(categoryId);
+    resetFilters();
   };
 
   const sideBarWidth = '360px';
@@ -57,7 +66,7 @@ export default function SideBar({ categories, showFilters }: Props) {
           <Box sx={{ ml: 2, mt: 2 }}>
             <SideBarHeader
               categories={categories}
-              categoryId={categoryId}
+              categoryId={categoryId as number}
               searchQuery={searchQuery as string}
             />
             <SearchBar onSubmit={handleProductSearch} />
@@ -93,8 +102,8 @@ export default function SideBar({ categories, showFilters }: Props) {
           {categories && (
             <CategoriesList
               categories={categories}
-              onCategorySelect={(categoryId) => setCategoryId(categoryId)}
-              selectedCategory={categoryId}
+              onCategorySelect={handleCategorySelect}
+              selectedCategory={categoryId as number}
             />
           )}
         </Box>
