@@ -8,27 +8,48 @@ interface Props {
   categoryId: number;
 }
 
+const headerStyles = {
+  mb: 1,
+  fontSize: '1.5rem',
+  color: 'black',
+  fontFamily: 'inherit',
+  fontWeight: 'bold',
+};
+
+const navigatorStyles = {
+  mt: 1,
+  fontSize: '.8rem',
+  color: 'grey',
+  fontFamily: 'inherit',
+};
+
 export default function SideBarHeader({
   searchQuery,
   categories,
   categoryId,
 }: Props) {
+  const { name: categoryName } =
+    categories.find((c) => c.id === categoryId) || {};
+  const showNavigator: boolean = !!searchQuery || !!categoryId;
+  const navigatorMarginTop = showNavigator ? 1 : 0;
+
+  const headerText = searchQuery
+    ? 'Search results'
+    : categoryId
+    ? categoryName
+    : 'Marketplace';
+
   return (
-    <Typography
-      sx={{
-        mt: 1,
-        mb: 1,
-        fontSize: '1.5rem',
-        color: 'black',
-        fontFamily: 'inherit',
-        fontWeight: 'bold',
-      }}
-      variant='h2'>
-      {searchQuery
-        ? 'Search results'
-        : categories && categoryId
-        ? `${categories[categories.findIndex((c) => c.id === categoryId)].name}`
-        : 'Marketplace'}
-    </Typography>
+    <>
+      {showNavigator && (
+        <Typography sx={{ ...navigatorStyles, mt: navigatorMarginTop }}>
+          {`Marketplace ${categoryId ? `▸ ${categoryName}` : ''}`}
+        </Typography>
+      )}
+
+      <Typography sx={headerStyles} variant='h2'>
+        {headerText}
+      </Typography>
+    </>
   );
 }
