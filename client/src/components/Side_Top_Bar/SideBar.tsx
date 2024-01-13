@@ -32,6 +32,7 @@ export default function SideBar({ categories, showFilters }: Props) {
   };
 
   const sideBarWidth = '360px';
+  const sideBarMarginTop = searchQuery || categoryId ? '130px' : '110px';
   return (
     <Box
       sx={{
@@ -43,57 +44,60 @@ export default function SideBar({ categories, showFilters }: Props) {
         backgroundColor: 'appBg.sidebar',
         boxShadow: 2,
       }}>
-      <Card
-        elevation={0}
-        sx={{
-          position: 'fixed',
-          height: '100px',
-          top: 63,
-          width: sideBarWidth,
-          zIndex: 9,
-        }}>
-        <Box sx={{ ml: 2 }}>
-          <SideBarHeader
-            categories={categories}
-            categoryId={categoryId}
-            searchQuery={searchQuery as string}
+      <Box sx={{ display: 'flex' }}>
+        <Card
+          elevation={0}
+          sx={{
+            position: 'fixed',
+            flex: 1,
+            top: 63,
+            width: sideBarWidth,
+            zIndex: 9,
+          }}>
+          <Box sx={{ ml: 2, mt: 2 }}>
+            <SideBarHeader
+              categories={categories}
+              categoryId={categoryId}
+              searchQuery={searchQuery as string}
+            />
+            <SearchBar onSubmit={handleProductSearch} />
+            <Divider sx={{ mt: 1.5, width: '95%' }} />
+          </Box>
+        </Card>
+
+        <Box
+          sx={{
+            mt: sideBarMarginTop,
+            flex: 1,
+            width: sideBarWidth,
+            ml: 1,
+          }}>
+          {currentUser && (
+            <UserListingsButton
+              onSelect={() => navigate('me/selling')}
+              isSelected={false}
+            />
+          )}
+          <CreateListingButton
+            onCreateListing={() => navigate('createListing')}
           />
-          <SearchBar onSubmit={handleProductSearch} />
-          <Divider sx={{ mt: 1, mb: 1, width: '95%' }} />
+          <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
+
+          {searchQuery && showFilters && (
+            <>
+              <ProductFilters />
+              <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
+            </>
+          )}
+
+          {categories && (
+            <CategoriesList
+              categories={categories}
+              onCategorySelect={(categoryId) => setCategoryId(categoryId)}
+              selectedCategory={categoryId}
+            />
+          )}
         </Box>
-      </Card>
-
-      <Box
-        sx={{
-          mt: '110px',
-          width: sideBarWidth,
-          ml: 1,
-        }}>
-        {currentUser && (
-          <UserListingsButton
-            onSelect={() => navigate('me/selling')}
-            isSelected={false}
-          />
-        )}
-        <CreateListingButton
-          onCreateListing={() => navigate('createListing')}
-        />
-        <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
-
-        {searchQuery && showFilters && (
-          <>
-            <ProductFilters />
-            <Divider sx={{ ml: 1, mb: 2, mr: 0, width: '92%' }} />
-          </>
-        )}
-
-        {categories && (
-          <CategoriesList
-            categories={categories}
-            onCategorySelect={(categoryId) => setCategoryId(categoryId)}
-            selectedCategory={categoryId}
-          />
-        )}
       </Box>
     </Box>
   );
