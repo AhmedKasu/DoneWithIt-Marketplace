@@ -5,8 +5,8 @@ type Condition = Product['condition'];
 type Status = Product['status'];
 
 interface FiltersContextProps {
-  categoryId: number;
-  setCategoryId: (categoryId: number) => void;
+  categoryId: number | undefined;
+  setCategoryId: (categoryId: number | undefined) => void;
   searchQuery: string | undefined;
   setSearchQuery: (searchQuery: string | undefined) => void;
   minPrice: number | undefined;
@@ -36,7 +36,7 @@ interface Props {
 }
 
 export const FiltersProvider: React.FC<Props> = ({ children }) => {
-  const [categoryId, setCategoryId] = useState<number>(0);
+  const [categoryId, setCategoryId] = useState<number | undefined>(0);
   const [searchQuery, setSearchQuery] = useState<string | undefined>('');
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
