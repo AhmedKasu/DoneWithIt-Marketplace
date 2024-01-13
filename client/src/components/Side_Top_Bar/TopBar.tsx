@@ -105,7 +105,7 @@ export default function Topbar({ categories }: Props) {
           showHeader={false}
           categories={categories}
           onCategorySelect={handleCategorySelect}
-          selectedCategory={categoryId}
+          selectedCategory={categoryId as number}
         />
       </CustomModal>
 
