@@ -9,6 +9,9 @@ import { Toolbar } from '@mui/material';
 
 import UserProfileIcon from './UserProfileIcon';
 import useSignout from '../../hooks/useSignOut';
+
+import { useFiltersContext } from '../../context/FiltersContext';
+import useResetFilters from '../../hooks/useResetFilters';
 interface Props {
   currentUser: string | undefined;
 }
@@ -16,6 +19,13 @@ interface Props {
 function NavBar({ currentUser }: Props) {
   const navigate = useNavigate();
   const { mutate: signout } = useSignout();
+  const resetFilters = useResetFilters();
+  const { setCategoryId } = useFiltersContext();
+
+  const handleAppLogoClick = () => {
+    resetFilters();
+    setCategoryId(undefined);
+  };
 
   return (
     <AppBar elevation={1} sx={{ backgroundColor: 'appBg.navbar' }}>
@@ -30,6 +40,7 @@ function NavBar({ currentUser }: Props) {
           <Tooltip title='Go home'>
             <RouterLink to='/'>
               <RecyclingIcon
+                onClick={handleAppLogoClick}
                 sx={{ display: { md: 'flex', color: 'red' }, mr: 1 }}
               />
             </RouterLink>
