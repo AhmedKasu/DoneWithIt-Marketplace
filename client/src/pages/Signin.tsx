@@ -25,7 +25,7 @@ import Success from '../components/Feedback/Success';
 
 import signinSchema from '../utils/validation/signin';
 
-import useSignin from '../hooks/useSignIn';
+import useSignin from '../hooks/auth/useSignIn';
 
 type FormData = z.infer<typeof signinSchema>;
 

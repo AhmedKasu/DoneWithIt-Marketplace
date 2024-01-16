@@ -6,8 +6,8 @@ import renderWithRouter from '../Helpers/RoutesHelpers';
 import SignIn from '../../pages/Signin';
 import SignUp from '../../pages/Signup';
 
-import useSignin from '../../hooks/useSignIn';
-import useSignup from '../../hooks/useSignup';
+import useSignin from '../../hooks/auth/useSignIn';
+import useSignup from '../../hooks/auth/useSignup';
 
 jest.mock('../../hooks/useSignIn', () => jest.fn());
 jest.mock('../../hooks/useSignup', () => jest.fn());

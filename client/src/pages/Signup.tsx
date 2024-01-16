@@ -24,7 +24,7 @@ import Error from '../components/Feedback/Error';
 import Success from '../components/Feedback/Success';
 
 import signupSchema from '../utils/validation/signup';
-import useSignup from '../hooks/useSignup';
+import useSignup from '../hooks/auth/useSignup';
 
 type FormData = z.infer<typeof signupSchema>;
 

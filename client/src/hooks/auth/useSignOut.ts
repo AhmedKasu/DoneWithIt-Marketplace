@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 
-import APIClient from '../services/apiClient';
-import { useAuthContext } from '../context/authContext';
+import APIClient from '../../services/apiClient';
+import { useAuthContext } from '../../context/authContext';
 
-import { CustomAxiosError } from '../types';
+import { CustomAxiosError } from '../../types';
 
 const apiClient = new APIClient<void>('/logout');
 

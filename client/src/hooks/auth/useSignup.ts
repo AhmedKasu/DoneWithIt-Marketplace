@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 
-import APIClient from '../services/apiClient';
+import APIClient from '../../services/apiClient';
 
-import { CustomAxiosError } from '../types';
+import { CustomAxiosError } from '../../types';
 interface SignupData {
   name: string;
   email: string;

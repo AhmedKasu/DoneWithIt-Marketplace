@@ -7,7 +7,7 @@ import SignIn from '../../pages/Signin';
 
 import renderWithRouter from '../Helpers/RoutesHelpers';
 import useGetProduct from '../../hooks/product/useGetProduct';
-import useSignin from '../../hooks/useSignIn';
+import useSignin from '../../hooks/auth/useSignIn';
 
 import { products } from '../Helpers/mockData';
 import { capitalizeFirstLetter } from '../../helpers/product';

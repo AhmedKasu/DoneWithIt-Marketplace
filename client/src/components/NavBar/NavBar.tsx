@@ -8,7 +8,7 @@ import RecyclingIcon from '@mui/icons-material/Recycling';
 import { Toolbar } from '@mui/material';
 
 import UserProfileIcon from './UserProfileIcon';
-import useSignout from '../../hooks/useSignOut';
+import useSignout from '../../hooks/auth/useSignOut';
 
 import { useFiltersContext } from '../../context/FiltersContext';
 import useResetFilters from '../../hooks/product/useResetFilters';
