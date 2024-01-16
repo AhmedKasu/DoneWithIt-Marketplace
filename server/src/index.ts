@@ -3,9 +3,12 @@ import express, { Request } from 'express';
 import 'reflect-metadata';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import http from 'http';
 
 import { PORT, NODE_ENV } from './utils/config';
+import { CLIENT_URL } from './constants';
 import { connectToDatabase } from './utils/db';
+import { setUpSocket } from './utils/socket';
 
 import errorHandler from './middleware/errorHandler';
 
@@ -17,16 +20,19 @@ import productsRouter from './controllers/products';
 import path from 'path';
 
 const app = express();
+const server = http.createServer(app);
 
 app.use(
   cors<Request>({
     origin:
       NODE_ENV === 'development'
-        ? 'http://localhost:5173'
+        ? CLIENT_URL
         : 'https://patientor.herokuapp.com',
     credentials: true,
   })
 );
+
+setUpSocket(server);
 
 const root = path.join(__dirname, '../public');
 
@@ -52,7 +58,7 @@ app.use(errorHandler);
 
 const start = async () => {
   await connectToDatabase();
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
 };
