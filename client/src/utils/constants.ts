@@ -6,3 +6,5 @@ export const productConditions: Array<Product['condition']> = [
   'Used - Like New',
   'New',
 ];
+
+export const SERVER_URL = 'http://localhost:3001';
