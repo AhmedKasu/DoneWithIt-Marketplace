@@ -11,7 +11,7 @@ import UserProfileIcon from './UserProfileIcon';
 import useSignout from '../../hooks/useSignOut';
 
 import { useFiltersContext } from '../../context/FiltersContext';
-import useResetFilters from '../../hooks/useResetFilters';
+import useResetFilters from '../../hooks/product/useResetFilters';
 interface Props {
   currentUser: string | undefined;
 }

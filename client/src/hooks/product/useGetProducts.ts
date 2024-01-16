@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { Product, CustomAxiosError } from '../types';
-import { baseURL } from '../services/apiClient';
+import { Product, CustomAxiosError } from '../../types';
+import { baseURL } from '../../services/apiClient';
 
 const productsURL = `${baseURL}/products`;
 

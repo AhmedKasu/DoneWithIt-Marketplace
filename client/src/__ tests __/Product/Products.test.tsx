@@ -8,7 +8,7 @@ import Product from '../../pages/Product';
 import SignIn from '../../pages/Signin';
 
 import renderWithRouter from '../Helpers/RoutesHelpers';
-import useGetProduct from '../../hooks/useGetProduct';
+import useGetProduct from '../../hooks/product/useGetProduct';
 import useSignin from '../../hooks/useSignIn';
 
 import { products } from '../Helpers/mockData';

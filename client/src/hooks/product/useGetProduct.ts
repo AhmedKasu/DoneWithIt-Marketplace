@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Product, CustomAxiosError } from '../types';
+import { Product, CustomAxiosError } from '../../types';
 
-import APIClient from '../services/apiClient';
+import APIClient from '../../services/apiClient';
 
 const apiClient = new APIClient<ResData>('/products');
 

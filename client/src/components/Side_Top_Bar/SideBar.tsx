@@ -16,7 +16,7 @@ import { Category } from '../../types';
 import { useAuthContext } from '../../context/authContext';
 import { useFiltersContext } from '../../context/FiltersContext';
 
-import useResetFilters from '../../hooks/useResetFilters';
+import useResetFilters from '../../hooks/product/useResetFilters';
 
 interface Props {
   categories: Category[];

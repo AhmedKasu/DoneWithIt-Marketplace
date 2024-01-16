@@ -3,7 +3,7 @@ import { FieldValues } from 'react-hook-form';
 import ProductForm, { FormData } from '../components/Product/ProductForm';
 
 import useGetCategories from '../hooks/useGetCategories';
-import useCreateListing from '../hooks/useCreateListing';
+import useCreateListing from '../hooks/product/useCreateListing';
 
 export default function CreateListing() {
   const { data: categories } = useGetCategories();

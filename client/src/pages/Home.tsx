@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import useGetProducts from '../hooks/useGetProducts';
+import useGetProducts from '../hooks/product/useGetProducts';
 import useGetCategories from '../hooks/useGetCategories';
-import useResetFilters from '../hooks/useResetFilters';
+import useResetFilters from '../hooks/product/useResetFilters';
 
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 import { useFiltersContext } from '../context/FiltersContext';

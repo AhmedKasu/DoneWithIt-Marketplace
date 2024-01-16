@@ -2,10 +2,10 @@ import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 
-import { baseURL } from '../services/apiClient';
+import { baseURL } from '../../services/apiClient';
 import useUploadImages from './useUploadImages';
-import { CustomAxiosError } from '../types';
-import { FormData as NewProduct } from '../components/Product/ProductForm';
+import { CustomAxiosError } from '../../types';
+import { FormData as NewProduct } from '../../components/Product/ProductForm';
 interface ResData extends NewProduct {
   userId: number;
   status: 'available' | 'pending' | 'sold';

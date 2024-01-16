@@ -25,8 +25,8 @@ import { useAuthContext } from '../context/authContext';
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 
 import useGetUser from '../hooks/useGetUser';
-import useUpdateProductStatus from '../hooks/useUpdateProductStatus';
-import useDeleteProduct from '../hooks/useDeleteProduct';
+import useUpdateProductStatus from '../hooks/product/useUpdateProductStatus';
+import useDeleteProduct from '../hooks/product/useDeleteProduct';
 import useHandleNotifications from '../hooks/useHandleNotifications';
 
 import {

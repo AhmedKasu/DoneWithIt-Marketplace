@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import renderWithRouter from '../Helpers/RoutesHelpers';
 
-import useCreateListing from '../../hooks/useCreateListing';
+import useCreateListing from '../../hooks/product/useCreateListing';
 import useGetCategories from '../../hooks/useGetCategories';
 import { Category } from '../../types';
 

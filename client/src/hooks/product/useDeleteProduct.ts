@@ -1,26 +1,23 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import APIClient from '../services/apiClient';
-import { Product, User, CustomAxiosError } from '../types';
+import APIClient from '../../services/apiClient';
 
-const apiClient = new APIClient<{ status: Product['status'] }, Product>(
-  '/products'
-);
+import { User, CustomAxiosError } from '../../types';
+const apiClient = new APIClient<void, void>('/products');
 
 interface Params {
   userId: number;
   productId: number;
-  status: Product['status'];
 }
 
 interface updateProductContext {
   previousUser: User;
 }
 
-const useUpdateProductstatus = () => {
+const useDeleteProduct = () => {
   const queryClient = useQueryClient();
-  return useMutation<Product, CustomAxiosError, Params, updateProductContext>({
-    onMutate: ({ userId, productId, status }) => {
+  return useMutation<void, CustomAxiosError, Params, updateProductContext>({
+    onMutate: ({ userId, productId }) => {
       const previousUser = queryClient.getQueryData<User>(['user', userId]);
       const previousProduct = previousUser?.products.find(
         (product) => product.id === productId
@@ -28,12 +25,12 @@ const useUpdateProductstatus = () => {
 
       if (!previousUser || !previousProduct) return;
 
-      const updatedProduct = { ...previousProduct, status };
       const previousProducts = previousUser?.products ?? [];
 
-      const updatedProducts = previousProducts.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product
+      const updatedProducts = previousProducts.filter(
+        (product) => product.id !== productId
       );
+
       const updatedUserCache = {
         ...previousUser,
         products: updatedProducts,
@@ -42,8 +39,7 @@ const useUpdateProductstatus = () => {
       queryClient.setQueryData<User>(['user', userId], updatedUserCache);
       return { previousUser };
     },
-    mutationFn: ({ productId, status }) =>
-      apiClient.put(`${productId}/status`, { status }),
+    mutationFn: ({ productId }: Params) => apiClient.delete(`${productId}`),
     onError: (_err, _product, context) => {
       if (!context) return;
       queryClient.setQueryData<User>(
@@ -54,4 +50,4 @@ const useUpdateProductstatus = () => {
   });
 };
 
-export default useUpdateProductstatus;
+export default useDeleteProduct;

@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 
-import APIClient from '../services/apiClient';
+import APIClient from '../../services/apiClient';
 import useUploadImages from './useUploadImages';
 
-import { FormData as UpdatedProduct } from '../components/Product/ProductForm';
-import { CustomAxiosError } from '../types';
+import { FormData as UpdatedProduct } from '../../components/Product/ProductForm';
+import { CustomAxiosError } from '../../types';
 
 interface Params {
   productId: number;

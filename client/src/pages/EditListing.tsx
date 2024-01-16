@@ -7,8 +7,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import ProductForm, { FormData } from '../components/Product/ProductForm';
 
 import useGetCategories from '../hooks/useGetCategories';
-import useGetProduct from '../hooks/useGetProduct';
-import useEditListing from '../hooks/useEditListing';
+import useGetProduct from '../hooks/product/useGetProduct';
+import useEditListing from '../hooks/product/useEditListing';
 
 import { Product } from '../types';
 

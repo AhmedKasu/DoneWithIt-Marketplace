@@ -3,7 +3,7 @@ import axios from 'axios';
 import {
   CLOUDINARY_UPLOAD_PRESET,
   CLOUDINARY_UPLOAD_URL,
-} from '../utils/config';
+} from '../../utils/config';
 
 const useUploadImages = () => {
   const uploadImage = async (imageUrls: string[]) => {

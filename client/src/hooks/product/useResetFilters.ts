@@ -1,4 +1,4 @@
-import { useFiltersContext } from '../context/FiltersContext';
+import { useFiltersContext } from '../../context/FiltersContext';
 
 const useResetFilters = () => {
   const { setCondition, setMaxPrice, setMinPrice, setSearchQuery, setStatus } =

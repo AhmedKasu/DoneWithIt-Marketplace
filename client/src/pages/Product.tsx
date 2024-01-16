@@ -24,7 +24,7 @@ import {
 } from '../helpers/product';
 
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
-import useGetProduct from '../hooks/useGetProduct';
+import useGetProduct from '../hooks/product/useGetProduct';
 interface ArrowProps {
   className?: string;
   style?: React.CSSProperties;
