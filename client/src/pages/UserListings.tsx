@@ -24,7 +24,7 @@ import GoBack from '../components/Feedback/GoBack';
 import { useAuthContext } from '../context/authContext';
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
 
-import useGetUser from '../hooks/useGetUser';
+import useGetUser from '../hooks/user/useGetUser';
 import useUpdateProductStatus from '../hooks/product/useUpdateProductStatus';
 import useDeleteProduct from '../hooks/product/useDeleteProduct';
 import useHandleNotifications from '../hooks/useHandleNotifications';

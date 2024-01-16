@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar/NavBar';
 
 import { useAuthContext } from '../context/authContext';
-import useGetCurrentUser from '../hooks/useGetCurrentUser';
+import useGetCurrentUser from '../hooks/user/useGetCurrentUser';
 
 export default function Layout() {
   const { currentUser } = useAuthContext();

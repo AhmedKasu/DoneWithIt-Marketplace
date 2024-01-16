@@ -3,7 +3,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 
-import useGetCurrentUser from '../hooks/useGetCurrentUser';
+import useGetCurrentUser from '../hooks/user/useGetCurrentUser';
 import { useAuthContext } from '../context/authContext';
 
 import NavBar from '../components/NavBar/NavBar';

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
-import APIClient from '../services/apiClient';
-import { useAuthContext } from '../context/authContext';
-import { CustomAxiosError } from '../types';
+import APIClient from '../../services/apiClient';
+import { useAuthContext } from '../../context/authContext';
+import { CustomAxiosError } from '../../types';
 
 interface CurrentUser {
   id: number;
