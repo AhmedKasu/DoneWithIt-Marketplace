@@ -13,7 +13,7 @@ interface CurrentUser {
 const apiClient = new APIClient<CurrentUser>('/users');
 
 const useGetCurrentUser = () => {
-  const { setCurrentUser, setError } = useAuthContext();
+  const { setCurrentUser } = useAuthContext();
   const query = useQuery<CurrentUser, CustomAxiosError>({
     queryKey: ['currentUser'],
     queryFn: () => apiClient.getOne('me'),
@@ -28,7 +28,8 @@ const useGetCurrentUser = () => {
     if (query.isError) {
       setCurrentUser(null);
     }
-  }, [query, setCurrentUser, setError]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.data, setCurrentUser]);
 
   return { refetch: query.refetch };
 };
