@@ -12,8 +12,8 @@ interface CurrentUser {
 
 const apiClient = new APIClient<CurrentUser>('/users');
 
-const useGetCurrentUser = () => {
-  const { setCurrentUser } = useAuthContext();
+const useRefetchCurrentUser = () => {
+  const { currentUser, setCurrentUser } = useAuthContext();
   const query = useQuery<CurrentUser, CustomAxiosError>({
     queryKey: ['currentUser'],
     queryFn: () => apiClient.getOne('me'),
@@ -22,16 +22,24 @@ const useGetCurrentUser = () => {
   });
 
   useEffect(() => {
-    if (!query.isLoading && query.data) {
+    if (!currentUser && query.data) {
       setCurrentUser(query.data);
     }
+
     if (query.isError) {
       setCurrentUser(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.data, setCurrentUser]);
+  }, [query.data]);
+
+  useEffect(() => {
+    if (currentUser === undefined) {
+      query.refetch();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
 
   return { refetch: query.refetch };
 };
 
-export default useGetCurrentUser;
+export default useRefetchCurrentUser;
