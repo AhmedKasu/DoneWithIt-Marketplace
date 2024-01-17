@@ -1,19 +1,14 @@
-import { useEffect } from 'react';
 import { Outlet } from 'react-router';
 import Box from '@mui/material/Box';
 
 import NavBar from '../components/NavBar/NavBar';
 
 import { useAuthContext } from '../context/authContext';
-import useGetCurrentUser from '../hooks/user/useGetCurrentUser';
+import useRefetchCurrentUser from '../hooks/user/useRefetchCurrentUser';
 
 export default function Layout() {
   const { currentUser } = useAuthContext();
-  const { refetch } = useGetCurrentUser();
-
-  useEffect(() => {
-    if (currentUser !== null) refetch();
-  }, [currentUser, refetch]);
+  useRefetchCurrentUser();
 
   return (
     <>
