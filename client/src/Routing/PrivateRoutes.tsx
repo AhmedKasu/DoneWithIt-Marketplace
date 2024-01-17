@@ -1,24 +1,17 @@
-import { useEffect } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 
-import useGetCurrentUser from '../hooks/user/useGetCurrentUser';
+import useRefetchCurrentUser from '../hooks/user/useRefetchCurrentUser';
 import { useAuthContext } from '../context/authContext';
 
 import NavBar from '../components/NavBar/NavBar';
 
 export default function PrivateRoutes() {
-  const { refetch } = useGetCurrentUser();
+  useRefetchCurrentUser();
   const { currentUser } = useAuthContext();
 
-  useEffect(() => {
-    if (currentUser !== null) refetch();
-  }, [currentUser, refetch]);
-
   if (currentUser === null) return <Navigate to='/signin' />;
-
-  if (currentUser === undefined) return;
 
   return (
     <>
