@@ -32,8 +32,6 @@ app.use(
   })
 );
 
-setUpSocket(server);
-
 const root = path.join(__dirname, '../public');
 
 app.use(express.static(root));
@@ -64,3 +62,4 @@ const start = async () => {
 };
 
 void start();
+setUpSocket(server);
