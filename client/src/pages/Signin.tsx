@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -26,17 +26,21 @@ import Success from '../components/Feedback/Success';
 import signinSchema from '../utils/validation/signin';
 
 import useSignin from '../hooks/auth/useSignIn';
+import { useAuthContext } from '../context/authContext';
 
 type FormData = z.infer<typeof signinSchema>;
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
+
   const methods = useForm<FormData>({
     mode: 'onBlur',
     resolver: zodResolver(signinSchema),
   });
 
   const { mutate: signin, error, data } = useSignin();
+
+  const { currentUser } = useAuthContext();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -45,6 +49,8 @@ export default function SignIn() {
   };
 
   const errorMessage = error?.response?.data.details as string;
+
+  if (currentUser) return <Navigate to='/' />;
 
   return (
     <Container component='main' maxWidth='xs' sx={{ pt: 15, height: '100vh' }}>
