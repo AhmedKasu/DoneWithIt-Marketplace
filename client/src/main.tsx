@@ -12,6 +12,7 @@ const queryClient = new QueryClient();
 import { AuthProvider } from './context/authContext';
 import { ScreenBreakpointsProvider } from './context/screenBreakpoints';
 import { FiltersProvider } from './context/FiltersContext';
+import { SocketProvider } from './context/SocketContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -21,7 +22,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <AuthProvider>
           <ScreenBreakpointsProvider>
             <FiltersProvider>
-              <RouterProvider router={router} />
+              <SocketProvider>
+                <RouterProvider router={router} />
+              </SocketProvider>
             </FiltersProvider>
           </ScreenBreakpointsProvider>
         </AuthProvider>
