@@ -22,7 +22,9 @@ const useRefetchCurrentUser = () => {
   });
 
   useEffect(() => {
-    if (!currentUser && query.data) {
+    if (currentUser) return;
+
+    if (query.data) {
       setCurrentUser(query.data);
     }
 
