@@ -6,15 +6,19 @@ import MessageIcon from './MessageIcon';
 interface Props {
   unreadMessages?: number;
   onBadgeClick: () => void;
+  isBadgeClicked: boolean;
   size?: number;
 }
 
 export default function MessageBadge({
   onBadgeClick,
+  isBadgeClicked,
   unreadMessages = 0,
-  size = 18,
+  size = 20,
 }: Props) {
-  const boxSize = size + 18;
+  const boxSize = size + 16;
+  const iconColor = isBadgeClicked ? '#1778F2' : 'black';
+  const iconWrapperColor = isBadgeClicked ? '#dfe3ee' : '#e9ebee';
   return (
     <Box onClick={onBadgeClick}>
       <Badge badgeContent={unreadMessages} color='primary'>
@@ -24,7 +28,7 @@ export default function MessageBadge({
             justifyContent: 'center',
             alignItems: 'center',
             width: boxSize,
-            backgroundColor: '#e9ebee',
+            backgroundColor: iconWrapperColor,
             height: boxSize,
             borderRadius: boxSize / 2,
             cursor: 'pointer',
@@ -33,7 +37,7 @@ export default function MessageBadge({
               cursor: 'pointer',
             },
           }}>
-          <MessageIcon size={size} />
+          <MessageIcon size={size} color={iconColor} />
         </Box>
       </Badge>
     </Box>
