@@ -62,6 +62,6 @@ export default function UserAvatar({
   return isCurrentUser ? (
     <Avatar {...stringAvatar(name)} />
   ) : (
-    <Avatar sx={{ ...styles }} />
+    <Avatar sx={{ width: size, height: size, ...styles }} />
   );
 }
