@@ -14,9 +14,9 @@ const useSignout = () => {
   return useMutation<void, CustomAxiosError>({
     mutationFn: apiClient.post,
     onSuccess: () => {
-      setCurrentUser(undefined);
       setTimeout(() => {
         navigate('/');
+        setCurrentUser(undefined);
       }, 300);
     },
   });
