@@ -240,7 +240,7 @@ export default function Product() {
           Seller information
         </Typography>
 
-        <Stack direction='row' spacing={2} sx={{ mt: 1.5 }} alignItems='center'>
+        <Stack direction='row' spacing={1} sx={{ mt: 1.5 }} alignItems='center'>
           <UserAvatar
             name={product?.seller.name as string}
             isCurrentUser
@@ -254,7 +254,7 @@ export default function Product() {
           </Typography>
         </Stack>
 
-        <Stack direction='row' spacing={2} sx={{ mt: 1.5 }} alignItems='center'>
+        <Stack direction='row' spacing={1} sx={{ mt: 1.5 }} alignItems='center'>
           <RecyclingIcon sx={{ display: { color: 'gray' } }} />
           <Typography variant='body1' sx={{ mt: 2 }}>
             {`Joined DoneWithIt in ${new Date(
