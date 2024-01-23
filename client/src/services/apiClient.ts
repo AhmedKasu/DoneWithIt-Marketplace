@@ -1,4 +1,5 @@
 import axios from 'axios';
+import EventEmitter from 'eventemitter3';
 
 export const baseURL = '/api';
 
@@ -6,6 +7,20 @@ const axiosInstance = axios.create({
   withCredentials: true,
   baseURL,
 });
+
+export const authEventEmitter = new EventEmitter();
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      authEventEmitter.emit('unauthorized');
+    }
+    return Promise.reject(error);
+  }
+);
 
 class APIClient<T, K = T> {
   endPoint: string;
