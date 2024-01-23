@@ -23,6 +23,7 @@
     "@mui/material": "^5.14.15",
     "@tanstack/react-query": "^5.4.3",
     "axios": "^1.6.0",
+    "eventemitter3": "^5.0.1",
     "jest-environment-jsdom": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
     "react": "^18.2.0",
