@@ -22,24 +22,16 @@ const useRefetchCurrentUser = () => {
   });
 
   useEffect(() => {
-    if (currentUser) return;
+    if (currentUser !== undefined) return;
 
     if (query.data) {
       setCurrentUser(query.data);
     }
 
-    if (query.isError) {
-      setCurrentUser(null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.data]);
+    query.refetch();
 
-  useEffect(() => {
-    if (currentUser === undefined) {
-      query.refetch();
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+  }, [currentUser, query.data, query.error]);
 
   return { refetch: query.refetch };
 };
