@@ -241,7 +241,14 @@ export default function Product() {
         </Typography>
 
         <Stack direction='row' spacing={2} sx={{ mt: 1.5 }} alignItems='center'>
-          <UserAvatar name={product?.seller.name as string} isCurrentUser />
+          <UserAvatar
+            name={product?.seller.name as string}
+            isCurrentUser
+            size={{ xs: 18, sm: 20, md: 23, lg: 25 }}
+            styles={{
+              mr: 2,
+            }}
+          />
           <Typography variant='body1' sx={{ fontWeight: 400 }}>
             {product?.seller.name}
           </Typography>

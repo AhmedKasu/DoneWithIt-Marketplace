@@ -3,11 +3,17 @@ import { SxProps } from '@mui/material/styles';
 
 interface Props {
   name: string;
+  size?: { xs: number; sm: number; md: number; lg: number };
   styles?: SxProps;
   isCurrentUser: boolean;
 }
 
-export default function UserAvatar({ name, styles, isCurrentUser }: Props) {
+export default function UserAvatar({
+  name,
+  size = { xs: 25, sm: 30, md: 35, lg: 35 },
+  styles,
+  isCurrentUser,
+}: Props) {
   const stringToColor = (string: string) => {
     let hash = 0;
     let i;
@@ -39,9 +45,14 @@ export default function UserAvatar({ name, styles, isCurrentUser }: Props) {
     return {
       sx: {
         bgcolor: stringToColor(name),
-        width: 50,
-        height: 50,
-        fontSize: { xs: '.8rem' },
+        width: size,
+        height: size,
+        fontSize: {
+          xs: `${size.xs / 2.5}px`,
+          sm: `${size.sm / 2.5}px`,
+          md: `${size.md / 2.5}px`,
+          lg: `${size.lg / 2.5}px`,
+        },
         ...styles,
       },
       children: `${getInitials(name)}`,

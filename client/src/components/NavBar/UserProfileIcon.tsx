@@ -50,10 +50,6 @@ export default function UserProfileIcon({
             <UserAvatar
               name={currentUser as string}
               isCurrentUser={!!currentUser}
-              styles={{
-                width: { xs: 25, sm: 30, md: 35, lg: 35 },
-                height: { xs: 25, sm: 30, md: 35, lg: 35 },
-              }}
             />
           </IconButton>
         </Tooltip>
@@ -69,9 +65,8 @@ export default function UserProfileIcon({
           <UserAvatar
             name={currentUser as string}
             isCurrentUser={!!currentUser}
+            size={{ xs: 18, sm: 20, md: 23, lg: 25 }}
             styles={{
-              width: { xs: 18, sm: 20, md: 23, lg: 25 },
-              height: { xs: 18, sm: 20, md: 23, lg: 25 },
               mr: 2,
             }}
           />
