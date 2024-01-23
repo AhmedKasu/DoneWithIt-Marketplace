@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { authEventEmitter } from '../services/apiClient';
 
 interface AuthContext {
   currentUser: { name: string; id: number } | undefined | null;
@@ -28,6 +29,18 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     { name: string; id: number } | undefined | null
   >(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      setCurrentUser(null);
+    };
+
+    authEventEmitter.on('unauthorized', handleUnauthorized);
+
+    return () => {
+      authEventEmitter.off('unauthorized', handleUnauthorized);
+    };
+  }, []);
 
   return (
     <AuthContext.Provider
