@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+import App from './App';
+
 import theme from './themes/customTheme';
-import router from './Routing/Routes';
 const queryClient = new QueryClient();
 
 import { AuthProvider } from './context/authContext';
@@ -23,7 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <ScreenBreakpointsProvider>
             <FiltersProvider>
               <SocketProvider>
-                <RouterProvider router={router} />
+                <App />
               </SocketProvider>
             </FiltersProvider>
           </ScreenBreakpointsProvider>
