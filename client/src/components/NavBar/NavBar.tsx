@@ -9,18 +9,18 @@ import { Toolbar } from '@mui/material';
 
 import UserProfileIcon from './UserProfileIcon';
 import useSignout from '../../hooks/auth/useSignOut';
+import useResetFilters from '../../hooks/product/useResetFilters';
 
 import { useFiltersContext } from '../../context/FiltersContext';
-import useResetFilters from '../../hooks/product/useResetFilters';
-interface Props {
-  currentUser: string | undefined;
-}
+import { useAuthContext } from '../../context/authContext';
 
-function NavBar({ currentUser }: Props) {
+function NavBar() {
   const navigate = useNavigate();
   const { mutate: signout } = useSignout();
   const resetFilters = useResetFilters();
+
   const { setCategoryId } = useFiltersContext();
+  const { currentUser } = useAuthContext();
 
   const handleAppLogoClick = () => {
     resetFilters();
@@ -64,7 +64,7 @@ function NavBar({ currentUser }: Props) {
         </Toolbar>
 
         <UserProfileIcon
-          currentUser={currentUser}
+          currentUser={currentUser?.name}
           handleSigninClick={() => navigate('/signin')}
           handleSignoutClick={() => signout()}
           handleSignupClick={() => navigate('/signup')}

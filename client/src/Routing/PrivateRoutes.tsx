@@ -21,7 +21,7 @@ export default function PrivateRoutes() {
 
   return (
     <>
-      <NavBar currentUser={currentUser?.name} />
+      <NavBar />
       <Box
         sx={{
           mt: 2,
