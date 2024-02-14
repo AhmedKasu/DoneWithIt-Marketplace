@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { useParams } from 'react-router';
 
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -15,6 +16,7 @@ import RecyclingIcon from '@mui/icons-material/Recycling';
 import UserAvatar from '../components/NavBar/UserAvatar';
 import PrevPrice from '../components/Product/PrevPrice';
 import GoBack from '../components/Feedback/GoBack';
+import MessageIcon from '../components/NavBar/MessageIcon';
 
 import {
   calculateDateDifference,
@@ -24,7 +26,12 @@ import {
 } from '../helpers/product';
 
 import { useScreenBreakingPoints } from '../context/screenBreakpoints';
+import { useChatRoomContext } from '../context/ChatRoomContext';
+import { useSocketContext } from '../context/SocketContext';
+import { useAuthContext } from '../context/authContext';
+
 import useGetProduct from '../hooks/product/useGetProduct';
+
 interface ArrowProps {
   className?: string;
   style?: React.CSSProperties;
@@ -86,6 +93,9 @@ export default function Product() {
   const { data: product, isLoading, isError } = useGetProduct(id);
 
   const { isSmallScreen } = useScreenBreakingPoints();
+  const { setOpenChatRooms, setChatRoomId } = useChatRoomContext();
+  const { socket } = useSocketContext();
+  const { currentUser } = useAuthContext();
 
   const { prevPrice } = getPreviousPrice(product?.priceHistories);
 
@@ -109,6 +119,20 @@ export default function Product() {
       : `Listed ${listedWeeks} ${listedWeeks < 2 ? 'week' : 'weeks'} ago.`;
 
   const productStatusColor = getProductStatusColor(product?.status);
+
+  const handleOpenChatBox = () => {
+    const buyerId = currentUser?.id;
+    const sellerId = product?.seller.id;
+    const productId = product?.id;
+    const chatRoomId = `${sellerId}-${buyerId}-${productId}`;
+
+    socket?.emit('init_chat', { sellerId, buyerId, productId });
+
+    setOpenChatRooms((openChatRooms) => [...openChatRooms, chatRoomId]);
+    setChatRoomId(chatRoomId);
+  };
+
+  const currentUserIsSeller = currentUser?.id === product?.seller.id;
 
   if (isLoading) return <div>Loading...</div>;
   if (isError)
@@ -262,6 +286,19 @@ export default function Product() {
             ).getFullYear()}`}
           </Typography>
         </Stack>
+
+        <Divider sx={{ mt: 5 }} />
+
+        {!currentUserIsSeller && (
+          <Button
+            variant='contained'
+            fullWidth
+            onClick={handleOpenChatBox}
+            startIcon={<MessageIcon size={20} color='white' />}
+            sx={{ mt: 5 }}>
+            Message seller
+          </Button>
+        )}
       </Paper>
       <style>{`
         .custom-slider .slick-slide {
