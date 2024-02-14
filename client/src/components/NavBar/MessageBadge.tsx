@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import MessageIcon from './MessageIcon';
 
 interface Props {
-  unreadMessages?: number;
+  unreadMessages: number;
   onBadgeClick: () => void;
   isBadgeClicked: boolean;
   size?: number;
@@ -13,7 +13,7 @@ interface Props {
 export default function MessageBadge({
   onBadgeClick,
   isBadgeClicked,
-  unreadMessages = 0,
+  unreadMessages,
   size = 20,
 }: Props) {
   const boxSize = size + 16;
@@ -21,7 +21,7 @@ export default function MessageBadge({
   const iconWrapperColor = isBadgeClicked ? '#dfe3ee' : '#e9ebee';
   return (
     <Box onClick={onBadgeClick}>
-      <Badge badgeContent={unreadMessages} color='primary'>
+      <Badge badgeContent={unreadMessages} color='error'>
         <Box
           sx={{
             display: 'flex',
