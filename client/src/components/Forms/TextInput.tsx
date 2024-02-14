@@ -12,11 +12,13 @@ interface Props {
   otherProps?: TextFieldProps;
   gridProps?: GridProps;
   children?: ReactNode;
+  hiddenLabel?: boolean;
 }
 
 export default function TextInput({
   name,
   label,
+  hiddenLabel = false,
   type = 'text',
   gridProps,
   otherProps,
@@ -35,7 +37,8 @@ export default function TextInput({
       <TextField
         error={!!error}
         {...register(name, { valueAsNumber: type === 'number' ? true : false })}
-        label={label}
+        label={hiddenLabel ? undefined : label}
+        hiddenLabel={hiddenLabel}
         type={type}
         helperText={showHelperText ? (error?.message as string) : undefined}
         {...otherProps}>
