@@ -9,6 +9,8 @@ import {
 } from 'sequelize-typescript';
 
 import { Product } from './Product';
+import { ChatRoom } from './ChatRoom';
+
 import {
   requiredIntegerColumn,
   requiredStringColumn,
@@ -33,4 +35,10 @@ export class User extends Model<UserType> {
 
   @HasMany(() => Product)
   products!: Product[];
+
+  @HasMany(() => ChatRoom, { as: 'buyerChatRooms', foreignKey: 'buyerId' })
+  buyerChatRooms!: ChatRoom[];
+
+  @HasMany(() => ChatRoom, { as: 'sellerChatRooms', foreignKey: 'sellerId' })
+  sellerChatRooms!: ChatRoom[];
 }
