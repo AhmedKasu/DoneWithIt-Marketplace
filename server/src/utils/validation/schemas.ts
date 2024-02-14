@@ -52,6 +52,8 @@ const paramsIdSchema = z.string().refine((value) => {
   return reg.test(value);
 }, 'ID must be a positive integer');
 
+const paramsStringIdSchema = z.string();
+
 const productStatusSchema = z.object({
   status: z.enum(['available', 'sold', 'pending']),
 });
@@ -77,4 +79,5 @@ export {
   productStatusSchema,
   productSchema,
   userSchema,
+  paramsStringIdSchema,
 };
