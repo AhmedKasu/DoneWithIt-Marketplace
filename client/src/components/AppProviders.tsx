@@ -12,6 +12,7 @@ import { AuthProvider } from '../context/authContext';
 import { ScreenBreakpointsProvider } from '../context/screenBreakpoints';
 import { FiltersProvider } from '../context/FiltersContext';
 import { SocketProvider } from '../context/SocketContext';
+import { ChatRoomProvider } from '../context/ChatRoomContext';
 
 function withProviders(Component: React.ComponentType) {
   return function WrappedComponent(
@@ -26,7 +27,9 @@ function withProviders(Component: React.ComponentType) {
               <ScreenBreakpointsProvider>
                 <FiltersProvider>
                   <SocketProvider>
-                    <Component {...props} />
+                    <ChatRoomProvider>
+                      <Component {...props} />
+                    </ChatRoomProvider>
                   </SocketProvider>
                 </FiltersProvider>
               </ScreenBreakpointsProvider>
