@@ -17,6 +17,7 @@ import loginRouter from './controllers/login';
 import logoutRouter from './controllers/logout';
 import categoriesRouter from './controllers/categories';
 import productsRouter from './controllers/products';
+import chatRoomRouter from './controllers/chatRooms';
 import path from 'path';
 
 const app = express();
@@ -43,6 +44,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/chat-rooms', chatRoomRouter);
 
 app.get('/health', (_req, res) => {
   res.status(200).send('ok');
