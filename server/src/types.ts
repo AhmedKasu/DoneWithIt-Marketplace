@@ -49,3 +49,28 @@ export interface User {
 }
 
 export type AuthUser = Omit<User, 'email' | 'passwordHash'>;
+
+export interface InitChat {
+  buyerId: number;
+  sellerId: number;
+  productId: number;
+}
+
+export interface Message {
+  id?: number;
+  chatRoomId: string;
+  senderId: number;
+  content: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface ChatRoom {
+  id: string;
+  buyerId: number;
+  sellerId: number;
+  productId: number;
+  lastReadMessageId?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
