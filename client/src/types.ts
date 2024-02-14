@@ -33,6 +33,7 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   products: Product[];
+  chatRooms: ChatRoom[];
 }
 
 export type CategoriesNames =
@@ -50,4 +51,31 @@ export type CategoriesNames =
 export interface Category {
   id: number;
   name: CategoriesNames;
+}
+
+export interface Message {
+  id: number;
+  chatRoomId: string;
+  senderId: number;
+  content: string;
+}
+
+interface ChatRoomUser {
+  id: number;
+  name: string;
+}
+
+export interface ChatRoomMessage {
+  id: number;
+  content: string;
+  sender: ChatRoomUser;
+}
+
+export interface ChatRoom {
+  id: string;
+  product: Product;
+  messages: ChatRoomMessage[];
+  buyer: ChatRoomUser;
+  seller: ChatRoomUser;
+  lastReadMessage: number;
 }
