@@ -32,7 +32,13 @@ export const SocketProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     if (currentUser && !socketRef.current) {
-      socketRef.current = io(SERVER_URL);
+      const userId = currentUser.id;
+      socketRef.current = io(SERVER_URL, { query: { userId } });
+
+      socketRef.current.on('connect', () => {
+        console.log('connected to room', `seller_${userId}`);
+      });
+
       forceUpdate((prev) => !prev);
     }
 
