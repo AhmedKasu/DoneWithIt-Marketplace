@@ -66,7 +66,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
 
       setLiveMessages((liveMessages) => [
         ...liveMessages,
-        { content, sender: { id: senderId, name: '' } },
+        { content, senderId },
       ]);
     };
 
@@ -91,7 +91,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
 
     setLiveMessages((liveMessages) => [
       ...liveMessages,
-      { content: message, sender: { id: senderId, name: senderName } },
+      { content: message, senderId },
     ]);
   };
 
@@ -219,7 +219,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
               flexDirection: 'column',
             }}>
             {allMessages.map((m, i) => {
-              const isSentMessage = m.sender.id === senderId;
+              const isSentMessage = m.senderId === senderId;
               return (
                 <Chip
                   key={i}
