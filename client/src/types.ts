@@ -68,7 +68,8 @@ interface ChatRoomUser {
 export interface ChatRoomMessage {
   id: number;
   content: string;
-  sender: ChatRoomUser;
+  senderId: number;
+  createdAt?: string;
 }
 
 export interface ChatRoom {
@@ -77,5 +78,5 @@ export interface ChatRoom {
   messages: ChatRoomMessage[];
   buyer: ChatRoomUser;
   seller: ChatRoomUser;
-  lastReadMessage: number;
+  lastReadMessage: { id: number };
 }
