@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -101,6 +102,13 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
     setOpenChatRooms(updatedChatRooms);
   };
 
+  const navigate = useNavigate();
+
+  const handleSeeDatailsClick = () => {
+    handleChatClose();
+    navigate(`products/${dbProduct?.id}`);
+  };
+
   return (
     <Paper
       elevation={3}
@@ -150,7 +158,6 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
             }}>
             <Box sx={{ display: 'flex', p: 1 }}>
               <Box
-                onClick={() => console.log('clicked')}
                 sx={{
                   ml: 1.5,
                   mr: 2,
@@ -177,7 +184,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
             <Button
               variant='contained'
               disableElevation
-              onClick={() => console.log('clicked')}
+              onClick={handleSeeDatailsClick}
               sx={{
                 width: '90%',
                 ml: 2,
