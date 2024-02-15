@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
@@ -5,27 +6,83 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import RecyclingIcon from '@mui/icons-material/Recycling';
+import Stack from '@mui/material/Stack';
+
 import { Toolbar } from '@mui/material';
 
 import UserProfileIcon from './UserProfileIcon';
+import MessageBadge from './MessageBadge';
+import ChatRooms, { OnMessageClickParams } from '../ChatRoom/ChatRooms';
+
 import useSignout from '../../hooks/auth/useSignOut';
 import useResetFilters from '../../hooks/product/useResetFilters';
 
 import { useFiltersContext } from '../../context/FiltersContext';
+import { useSocketContext } from '../../context/SocketContext';
 import { useAuthContext } from '../../context/authContext';
+import { useChatRoomContext } from '../../context/ChatRoomContext';
+
+import { ChatRoom } from '../../types';
 
 function NavBar() {
+  const [openMessages, setOpenMessages] = useState(false);
+  const [unreadMessages, setUnreadMessages] = useState<ChatRoom['id'][]>([]);
+
   const navigate = useNavigate();
   const { mutate: signout } = useSignout();
   const resetFilters = useResetFilters();
 
   const { setCategoryId } = useFiltersContext();
   const { currentUser } = useAuthContext();
+  const { setOpenChatRooms, openChatRooms } = useChatRoomContext();
+  const { socket } = useSocketContext();
 
   const handleAppLogoClick = () => {
     resetFilters();
     setCategoryId(undefined);
   };
+
+  const handleMessageClick = ({
+    chatRoomId,
+    receiverId,
+    lastReadMessageId,
+  }: OnMessageClickParams) => {
+    socket?.emit('existing_chat', {
+      chatRoomId,
+      receiverId,
+      lastReadMessageId,
+    });
+
+    const chatRoomExists = openChatRooms.find((room) => room === chatRoomId);
+    if (!chatRoomExists) {
+      setOpenChatRooms((openChatRooms) => [...openChatRooms, chatRoomId]);
+    }
+
+    setOpenMessages(false);
+
+    const updatedUnreadMessages = unreadMessages.filter(
+      (room) => room !== chatRoomId
+    );
+    setUnreadMessages([...updatedUnreadMessages]);
+  };
+
+  useEffect(() => {
+    const receivedMessageHandler = ({ chatRoomId }: { chatRoomId: string }) => {
+      setUnreadMessages((unreadMessages) => [...unreadMessages, chatRoomId]);
+    };
+
+    socket?.on('new_chat', ({ chatRoomId }: { chatRoomId: string }) => {
+      socket?.emit('join_chat', { chatRoomId });
+    });
+
+    socket?.on('receive_message', receivedMessageHandler);
+
+    return () => {
+      socket?.off('receive_message', receivedMessageHandler);
+      socket?.off('new_chat');
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket]);
 
   return (
     <AppBar elevation={1} sx={{ backgroundColor: 'appBg.navbar' }}>
@@ -63,12 +120,31 @@ function NavBar() {
           </Typography>
         </Toolbar>
 
-        <UserProfileIcon
-          currentUser={currentUser?.name}
-          handleSigninClick={() => navigate('/signin')}
-          handleSignoutClick={() => signout()}
-          handleSignupClick={() => navigate('/signup')}
-        />
+        <Stack
+          direction='row'
+          spacing={-2}
+          sx={{
+            alignItems: 'center',
+          }}>
+          {currentUser && (
+            <MessageBadge
+              unreadMessages={unreadMessages.length}
+              onBadgeClick={() =>
+                setOpenMessages((openMessages) => !openMessages)
+              }
+              isBadgeClicked={openMessages}
+            />
+          )}
+
+          {openMessages && <ChatRooms onMessageClick={handleMessageClick} />}
+
+          <UserProfileIcon
+            currentUser={currentUser?.name}
+            handleSigninClick={() => navigate('/signin')}
+            handleSignoutClick={() => signout()}
+            handleSignupClick={() => navigate('/signup')}
+          />
+        </Stack>
       </Container>
     </AppBar>
   );
