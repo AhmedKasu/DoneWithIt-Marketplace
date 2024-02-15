@@ -129,10 +129,12 @@ function NavBar() {
           {currentUser && (
             <MessageBadge
               unreadMessages={unreadMessages.length}
+              setUnreadMessages={setUnreadMessages}
               onBadgeClick={() =>
                 setOpenMessages((openMessages) => !openMessages)
               }
               isBadgeClicked={openMessages}
+              currentUserId={currentUser.id}
             />
           )}
 
