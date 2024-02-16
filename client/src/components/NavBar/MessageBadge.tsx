@@ -33,7 +33,7 @@ export default function MessageBadge({
 
       const lastMessage = room.messages[0];
 
-      if (lastMessage.senderId === currentUserId) return acc;
+      if (lastMessage.sender.id === currentUserId) return acc;
 
       if (room.lastReadMessage.id !== room.messages[0].id) {
         return [...acc, room.id];
