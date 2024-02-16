@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 import { Link as RouterLink, Navigate } from 'react-router-dom';
 import { z } from 'zod';
@@ -31,7 +31,8 @@ import { useAuthContext } from '../context/authContext';
 type FormData = z.infer<typeof signinSchema>;
 
 export default function SignIn() {
-  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [shouldNavigate, setShouldNavigate] = useState(false);
 
   const methods = useForm<FormData>({
     mode: 'onBlur',
@@ -50,7 +51,17 @@ export default function SignIn() {
 
   const errorMessage = error?.response?.data.details as string;
 
-  if (currentUser) return <Navigate to='/' />;
+  useEffect(() => {
+    if (currentUser) {
+      const timeoutId = setTimeout(() => {
+        setShouldNavigate(true);
+      }, 2000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [currentUser]);
+
+  if (shouldNavigate) return <Navigate to='/' />;
 
   return (
     <Container component='main' maxWidth='xs' sx={{ pt: 15, height: '100vh' }}>
