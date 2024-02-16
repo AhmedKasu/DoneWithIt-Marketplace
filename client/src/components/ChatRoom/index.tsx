@@ -113,12 +113,8 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
     <Paper
       elevation={3}
       sx={{
-        position: 'fixed',
-        bottom: 0,
-        right: 80,
-        width: 340,
+        width: { xs: 300, md: 340 },
         height: 455,
-        zIndex: 999,
       }}>
       {chatRoom && (
         <>
@@ -137,7 +133,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
               size={25}
             />
 
-            <Box sx={{ display: 'flex', width: '70%', ml: 1 }}>
+            <Box sx={{ display: 'flex', width: '70%', ml: { xs: 2, md: 1 } }}>
               <Typography
                 sx={{
                   fontWeight: 600,
@@ -247,7 +243,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
 
         <Box
           sx={{
-            width: 340,
+            width: '100%',
             padding: 1.5,
           }}>
           <Box sx={{ ml: 2, pt: 1.5 }}>
