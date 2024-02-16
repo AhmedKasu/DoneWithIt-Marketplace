@@ -19,7 +19,14 @@ import { useAuthContext } from '../../context/authContext';
 
 import useGetChatRoom from '../../hooks/chatRoom/useGetChatRoom';
 
-import { Message, ChatRoomMessage } from '../../types';
+import { ChatRoomMessage } from '../../types';
+
+interface LiveMessage {
+  chatRoomId: string;
+  senderId: number;
+  senderName: string;
+  content: string;
+}
 
 interface Props {
   chatRoomId: string;
@@ -61,12 +68,17 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
   const allMessages = [...dbMessages, ...liveMessages];
 
   useEffect(() => {
-    const messageHandler = ({ content, senderId, chatRoomId }: Message) => {
+    const messageHandler = ({
+      content,
+      senderId,
+      senderName,
+      chatRoomId,
+    }: LiveMessage) => {
       if (chatRoomId !== dbChatRoomId) return;
 
       setLiveMessages((liveMessages) => [
         ...liveMessages,
-        { content, senderId },
+        { content, sender: { id: senderId, name: senderName } },
       ]);
     };
 
@@ -82,16 +94,17 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
     if (!senderId || !senderName || !chatRoomId) return;
 
     if (chatRoomId !== dbChatRoomId) return;
-    const newMessage: Omit<Message, 'id'> = {
+    const newMessage: LiveMessage = {
       chatRoomId,
       senderId,
+      senderName,
       content: message,
     };
     socket?.emit('send_message', newMessage);
 
     setLiveMessages((liveMessages) => [
       ...liveMessages,
-      { content: message, senderId },
+      { content: message, sender: { id: senderId, name: senderName } },
     ]);
   };
 
@@ -215,7 +228,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
               flexDirection: 'column',
             }}>
             {allMessages.map((m, i) => {
-              const isSentMessage = m.senderId === senderId;
+              const isSentMessage = m.sender.id === senderId;
               return (
                 <Chip
                   key={i}
