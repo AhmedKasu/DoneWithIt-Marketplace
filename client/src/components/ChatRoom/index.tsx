@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Paper from '@mui/material/Paper';
@@ -65,7 +65,18 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
 
   const { id: senderId, name: senderName } = currentUser || {};
   const chatRoomId = initialChatRoomId || dbChatRoomId;
-  const allMessages = [...dbMessages, ...liveMessages];
+
+  const allMessages = useMemo(() => {
+    return [...dbMessages, ...liveMessages];
+  }, [dbMessages, liveMessages]);
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(scrollToBottom, [allMessages]);
 
   useEffect(() => {
     const messageHandler = ({
@@ -251,6 +262,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
                 />
               );
             })}
+            <div ref={messagesEndRef} />
           </Box>
         </Box>
 
