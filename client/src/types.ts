@@ -53,13 +53,6 @@ export interface Category {
   name: CategoriesNames;
 }
 
-export interface Message {
-  id: number;
-  chatRoomId: string;
-  senderId: number;
-  content: string;
-}
-
 interface ChatRoomUser {
   id: number;
   name: string;
@@ -68,7 +61,7 @@ interface ChatRoomUser {
 export interface ChatRoomMessage {
   id: number;
   content: string;
-  senderId: number;
+  sender: ChatRoomUser;
   createdAt?: string;
 }
 
