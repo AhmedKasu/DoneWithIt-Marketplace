@@ -202,9 +202,7 @@ describe('Home page', function () {
 
         describe('Clicking on UserAvatar, opens a menu with correct elements', function () {
           beforeEach(function () {
-            cy.get(
-              '.MuiContainer-root > .MuiBox-root > .MuiButtonBase-root'
-            ).click();
+            cy.get('[data-testid="user-profile-icon"]').click();
           });
 
           it('Renders current user as Guest', function () {

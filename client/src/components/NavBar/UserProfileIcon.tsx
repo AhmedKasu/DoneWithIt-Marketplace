@@ -41,6 +41,7 @@ export default function UserProfileIcon({
       <Box>
         <Tooltip title='Current User'>
           <IconButton
+            data-testid='user-profile-icon'
             onClick={handleAvatar}
             size='large'
             sx={{ ml: 2 }}
