@@ -125,7 +125,8 @@ npm run lint
 
 [DoneWithIt-Marketplace](https://donewithit-marketplace-6ab68864c928.herokuapp.com/) full-stack app is an online second hand shop web app inspired by Facebook marketplace.
 
-- User authentication is required to post a new listing for sell or to view a product's details.
+- User authentication is required to post a new listing for sell, to view a product's details and send the product's seller a message.
+
 - Clicking the app logo redirects to the home page.
 
 Feel free to create a new user or use available credentials.
@@ -170,8 +171,7 @@ npm run build
 
 ### Feature 1
 
-> Ability for marketplace users to send messages to other users.
-> This may be implemented using WebSockets or a library like [socket.io](https://socket.io/)
+> Ability for marketplace users to delete their chats.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -180,6 +180,7 @@ npm run build
 - [Express](https://expressjs.com/) - Server Framework
 - [ReactJs](https://react.dev/) - Web Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment
+- [Socket.io](https://socket.io/) - Web sockets for live messaging feature.
 
 ## ✍️ Authors <a name = "authors"></a>
 
