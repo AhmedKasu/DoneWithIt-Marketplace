@@ -5,8 +5,8 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import http from 'http';
 
-import { PORT, NODE_ENV } from './utils/config';
-import { CLIENT_URL } from './constants';
+import { PORT } from './utils/config';
+import { CORS_ORIGIN } from './constants';
 import { connectToDatabase } from './utils/db';
 import { setUpSocket } from './utils/socket';
 
@@ -25,10 +25,7 @@ const server = http.createServer(app);
 
 app.use(
   cors<Request>({
-    origin:
-      NODE_ENV === 'development'
-        ? CLIENT_URL
-        : 'https://patientor.herokuapp.com',
+    origin: CORS_ORIGIN,
     credentials: true,
   })
 );
