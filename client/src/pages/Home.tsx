@@ -45,7 +45,7 @@ export default function Home() {
 
   const resetFilters = useResetFilters();
 
-  const { isSmallScreen } = useScreenBreakingPoints();
+  const { isSmallerScreen, isLargerScreen } = useScreenBreakingPoints();
 
   const handleRefetch = () => {
     resetFilters();
@@ -112,7 +112,7 @@ export default function Home() {
         backgroundColor: 'appBg.main',
         height: '100vh',
       }}>
-      {!isSmallScreen && categories && (
+      {isLargerScreen && categories && (
         <SideBar categories={categories} showFilters={!!isProductsAvailable} />
       )}
 
@@ -123,7 +123,7 @@ export default function Home() {
           overflowY: 'scroll',
           minWidth: { xs: '100vw', md: 'calc(100vw - 360px)' },
         }}>
-        {isSmallScreen ? smallScreenContent() : largeScreenContent()}
+        {isSmallerScreen ? smallScreenContent() : largeScreenContent()}
       </Box>
     </Box>
   );
