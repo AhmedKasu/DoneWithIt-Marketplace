@@ -61,6 +61,33 @@ export default function ChatRooms({ onMessageClick }: Props) {
         Chats
       </Typography>
 
+      {chatRooms?.length === 0 && (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            mt: 5,
+          }}>
+          <img
+            alt='search'
+            src='https://static.xx.fbcdn.net/rsrc.php/y_/r/Krj1JsX3uTI.svg'
+            height={120}
+          />
+          <Typography
+            variant='h3'
+            sx={{
+              fontSize: '1.3rem',
+              fontWeight: 500,
+              color: 'gray',
+              mt: 2,
+            }}>
+            No chats yet!
+          </Typography>
+        </Box>
+      )}
+
       {chatRooms &&
         chatRooms.map(({ id, buyer, seller, product, messages }) => {
           if (messages.length === 0) return;
