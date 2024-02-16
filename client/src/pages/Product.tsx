@@ -39,7 +39,7 @@ interface ArrowProps {
 }
 
 const PrevArrow = (props: ArrowProps) => {
-  const isExtraSmallScreen = useScreenBreakingPoints();
+  const { isSmallerScreen } = useScreenBreakingPoints();
   const { className, style, onClick } = props;
   return (
     <div
@@ -48,7 +48,7 @@ const PrevArrow = (props: ArrowProps) => {
         ...style,
         position: 'absolute',
         left: '80px',
-        top: isExtraSmallScreen ? '104%' : '102%',
+        top: isSmallerScreen ? '104%' : '102%',
         zIndex: 10,
       }}
       onClick={onClick}
@@ -60,7 +60,7 @@ const PrevArrow = (props: ArrowProps) => {
 };
 
 const NextArrow = (props: ArrowProps) => {
-  const isExtraSmallScreen = useScreenBreakingPoints();
+  const { isSmallerScreen } = useScreenBreakingPoints();
   const { className, style, onClick } = props;
   return (
     <div
@@ -69,7 +69,7 @@ const NextArrow = (props: ArrowProps) => {
         ...style,
         position: 'absolute',
         right: '50px',
-        top: isExtraSmallScreen ? '104%' : '102%',
+        top: isSmallerScreen ? '104%' : '102%',
         zIndex: 10,
       }}
       onClick={onClick}
@@ -92,7 +92,7 @@ export default function Product() {
   const { id } = useParams<{ id: string }>();
   const { data: product, isLoading, isError } = useGetProduct(id);
 
-  const { isSmallScreen } = useScreenBreakingPoints();
+  const { isSmallerScreen } = useScreenBreakingPoints();
   const { setOpenChatRooms, setChatRoomId } = useChatRoomContext();
   const { socket } = useSocketContext();
   const { currentUser } = useAuthContext();
@@ -155,12 +155,11 @@ export default function Product() {
           overflow: 'hidden',
           pl: { xs: 0, md: 1 },
         }}>
-        {!isSmallScreen && (
+        {!isSmallerScreen && (
           <Box sx={{ pt: 10, mr: 1 }}>
             <GoBack />
           </Box>
         )}
-
         <Box
           sx={{
             order: { xs: 1, md: 0 },
@@ -302,7 +301,7 @@ export default function Product() {
       </Paper>
       <style>{`
         .custom-slider .slick-slide {
-          height: ${isSmallScreen ? '40vh' : '90vh'};
+          height: ${isSmallerScreen ? '40vh' : '90vh'};
         }
         .custom-slider .slick-prev:before{
           margin-left: -50px;
