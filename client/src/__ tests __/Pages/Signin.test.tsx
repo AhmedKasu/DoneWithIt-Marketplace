@@ -9,8 +9,8 @@ import SignUp from '../../pages/Signup';
 import useSignin from '../../hooks/auth/useSignIn';
 import useSignup from '../../hooks/auth/useSignup';
 
-jest.mock('../../hooks/useSignIn', () => jest.fn());
-jest.mock('../../hooks/useSignup', () => jest.fn());
+jest.mock('../../hooks/auth/useSignIn', () => jest.fn());
+jest.mock('../../hooks/auth/useSignup', () => jest.fn());
 
 describe('<SignIn />', () => {
   const routes = [{ path: '/signup', element: <SignUp /> }];

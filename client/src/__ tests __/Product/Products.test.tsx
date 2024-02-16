@@ -14,8 +14,8 @@ import useSignin from '../../hooks/auth/useSignIn';
 import { products } from '../Helpers/mockData';
 import { capitalizeFirstLetter } from '../../helpers/product';
 
-jest.mock('../../hooks/useGetProduct', () => jest.fn());
-jest.mock('../../hooks/useSignIn', () => jest.fn());
+jest.mock('../../hooks/product/useGetProduct', () => jest.fn());
+jest.mock('../../hooks/auth/useSignIn', () => jest.fn());
 
 const clickedProduct = products[1];
 

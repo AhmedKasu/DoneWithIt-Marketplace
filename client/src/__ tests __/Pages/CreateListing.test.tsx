@@ -10,7 +10,7 @@ import { Category } from '../../types';
 
 import CreateListing from '../../pages/CreateListing';
 
-jest.mock('../../hooks/useCreateListing', () => jest.fn());
+jest.mock('../../hooks/product/useCreateListing', () => jest.fn());
 jest.mock('../../hooks/useGetCategories', () => jest.fn());
 
 const mockUseCreateListing = useCreateListing as jest.Mock;
