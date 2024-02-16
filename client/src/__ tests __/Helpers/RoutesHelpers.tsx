@@ -5,6 +5,8 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { AuthProvider } from '../../context/authContext';
 import { ScreenBreakpointsProvider } from '../../context/screenBreakpoints';
 import { FiltersProvider } from '../../context/FiltersContext';
+import { SocketProvider } from '../../context/SocketContext';
+import { ChatRoomProvider } from '../../context/ChatRoomContext';
 
 import ErrorPage from '../../pages/ErrorPage';
 
@@ -35,7 +37,11 @@ const renderWithRouter = (
     <AuthProvider>
       <ScreenBreakpointsProvider>
         <FiltersProvider>
-          <RouterProvider router={router} />
+          <SocketProvider>
+            <ChatRoomProvider>
+              <RouterProvider router={router} />
+            </ChatRoomProvider>
+          </SocketProvider>
         </FiltersProvider>
       </ScreenBreakpointsProvider>
     </AuthProvider>
