@@ -39,6 +39,10 @@ export const SocketProvider: React.FC<Props> = ({ children }) => {
         console.log('connected to room', `seller_${userId}`);
       });
 
+      socketRef.current.on('connect_error', (error) => {
+        console.log('Connection Error', error);
+      });
+
       forceUpdate((prev) => !prev);
     }
 
