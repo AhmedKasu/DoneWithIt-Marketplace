@@ -6,6 +6,7 @@ import MessageIcon from './MessageIcon';
 
 import useGetChatRooms from '../../hooks/chatRoom/useGetChatRooms';
 
+import { useChatRoomContext } from '../../context/ChatRoomContext';
 interface Props {
   unreadMessages: number;
   setUnreadMessages: React.Dispatch<React.SetStateAction<string[]>>;
@@ -24,12 +25,14 @@ export default function MessageBadge({
   size = 20,
 }: Props) {
   const { data: chatRooms } = useGetChatRooms(currentUserId);
+  const { openChatRooms } = useChatRoomContext();
 
   useEffect(() => {
     if (!chatRooms) return;
 
     const dbUnreadMessages = chatRooms.reduce<string[]>((acc, room) => {
-      if (room.messages.length === 0) return acc;
+      if (room.messages.length === 0 || openChatRooms.includes(room.id))
+        return acc;
 
       const lastMessage = room.messages[0];
 
@@ -41,7 +44,7 @@ export default function MessageBadge({
       return acc;
     }, []);
 
-    if (dbUnreadMessages.length < 0) return;
+    if (dbUnreadMessages.length === 0) return;
 
     setUnreadMessages(dbUnreadMessages);
 

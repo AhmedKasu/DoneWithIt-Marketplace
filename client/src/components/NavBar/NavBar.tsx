@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
@@ -53,8 +53,8 @@ function NavBar() {
       lastReadMessageId,
     });
 
-    const chatRoomExists = openChatRooms.find((room) => room === chatRoomId);
-    if (!chatRoomExists) {
+    const chatRoomIsOpen = openChatRooms.includes(chatRoomId);
+    if (!chatRoomIsOpen) {
       setOpenChatRooms((openChatRooms) => [...openChatRooms, chatRoomId]);
     }
 
@@ -66,8 +66,14 @@ function NavBar() {
     setUnreadMessages([...updatedUnreadMessages]);
   };
 
+  const openChatRoomsRef = useRef(openChatRooms);
+  openChatRoomsRef.current = openChatRooms;
+
   useEffect(() => {
     const receivedMessageHandler = ({ chatRoomId }: { chatRoomId: string }) => {
+      const chatRoomIsOpen = openChatRoomsRef.current.includes(chatRoomId);
+      if (chatRoomIsOpen) return;
+
       setUnreadMessages((unreadMessages) => [...unreadMessages, chatRoomId]);
     };
 
