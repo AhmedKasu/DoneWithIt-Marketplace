@@ -50,7 +50,7 @@ export default function UserListings() {
     isSuccess: deleteSuccess,
   } = useDeleteProduct();
 
-  const { isSmallScreen } = useScreenBreakingPoints();
+  const { isSmallerScreen, isLargerScreen } = useScreenBreakingPoints();
   const navigate = useNavigate();
 
   const [showError, setShowError] = useState(false);
@@ -85,7 +85,7 @@ export default function UserListings() {
             <CreateListingButton
               onCreateListing={() => navigate('/createListing')}
             />
-            {!isSmallScreen && (
+            {isLargerScreen && (
               <>
                 <UserListingsButton label='Your listings' isSelected />
                 <Divider sx={{ mt: 2, mr: 0, width: '95%' }} />
@@ -248,7 +248,7 @@ export default function UserListings() {
                             productId: product.id,
                           })
                         }
-                        size={isSmallScreen ? 'small' : 'medium'}
+                        size={isSmallerScreen ? 'small' : 'medium'}
                         sx={{
                           mb: 2,
                           ml: 1,
