@@ -133,6 +133,8 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
     navigate(`products/${dbProduct?.id}`);
   };
 
+  if (senderId !== dbSeller?.id && senderId !== dbBuyer?.id) return;
+
   if (isLoading) return <LoadingSkeleton />;
 
   return (
