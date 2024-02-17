@@ -7,6 +7,7 @@ import MessageIcon from './MessageIcon';
 import useGetChatRooms from '../../hooks/chatRoom/useGetChatRooms';
 
 import { useChatRoomContext } from '../../context/ChatRoomContext';
+
 interface Props {
   unreadMessages: number;
   setUnreadMessages: React.Dispatch<React.SetStateAction<string[]>>;
@@ -28,26 +29,30 @@ export default function MessageBadge({
   const { openChatRooms } = useChatRoomContext();
 
   useEffect(() => {
-    if (!chatRooms) return;
+    if (!chatRooms || chatRooms?.length === 0) return;
 
-    const dbUnreadMessages = chatRooms.reduce<string[]>((acc, room) => {
-      if (room.messages.length === 0 || openChatRooms.includes(room.id))
-        return acc;
+    const dbUnreadMessages = chatRooms
+      .filter((room) => {
+        if (room.messages.length === 0 || openChatRooms.includes(room.id))
+          return false;
 
-      const lastMessage = room.messages[0];
+        const lastMessage = room.messages[0];
 
-      if (lastMessage.sender.id === currentUserId) return acc;
+        if (lastMessage.sender.id === currentUserId) return false;
 
-      if (room.lastReadMessage.id !== room.messages[0].id) {
-        return [...acc, room.id];
-      }
-      return acc;
-    }, []);
+        if (room.lastReadMessage === null && room.messages.length > 0) {
+          return true;
+        }
 
+        if (room.lastReadMessage.id !== lastMessage.id) {
+          return true;
+        }
+        return false;
+      })
+      .map((room) => room.id);
     if (dbUnreadMessages.length === 0) return;
 
     setUnreadMessages(dbUnreadMessages);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chatRooms, currentUserId]);
 
