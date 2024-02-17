@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 
 import ChatInput, { FormData } from './ChatInput';
 import ChatAvatars from './ChatAvatars';
+import LoadingSkeleton from './LoadingSkeleton';
 
 import { useSocketContext } from '../../context/SocketContext';
 import { useChatRoomContext } from '../../context/ChatRoomContext';
@@ -44,7 +45,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
     Array<Omit<ChatRoomMessage, 'id'>>
   >([]);
 
-  const { data: chatRoom } = useGetChatRoom(dbChatRoomId);
+  const { data: chatRoom, isLoading } = useGetChatRoom(dbChatRoomId);
 
   const {
     messages: dbMessages = [],
@@ -133,6 +134,8 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
     navigate(`products/${dbProduct?.id}`);
   };
 
+  if (isLoading) return <LoadingSkeleton />;
+
   return (
     <Paper
       elevation={3}
@@ -192,7 +195,7 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Box>
+              <Box sx={{ width: '75%' }}>
                 <Typography sx={{ color: 'gray', fontSize: '.8rem' }}>
                   Marketplace
                 </Typography>
