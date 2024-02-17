@@ -144,7 +144,9 @@ function NavBar() {
             />
           )}
 
-          {openMessages && <ChatRooms onMessageClick={handleMessageClick} />}
+          {openMessages && currentUser && (
+            <ChatRooms onMessageClick={handleMessageClick} />
+          )}
 
           <UserProfileIcon
             currentUser={currentUser?.name}
