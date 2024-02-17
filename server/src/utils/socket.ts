@@ -1,7 +1,6 @@
 import { Server } from 'socket.io';
 import { Server as HttpServer } from 'http';
-import { NODE_ENV } from './config';
-import { CLIENT_URL } from '../constants';
+import { CORS_ORIGIN } from '../constants';
 import { Message as MessageType, InitChat } from '../types';
 
 import { ChatRoom } from '../models/ChatRoom';
@@ -16,7 +15,7 @@ interface ExistingChatEvent {
 const setUpSocket = (server: HttpServer) => {
   const io = new Server(server, {
     cors: {
-      origin: NODE_ENV === 'production' ? undefined : CLIENT_URL,
+      origin: CORS_ORIGIN,
       methods: ['GET', 'POST'],
     },
   });
