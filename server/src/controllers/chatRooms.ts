@@ -25,6 +25,7 @@ router.get('/user/:id', auth, async (_req, res) => {
       {
         model: Message,
         as: 'messages',
+        required: true,
         include: [{ model: User, as: 'sender', attributes: ['id', 'name'] }],
       },
       { model: User, as: 'buyer', attributes: ['id', 'name'] },
