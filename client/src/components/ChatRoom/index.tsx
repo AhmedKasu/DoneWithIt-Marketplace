@@ -105,7 +105,6 @@ export default function ChatRoom({ chatRoomId: dbChatRoomId }: Props) {
   const handleSubmit = ({ message }: FormData) => {
     if (!senderId || !senderName || !chatRoomId) return;
 
-    if (chatRoomId !== dbChatRoomId) return;
     const newMessage: LiveMessage = {
       chatRoomId,
       senderId,
