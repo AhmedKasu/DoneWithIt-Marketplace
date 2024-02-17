@@ -7,4 +7,4 @@ export const productConditions: Array<Product['condition']> = [
   'New',
 ];
 
-export const SERVER_URL = 'http://localhost:18726';
+export const SERVER_URL = '/';
